@@ -13,6 +13,11 @@ jobs:
       - name: npm install
         run: |
           npm install
+      - name: shopify-cli install
+        run: |
+          brew tap shopify/shopify
+          brew install shopify-cli
+          shopify version
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.3.x
