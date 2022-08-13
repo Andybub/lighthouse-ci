@@ -15,7 +15,10 @@ jobs:
           npm install
       - name: shopify-cli install
         run: |
+          brew uninstall shopify-cli
+          brew cleanup shopify-cli
           brew install ruby
+          brew install ruby@3.0
           brew install shopify-cli
       - name: run Lighthouse CI
         run: |
