@@ -15,8 +15,8 @@ jobs:
           npm install
       - name: shopify-cli install
         run: |
-          gem install shopify-cli
-          shopify version
+          brew install ruby
+          brew install shopify-cli
       - name: run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.3.x
