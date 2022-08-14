@@ -1,0 +1,199 @@
+.payment-box-container {
+  &#sticky-cart-payment-box {
+    @include respondLG {
+      position: sticky;
+      top: 200px;
+      max-width: 340px;
+    }
+  }
+
+  .payment-info-top {
+    margin-bottom: 0.5rem;
+    color: #222;
+    font-size: 24px;
+    font-weight: 500;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    span {
+      font-size: 18px;
+      font-weight: normal;
+    }
+  }
+
+  .txt-subtotal-savings {
+    color: #7e3d7e;
+  }
+
+  .btn-checkout {
+    margin-bottom: 2.5rem;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    color: white;
+    font-size: 16px;
+    background: #62ba67;
+    span {
+      margin-right: 0.5rem;
+    }
+    .loading-animation {
+      $loadingSize: 30px;
+      @keyframes spin {
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+
+      .loading-icon {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: $loadingSize;
+        height: $loadingSize;
+        .shanxing {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: #fff;
+          animation: spin 3s linear infinite;
+          .sx1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg) scale(1.01);
+            clip: rect(0px, calc($loadingSize / 2), $loadingSize, 0px);
+            border-radius: 50%;
+            background-color: #62ba67;
+          }
+          .sx2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotate(60deg) scale(1.01);
+            clip: rect(0px, $loadingSize, $loadingSize, calc($loadingSize / 2));
+            border-radius: 50%;
+            background-color: #62ba67;
+          }
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #62ba67;
+            transform: scale(0.85);
+          }
+        }
+      }
+      i {
+        position: relative;
+      }
+    }
+    &.btn-loading {
+      span {
+        margin-right: 0;
+        width: 0;
+        opacity: 0;
+      }
+      .loading-animation {
+        .loading-icon {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .additional-checkout-container {
+    padding-top: 2rem;
+    margin-bottom: 2.5rem;
+
+    p {
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+    }
+
+    .additional-checkout-buttons {
+      visibility: hidden;
+
+      &.payment-rearranged {
+        visibility: visible;
+      }
+
+      .shopify-cleanslate {
+        ul {
+          margin: 0 !important;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+
+          li {
+            margin: 0 !important;
+            flex: 1 1 calc(50% - 4px) !important;
+            max-width: calc(50% - 4px);
+
+            &.apple-pay-button {
+              order: 1;
+              flex-basis: 100% !important;
+              margin-bottom: 8px !important;
+              max-width: 100% !important;
+            }
+
+            &.shopify-pay-button {
+              order: 2;
+            }
+
+            &.pay-pal-button {
+              order: 3;
+            }
+
+            @include respondLG {
+              margin-bottom: 0.5rem !important;
+              flex: 1 1 100% !important;
+              max-width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .txt-after-additional-checkout {
+    margin-bottom: 0.5rem;
+    color: #999;
+    font-size: 13px;
+  }
+
+  .payment-method-container {
+    margin-bottom: 2.5rem;
+
+    img {
+      width: 14%;
+      padding: 0;
+      opacity: 0.7;
+      filter: grayscale(100%);
+    }
+  }
+
+  .btn-stamped-reviews-widget {
+    max-width: calc(126px + var(--grid-gutter) + var(--grid-gutter));
+    .stamped-badge-powered {
+      display: none;
+    }
+    text#stamped-badge-count-color #stamped-badge-total {
+      font-size: 25px !important;
+    }
+  }
+
+  .btn-bbb {
+    max-width: calc(70px + var(--grid-gutter) + var(--grid-gutter));
+  }
+}

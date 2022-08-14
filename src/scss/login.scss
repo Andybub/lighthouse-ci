@@ -1,0 +1,200 @@
+@mixin submitBtn {
+  margin-bottom: 10px;
+  padding: 12px 40px;
+  border: 0;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #7e3d7e;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  @include respondMD {
+    margin-bottom: 30px;
+  }
+}
+
+#login-page {
+  max-width: 300px;
+  margin: 30px auto 80px;
+
+  .login-wrapper, .change-password-wrapper {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
+  .change-password-wrapper {
+    .btn-submit {
+      color: $colorPurple;
+      border-color: $colorPurple;
+      background-color: #fff;
+      border-radius: 99px;
+    }
+    .btn-cancel {
+      color: $colorPurple;
+      border: none;
+      background-color: #fff;
+      text-decoration: underline;
+    }
+  }
+
+  .login-form {
+    [data-show] {
+      &.hide {
+        display: none !important;
+      }
+    }
+    .login-box {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      .login-shop {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .custom-control-label {
+          &::before, &::after {
+            top: .3rem;
+          }
+        }
+      }
+      .login-or {
+        margin-bottom: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #999;
+        .login-or--rule {
+          flex: 1;
+          width: auto;
+          height: 1px;
+          background-color: #ddd;
+        }
+        span {
+          display: inline-block;
+          width: 25px;
+        }
+      }
+      .login-soc {
+        flex: 1;
+      }
+    }
+    .login-footer {
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: #7e3d7e;
+      .no-account {
+        margin-bottom: 5px;
+      }
+      .btn-login-footer {
+        display: inline-block;
+        margin-bottom: 5px;
+        padding: 5px 30px;
+        border: 2px solid #7e3d7e;
+        border-radius: 20px;
+        color: #7e3d7e;
+        background-color: #fff;
+        font-size: 14px;
+      }
+      .return-store {
+        > a {
+          text-decoration: underline;
+        }
+      }
+    }
+    .form-footer {
+      display: flex;
+      flex-direction: column-reverse;
+      button {
+        &:not(.btn-hint) {
+          @include submitBtn;
+        }
+      }
+      .btn-hint {
+        padding: 0;
+        border: 0;
+        color: #7c297c;
+        background-color: #fff;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .reset-form, .activate-form {
+    margin: 0 auto;
+    max-width: 500px;
+    .form-footer {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      button {
+        @include submitBtn;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+    input {
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      color: #333;
+      background-color: #fff;
+      font-size: 14px;
+    }
+  }
+
+  .errors {
+    text-align: center;
+    ul {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 20px;
+      border: 1px solid #DADADA;
+      border-radius: 5px;
+      color: red;
+      background-color: rgba(red, .1);
+    }
+  }
+
+  @include respondMD {
+    max-width: 650px;
+    margin-top: 20px;
+    .login-form {
+      .login-box {
+        justify-content: space-between;
+        flex-direction: row;
+        .login-shop {
+          min-height: 250px;
+        }
+        .login-or {
+          margin-bottom: 30px;
+          width: 130px;
+          flex-direction: column;
+          .login-or--rule {
+            width: 1px;
+            height: auto;
+          }
+          span {
+            width: auto;
+            height: 25px;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+    .reset-form, .activate-form {
+      .form-footer {
+        flex-direction: row;
+      }
+    }
+  }
+}

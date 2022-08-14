@@ -1,0 +1,24 @@
+.gallery-container {
+  // .modal-dialog {}
+
+  .modal-body {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1;
+  }
+
+  .btn-close {
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #666;
+    font-size: 28px;
+    background-color: transparent;
+    border: 0;
+  }
+
+  .btn-load-more {
+    color: #222;
+    background-color: #fff;
+    border: 1.5px solid #dadada;
+  }
+}

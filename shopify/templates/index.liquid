@@ -1,0 +1,33 @@
+{%-if settings.use_sidebar-%}
+{%-if template.name == 'index'-%}
+{%-capture check_sidebar-%}{{ content_for_index  |  strip_newlines }}{%-endcapture-%}
+{%-if check_sidebar contains '<!-- START SIDEBAR INDEX -->'-%}
+{{ check_sidebar | split: '<!-- START SIDEBAR INDEX -->' | first | append: '</div>' | html }}
+<div class="{{settings.width_sidebar_layout}}">
+{%-case settings.width_sidebar_layout-%}
+{%-when 'container'-%}
+{%-assign content_width = 'col-xl-9'-%}
+{%-assign sidebar_width = 'col-xl-3 sidebar-wrapper'-%}
+{%-else-%}
+{%-assign content_width = 'col-xl-9 col-xxl-10'-%}
+{%-assign sidebar_width = 'col-xl-3 col-xxl-2 sidebar-wrapper'-%}
+{%-endcase-%}
+<div class="row content-sidebar">
+<div class="{{content_width}}">
+{{ check_sidebar | split: '<!-- END SIDEBAR INDEX --></div>' | last | split: '<!-- END CONTENT INDEX --></div>' | first | append: '</div>' | html }}
+</div>
+<div class="{{sidebar_width}}{%unless settings.use_sidebar_r%} order-xl-first{%endunless%}">
+<div class="row">
+{{ check_sidebar | split: '<!-- START SIDEBAR INDEX --></div>' | last | split: '<!-- END SIDEBAR INDEX --></div>' | first | append: '</div>' | html }}
+</div>
+</div>
+</div>
+</div>
+{{ check_sidebar | split: '<!-- END CONTENT INDEX --></div>' | last | append: '</div>' | html }}
+{%-else-%}
+{{ content_for_index }}
+{%-endif-%}
+{%-endif-%}
+{%-else-%}
+{{ content_for_index}}
+{%-endif-%}

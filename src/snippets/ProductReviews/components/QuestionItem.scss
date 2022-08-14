@@ -1,0 +1,36 @@
+.question-item {
+  font-size: 14px;
+  background-color: #fff;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #c4c4c4;
+  }
+
+  .question-item-author {
+    font-weight: 500;
+  }
+
+  .question-item-date {
+    color: #666;
+    font-size: 12px;
+  }
+
+  .question-item-answers-count {
+    i {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+  }
+
+  .question-item-answer {
+    margin: 15px 0 0 35px;
+    padding: 10px 0 0 15px;
+    border-left: 5px solid #e0e0e0;
+  }
+  @include respondMD {
+    margin-bottom: 16px;
+    padding: 0 16px;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+  }
+}

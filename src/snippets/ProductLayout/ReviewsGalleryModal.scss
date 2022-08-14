@@ -1,0 +1,56 @@
+#tw-reviews-gallery-btn {
+  color: #333;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+
+  @at-root .desktop & {
+    text-decoration: none;
+
+    &:hover {
+      color: #000;
+      text-decoration: underline;
+    }
+  }
+}
+
+#tw-reviews-gallery-modal {
+  background: rgba(0 0 0 / 0.5);
+
+  .modal-dialog {
+    width: calc(100% - 1rem);
+    max-width: 100%;
+    max-height: calc(100vh - 1rem);
+    border-radius: 8px;
+    overflow: hidden;
+
+    @include respondSM {
+      max-width: 80%;
+      max-height: calc(100vh - 3.5rem);
+    }
+  }
+
+  .modal-header {
+    height: 40px;
+    padding: 0 20px;
+
+    .modal-title {
+      font-size: 16px;
+      line-height: 40px;
+    }
+
+    .close {
+      top: 0;
+    }
+  }
+
+  .modal-body {
+    max-height: calc(100vh - 1rem - 40px);
+    overflow-y: scroll;
+
+    @include respondSM {
+      max-height: calc(100vh - 3.5rem - 40px);
+    }
+  }
+}

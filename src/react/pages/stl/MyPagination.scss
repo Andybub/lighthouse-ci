@@ -1,0 +1,19 @@
+.stl-pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  @include respondSM {
+    .MuiPaginationItem-root {
+      &:not(.MuiPaginationItem-ellipsis) {
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        svg {
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
+}

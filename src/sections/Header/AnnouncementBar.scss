@@ -1,0 +1,77 @@
+#shopify-section-tw-announcement-bar {
+  & > .container-fluid {
+    background: #b99fbc;
+  }
+
+  .announcement-container {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .no-banner {
+    color: #fff;
+    margin: 0;
+  }
+
+  a {
+    color: #fff;
+  }
+
+  .btn-discount {
+    text-shadow: 0 0 4px rgba(102, 51, 102, 0.7);
+
+    &:focus,
+    &:hover {
+      .message-2 {
+        color: #ffca7c;
+      }
+    }
+
+    .message-1 {
+      color: #fff !important;
+    }
+
+    .message-2 {
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+  }
+
+  .right-container {
+    a {
+      * {
+        vertical-align: middle;
+      }
+
+      &:focus,
+      &:hover {
+        color: $colorPurpleHover;
+      }
+    }
+  }
+
+  .btn-cobrand {
+    white-space: nowrap;
+    margin-right: 12px;
+    > img {
+      max-width: none;
+      height: 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .btn-shipping {
+    margin-right: 12px;
+  }
+
+  .btn-returns {
+    margin-right: 12px;
+  }
+
+  .btn-track-your-order {
+  }
+}

@@ -1,0 +1,176 @@
+.slide-item {
+  .product-thumb {
+    display: block;
+
+    img {
+      width: 100%;
+      height: var(--swiper-width);
+    }
+
+    .cta-btn {
+      opacity: 1;
+      visibility: visible;
+      top: 1rem !important;
+      right: 1rem !important;
+      @include respondLG {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .btn-add-to-wishlist {
+      width: 3rem;
+      height: 3rem;
+      background: white;
+      transition: all 0.3s ease;
+      @include respondLG {
+        visibility: hidden;
+        opacity: 0 !important;
+        pointer-events: none;
+      }
+
+      i {
+        color: #333;
+        font-size: 2rem;
+      }
+
+      .text-nowrap {
+        font-size: 1.1rem;
+        font-family: $font;
+        font-weight: 300;
+        line-height: 3rem;
+        background: #7c297c;
+        top: 0;
+        bottom: 0;
+      }
+
+      &::after {
+        display: none;
+      }
+
+      &.swym-added {
+        i {
+          color: red !important;
+        }
+      }
+
+      &:hover {
+        background: #7c297c;
+        opacity: 1 !important;
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+
+        i {
+          color: white;
+        }
+
+        .text-nowrap {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .product-action {
+    .btn-add-to-cart {
+      width: 100%;
+      color: $colorPurple;
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1.5px $colorPurple solid;
+      padding: 5px;
+
+      @media (hover: 'hover') {
+        &:not(.is-loading):hover {
+          color: #fff;
+          background: var(--primary);
+        }
+      }
+
+      &.is-loading {
+        color: transparent;
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 1.6rem;
+          height: 1.6rem;
+          line-height: 1;
+          display: inline-block;
+          border: 0.2rem $colorPurple solid;
+          border-top-color: transparent;
+          border-radius: 50px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-top: -0.8rem;
+          margin-left: -0.8rem;
+          animation: spin 1s infinite linear;
+        }
+      }
+    }
+
+    .fkt-cart-plus {
+      margin-left: 5px;
+    }
+  }
+
+  .product-info {
+    padding: 10px;
+  }
+
+  .product-title {
+    color: #222;
+    font-size: 16px;
+    line-height: 21px;
+    display: block;
+
+    @include textEllipsis(2);
+  }
+
+  .product-price {
+    margin: 4px 0 0;
+
+    .price {
+      color: #222;
+      font-size: 21px;
+      line-height: 27px;
+    }
+
+    .regular-price {
+      color: #999;
+      font-size: 16px;
+      line-height: 21px;
+      text-decoration: line-through;
+      margin-left: 4px;
+    }
+  }
+
+  @media (hover: hover) {
+    &:not(.hover-disabled) .product-action:not(.is-loading) {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s $easeOutCubic;
+    }
+
+    &:not(.hover-disabled):hover {
+      .cta-btn {
+        opacity: 1;
+        visibility: visible;
+
+        .btn-add-to-wishlist {
+          visibility: visible;
+          opacity: 1 !important;
+          pointer-events: auto;
+        }
+      }
+      .product-action:not(.is-loading) {
+        max-height: 42px;
+      }
+    }
+  }
+}

@@ -1,0 +1,1415 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<style>
+  #ordertable thead, #allordertable thead {
+    background: #561c56;
+    color: #fff;
+  }
+  #allordertable tbody tr:hover {
+    background: #c3c3c3;
+  }
+  #ordertable>tbody>tr>td{
+    padding: 4px;
+  }
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 3px;
+  }
+  .cc-sticky .site-header {
+    z-index: 999;
+  }
+  .error{
+    display:none;
+    color:red;
+  }
+  .error2{
+    margin-right: 7px;
+    justify-content: center;
+    color: red;
+  }
+  .return-from-span{font-size: 13px;}
+  #lookup_form{  
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF !important;
+    padding: 20px 10px;
+    max-width: 400px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+/*     margin:0 auto; */
+  }
+  #lookup_form label.lookup_label {
+    letter-spacing: 0.35px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  #lookup_form input:not([type=checkbox]), #lookup_form select, #lookup_form textarea,
+  #ordertable input:not([type=checkbox]), #ordertable select, #ordertable textarea {
+    border: 1px solid #eaeaea;
+    background-color: white;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    margin: 0 0 1em;
+    color: #333;
+    -webkit-appearance: none;
+    padding: 8px 10px;
+    line-height: 1.42;
+    border-radius: 3px;
+  }
+
+  #lookup_form .btn.return-buttonbtn, .customer .btn.create_request {
+    background-color: #7e3d7e;
+    border-radius: 30px;
+    text-transform: capitalize;
+    padding: 12px 40px;
+    border: 0;
+    display: inline-block;
+    color: white;
+  }
+  #ordertable thead, #allordertable thead {
+    background: #561c56;
+    color: #fff;
+  }
+
+  #ordertable th {
+    text-align: center;
+  }
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 3px;
+  }
+  #ordertable>tbody>tr>td {
+    padding: 4px;
+    vertical-align: middle;
+  }
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 3px;
+  }
+  a, .text-link {
+    color: #561c56;
+    text-decoration: none;
+    background: transparent;
+  }
+  .btn.focus, .btn:focus, .btn:hover{
+    color: #f7f5f5;
+  }
+  .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+  }
+  .active:focus{
+    background: #fff;
+  } 
+  .active .loader{
+    height: 20px;
+    width: 23px;
+  }
+  .active{    
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 23px;
+  }
+  .create_request.active, .return-buttonbtn.active{    
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 23px;
+  }
+  #allordertableb .disabled{
+    background: #e2e2e2;
+    color: #868686;
+  }
+  .number-round {
+    border: 1px solid #7C297C;
+    padding: 5px 8px;
+    position: absolute;
+    left: 0px;
+    top: 0px !important;
+    width: 28px;
+    height: 28px;
+    border-radius: 28px;
+    line-height: 18px;
+  }
+  .mod_inner p a {
+    font-weight: 700;
+  }
+  .mrglft{
+    margin-left: 38px;
+  }
+  input[type="number"][disabled], textarea[disabled], select[disabled]{
+    background-color: #e2e2e2;
+    color: #868686;
+  }
+
+  div#thankyou-modal .modal-content {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: #e8e8e8;
+  }
+  .mod_inner {
+    background-color: #fff;
+    padding: 50px 30px;
+    margin-top: 20px;
+  }
+  div#thankyou-modal .modal-body {
+    padding: 30px 50px 50px 50px;
+  }
+
+  div#thankyou-modal  h4.modal-title {
+    text-transform: inherit;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .mod_li {
+    padding: 20px 0px 30px;
+  }
+  .mod_li p {
+    position: relative;
+    padding-left: 40px;
+    min-height: 28px;
+  }
+  #ordertable th {
+    text-align: center;
+  }
+  .submitcase.disable-btn {
+    opacity: 0.5;
+    pointer-events: none;
+  }  
+  .case-error{
+    color: red;
+  }
+  #thankyou-modal .hide {
+    display:none;
+  }
+
+  .modal-open .modal .modal__inner {
+    animation: modal-open 0.5s forwards;
+  }
+
+  .modal-closing .modal .modal__inner {
+    animation: modal-closing 0.5s forwards;
+  }
+
+  .modal-closing .modal:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    animation: overlay-off 0.5s forwards;
+  }
+
+  .modal-open--solid .modal:before {
+    background-color: #000;
+  }
+
+  .modal-open .modal--solid:before {
+    background-color: #000;
+    animation: full-overlay-on 0.5s forwards;
+  }
+
+  .modal-closing .modal--solid:before {
+    background-color: #000;
+    animation: full-overlay-off 0.5s forwards;
+  }
+
+  .modal--is-closing {
+    display: flex !important;
+    overflow: hidden;
+  }
+  .oneordr_tbld input.quantity[type=number]::-webkit-inner-spin-button, 
+  .oneordr_tbld input.quantity[type=number]::-webkit-outer-spin-button {  
+
+    -webkit-appearance: "Always Show Up/Down Arrows";
+
+  }
+  .oneordr_tbld input.quantity[type=number]::-webkit-inner-spin-button, 
+  .oneordr_tbld input.quantity[type=number]::-webkit-outer-spin-button {  
+
+    opacity: 1;
+
+  }
+  span.return-from-span {
+    width: 100%;
+    display: block;
+/*     text-align: center; */
+    padding-top:20px;
+}
+div#page-content.outer-conatiner {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+}
+/*   .submit_add {
+    text-align: center;
+} */
+  @media only screen and (min-width: 769px) {
+
+    .modal__inner {
+      margin: 40px
+    }
+  }
+
+  .modal--square .modal__inner {
+    background-color: #fff;
+    color: #1c1d1d;
+  }
+
+  .modal__inner img {
+    display: block;
+    max-height: 90vh;
+  }
+
+  .modal__inner .image-wrap img {
+    max-height: none;
+  }
+
+  @media only screen and (min-width: 769px) {
+
+    .modal--square .modal__centered-content {
+      padding: 45px;
+      max-height: 90vh;
+      max-width: 1200px
+    }
+  }
+
+  .modal__close {
+    border: 0;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: #fff
+  }
+
+  @media only screen and (min-width: 769px) {
+
+    .modal__close {
+      padding: 30px
+    }
+  }
+
+  .modal__close .icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .modal__close:focus, .modal__close:hover {
+    color: #fff;
+  }
+
+  .modal--square .modal__close {
+    position: absolute;
+    color: #1c1d1d;
+    padding: 10px
+  }
+
+  .modal--square .modal__close:focus, .modal--square .modal__close:hover {
+    color: #1c1d1d;
+  }
+
+  .modal .page-content, .modal .page-width {
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .modal--mobile-friendly {
+      top: auto;
+      bottom: 0;
+      overflow: auto
+    }
+
+    .modal--mobile-friendly.modal--square .modal__centered-content {
+      padding: 20px 20px 0;
+    }
+
+    .modal--mobile-friendly.modal--is-active {
+      overflow: auto;
+    }
+
+    .modal-open .modal--mobile-friendly:before {
+      display: none;
+    }
+
+    .modal--mobile-friendly .modal__inner {
+      margin: 0;
+      border: 2px solid;
+      border-color: #1c1d1d;
+    }
+
+    .modal--mobile-friendly .h1 {
+      padding-right: 25px;
+    }
+
+    .modal--mobile-friendly input {
+      font-size: 16px !important;
+    }
+
+    .modal--mobile-friendly .text-close {
+      display: none;
+    }
+  }
+
+  .modal.modal-custom {
+    display: none;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 25;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal.modal-custom.modal--is-active {
+    display: flex !important;
+    overflow: hidden;
+  }
+  .modal-open .modal.modal-custom:before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e6e6e6ad;
+    animation: overlay-on 5s forwards;
+    cursor: pointer;
+  }
+  .modal-open .modal.modal-custom .modal__inner {
+    animation: modal-open 0.5s forwards;
+  }
+  .modal.modal-custom .modal__inner {
+    transform-style: preserve-3d;
+    flex: 0 1 auto;
+    margin: 15px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .modal.modal-custom .modal__centered {
+    position: relative;
+    flex: 0 1 auto;
+    min-width: 1px;
+    max-width: 100%;
+  }
+  .modal.modal-custom p, .modal.modal-custom label {
+    color: #333;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .modal.modal-custom label {
+    text-transform: capitalize;
+    letter-spacing: 0px;
+  }
+  .modal-custom .modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .modal-custom .modal-title {
+    color: #333;
+    margin: 0;
+    line-height: 1.42857143;
+    letter-spacing: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .modal-custom .modal-body {
+    position: relative;
+    padding: 15px;
+  }
+  .modal-custom .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #e5e5e5;
+  }
+  .modal-custom .modal-footer button {
+    text-transform: capitalize !important;
+    padding: 6px 25px !important;
+    letter-spacing: 1px !important;
+  }
+  .text-center.logo-img {
+    margin-top: 15px;
+  }
+  #modal-cases label {
+    font-size: 14px;
+    font-weight: normal;
+  }  
+  .text-right {
+    margin-top: 20px;
+  }
+  label.lookup_label {
+    letter-spacing: 0.35px;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  button.btn.return-buttonbtn, button.btn.create_request {
+    letter-spacing: 1px;
+  }
+  /*   .modal-custom {
+  position: absolute;
+  z-index: 10000; 
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity:0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  } */
+  .modal-custom.is-visible {
+    visibility: visible;
+    opacity:1;
+  }
+  .modal-overlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsla(0, 0%, 0%, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s;
+  }
+  .modal-custom .modal-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+  .modal-wrapper {
+    position: absolute;
+    z-index: 9999;
+    top: 6em;
+    left: 50%;
+    width: 32em;
+    margin-left: -16em;
+    background-color: #fff;
+    box-shadow: 0 0 1.5em hsla(0, 0%, 0%, 0.35);
+  }
+  .modal-transition {
+    transition: all 0.3s 0.12s;
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  .modal-custom.is-visible .modal-transition {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .modal-custom .modal__inner.modal-content {
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+    margin: 0px;
+  }
+  .modal-custom.modal--square .modal__centered-content {
+    padding: 0px;
+  }
+  .modal--square .modal__inner {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .modal--square .modal__centered-content {
+    max-height: 80vh;
+    padding: 22.5px;
+    min-width: 200px;
+    min-height: 200px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-custom .modal__centered {
+    width: 100%;
+  }
+  .modal-custom .logo-img img {
+    margin: 0 auto;
+    height: auto;
+  }
+  .modal-custom .modal-header .close {
+    float: right;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    color: #333;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+  }
+  .modal-custom .modal-header button.close {
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .modal-custom .modal-header .modal-title {
+    display: inline;
+  }
+  .modal-custom .modal-footer button.btn.btn-secondary.close.close_customer_pop {
+    margin-left: 5px;
+  }
+  .modal-custom #modal-img {
+    margin-top: 10px;
+  }
+  .modal-custom #modal-cases label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: normal;
+  }
+  .modal-custom#mymodal #modal-cases label {
+    display: inline;
+  }
+  .modal-custom div#modal-cases {
+    text-align: left;
+    font-size: 16px;
+  }
+
+  .modal-custom button.close_customer_pop {
+    margin-left: 5px;
+  }
+
+
+  @media (min-width: 768px){
+    .modal-custom .modal-dialog {
+      width: 600px;
+      margin: 30px auto;
+    }
+
+    #mymodal .modal-dialog, #mymodal1 .modal-dialog {
+      width: 70%;
+      margin: 30px auto;
+      max-width: 700px;
+    }
+    .medium-up--text-center {
+      text-align: center !important;
+    }
+    .modal--square .modal__centered-content {
+      padding: 45px;
+      max-height: 90vh;
+      max-width: 1200px;
+    }
+    .modal-open {
+      overflow: hidden;
+    }
+  }
+  @media(max-width:1500px){
+    .oneordr_tbld .table-wrapper{
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      overflow-x: auto;
+      scrollbar-color: #ddd #908f8f;
+      scrollbar-width: thin;
+    }
+    .oneordr_tbld .table-wrapper::-webkit-scrollbar {
+      width: auto;
+      height: 4px;
+    }
+
+    .oneordr_tbld .table-wrapper::-webkit-scrollbar-track {
+      background: #ddd;
+    }
+
+    .oneordr_tbld .table-wrapper::-webkit-scrollbar-thumb {
+      background: #908f8f;
+    }
+    .oneordr_tbld {
+      overflow-x: auto;
+    }
+    .oneordr_tbld table#ordertable {
+      width: 100%;
+      min-width: 1400px;
+    }
+    .oneordr_tbld button.btn.btn-inverse.create_request {
+     /* position: absolute;
+      right: 11px;*/
+      padding: 6px 22px;
+      font-size: 12px;
+    }
+    .oneordr_tbld th {
+      font-size: 13px;
+    }
+    .oneordr_tbld td {
+      font-size: 13px;
+    }
+  }
+  #ordertable select{
+    background-image: url(//cdn.shopify.com/s/files/1/1552/7691/t/1440/assets/ico-select.svg?v=2311470…);
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+</style>
+<div id="s-9abb2877-d5fd-49c9-b3e4-b055e37cd9ab" class="shg-c shg-align-center">
+  <div class="">
+    <h2>Order Lookup</h2>
+  </div>
+</div>
+<div class="page-header clearfix">
+  <!--<h1>Order Lookup</h1>-->
+</div>
+<span class="return-from-span">To begin the return process, simply enter the email address you used to place the order or the order#.<br>Please track the return request status under "My Account" on our website.</span>
+<div id="page-content" class="outer-conatiner">
+  <form id="lookup_form" action="#" method="get">
+    <label class="lookup_label">Customer Email</label><input type="text" required="required" placeholder="Email" id="email" name="email" value="">
+    <label class="lookup_label">Order Number</label><input type="text" required="required" placeholder="Order Number" id="order_num" name="order_num" value="">
+    <div class="submit_add">
+      <button type="button" class="btn btn-inverse return-buttonbtn">Lookup </button>
+      <!--             <input type="button" name="Submit" value="" class="btn btn-inverse return-buttonbtn"> -->
+    </div>
+    <span class="error"></span>
+  </form>
+  <div class="customer" style="display:none;">
+    <p class="cust_name"></p>
+    <p class="order_created"></p>
+    <p class="order_number"></p>
+    <input type="hidden" name="order_id" id="order_id" >
+    <input type="hidden" name="customer_id" id="customer_id" >
+    <input type="hidden" name="customer_email" id="customer_email" >
+    <div class="allorder_tbld" style="display:none;">
+      <div style="text-align:center; color:red;"><h4>Please Select Order Number</h4></div>
+      <table id="allordertable" class="table table-striped sortable  sorttable_sorted_reverse">
+        <thead>
+          <tr>
+            <th class="">Order Number</th>
+            <th class="">Date</th>
+            <th class="">Total</th>
+            <th class="">Fulfillment</th>
+            <th class="">Status</th>
+          </tr>
+        </thead>
+        <tbody id="allordertableb">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="oneordr_tbld" style="display:none;">
+      <table id="ordertable" class="table table-striped">
+        <thead>
+          <tr>
+            <th class="hselect" style="width: 5%;">Select</th>
+            <th class="hname">Product</th>
+            <th class="htype" style="width: 12%;">SKU</th>
+            <th class="hprice" style="width: 7%;">Price</th>
+            <th class="hquantity" style="width: 7%;">Quantity</th>
+            <th class="hreason" style="width: 11%;">Return Reason</th> 
+            <th class="hnote">Customer Notes</th>
+            <th class="hattach" style="width: 12%;">Return Order Number</th>
+            <th class="hattach" style="width: 9%;">Return Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordertableb">
+          <tr></tr>
+        </tbody>
+      </table>
+      <div class="text-right"><span class="error2"></span><button type="button" class="btn btn-inverse back" style="display:none;">
+        Back</button><button type="button" class="btn btn-inverse create_request" style="float:right;">
+        Submit</button></div>
+    </div>
+  </div>
+  <div class="chat-btn"></div>
+</div>
+
+
+
+<div class="modal modal--square modal--mobile-friendly modal-custom" id="mymodal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal__inner modal-content">
+      <div class="modal__centered medium-up--text-center">
+        <div class="modal__centered-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-center">Thank you for your return request</h4>
+          </div>
+          <div class="modal-body">
+            <p class="text-center">To make sure that we can process your return <br>as quickly as possible please follow these steps when<br> returning your package.</p>
+            <div id="modal-cases"></div>
+          </div>
+          <div class="modal-footer"> 
+            <span class="case-error"></span>
+            <button type="button" class="btn btn-outline-dark submitcase">Submit</button>
+            <button type="button" class="btn btn-outline-dark cancle">Cancel Return Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal--square modal--mobile-friendly modal-custom" id="thankyou-modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal__inner modal-content">
+      <div class="modal__centered medium-up--text-center">
+        <div class="modal__centered-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center logo-img"><img src="//cdn.shopify.com/s/files/1/1552/7691/t/1433/assets/logo.svg?v=95115829315241654471653555549" alt="Ya Ya Testing" itemprop="logo" height="200" width="200"></div>
+            <div class="mod_inner">
+              <h4 class="modal-title text-center">Thank you for your return request</h4>
+              <div class="credit case-thanks-text mod_li hide">
+                <p class="text-center">An email will be sent to you within 24 hours that includes the Return Merchandise Authorization Number & a return label. Kindly make sure to check your spam folder as well.</p>
+              </div>
+              <div class="refund-without-label case-thanks-text mod_li hide">
+                <p class="text-center">A Return Merchandise Authorization number will be emailed to you within 24 hours. Kindly make sure to check your spam folder as well.</p>
+              </div>
+              <div class="refund-with-label case-thanks-text mod_li hide">
+                <p class="text-center">A Return Authorization Merchandise number and a discounted return label will be emailed to you within 24 hours. Kindly make sure to check your spam folder as well.</p>
+              </div>
+              <div class="default">
+                <p class="text-center">To make sure that we can process your return <br>as quickly as possible please follow these steps when<br> returning your package.</p>
+                <div class="mod_li">
+                  <p style="margin-bottom: 15px;"><span class="number-round"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                                                  width="10px" height="10px" viewBox="0 0 785.000000 1280.000000"
+                                                                                  preserveAspectRatio="xMidYMid meet"><metadata>Created by potrace 1.15, written by Peter Selinger 2001-2017</metadata>
+                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+                       fill="#7E3D7E" stroke="none"><path d="M4495 12298 c-604 -535 -1486 -866 -2660 -998 -331 -37 -854 -70
+                      -1104 -70 l-101 0 -2 -415 -3 -416 30 -29 30 -29 735 -4 c620 -3 753 -7 850
+                      -21 149 -22 254 -50 316 -86 82 -46 123 -142 161 -372 16 -95 18 -371 21
+                      -3663 2 -2593 0 -3591 -8 -3675 -44 -446 -177 -714 -416 -838 -279 -144 -663
+                      -202 -1350 -202 l-330 0 -27 -28 -27 -28 0 -389 0 -389 27 -28 27 -28 3386 0
+                      3386 0 27 28 27 28 0 390 0 390 -27 26 -28 26 -390 5 c-415 5 -557 17 -779 62
+                      -212 43 -367 103 -480 187 -156 115 -260 347 -312 693 -17 114 -18 350 -21
+                      5005 l-3 4884 -27 28 -27 28 -410 -1 -411 0 -80 -71z"/></g></svg></span> <span>Make sure all of the returned items are in the box with the invoice.</span></p>
+                  <p><span class="number-round"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                     width="10px" height="10px" viewBox="0 0 810.000000 1280.000000"
+                                                     preserveAspectRatio="xMidYMid meet">
+                    <metadata>
+                      Created by potrace 1.15, written by Peter Selinger 2001-2017
+                    </metadata>
+                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
+                       fill="#7E3D7E" stroke="none">
+                      <path d="M3445 12403 c-603 -49 -1043 -156 -1471 -358 -581 -274 -1041 -698
+                               -1289 -1188 -146 -289 -219 -588 -232 -942 -19 -539 124 -953 437 -1265 194
+                               -194 412 -311 693 -372 138 -30 484 -33 619 -5 263 53 486 170 666 348 227
+                               225 340 462 373 782 43 426 -125 829 -430 1031 -36 24 -198 103 -360 176 -162
+                               72 -306 139 -320 148 -41 25 -81 65 -97 94 -45 87 31 236 184 357 259 207 614
+                               321 994 321 850 -1 1367 -467 1517 -1367 36 -214 45 -343 45 -623 -1 -503 -68
+                               -912 -229 -1395 -164 -492 -361 -863 -716 -1345 -284 -385 -570 -731 -1055
+                               -1276 -814 -914 -1076 -1226 -1345 -1605 -715 -1005 -1043 -1906 -1105 -3032
+                               l-7 -128 28 -30 29 -29 3417 0 3416 0 6 33 c2 17 107 771 233 1674 l228 1643
+                               -29 30 -29 30 -388 0 -388 0 -4 -22 c-3 -13 -15 -84 -27 -158 -42 -264 -115
+                               -504 -196 -650 -118 -211 -334 -300 -798 -330 -86 -6 -907 -10 -1934 -10
+                               l-1783 0 7 28 c22 91 169 383 287 572 250 399 666 844 1149 1231 298 239 521
+                               394 964 669 826 512 1176 750 1581 1074 567 452 884 819 1123 1296 245 491
+                               354 1007 338 1610 -6 239 -21 379 -63 579 -174 844 -721 1532 -1559 1962 -484
+                               249 -1031 392 -1680 439 -126 9 -700 12 -800 3z"/>
+                    </g>
+                    </svg></span> <span>You will receive a confirmation email as soon as the items is processed.Please </span><span class="">allow 2-3 business days once the item is received to process the refund.</span><span class=""> You can track the status of the return here.</span></p>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <p>If you have any questions</p>
+                <p>Please contact us at <a href="mailto:sales@efavormart.com">sales@efavormart.com</a></p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal--square modal--mobile-friendly modal-custom" id="cancel-modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal__inner modal-content">
+      <div class="modal__centered medium-up--text-center">
+        <div class="modal__centered-content">
+          <div class="modal-header">
+            <h4 class="modal-title text-center">Thank you</h4>
+            <button type="button" class="close close_customer_pop" data-dismiss="modal" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="mod_inner">
+              <p>
+                Your return request have been canceled. if you have any questions, feel free to contact us via live chat or email at <a href="mailto:sales@efavormart.com">sales@efavormart.com</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal--square modal--mobile-friendly modal-custom" id="customerAccountDisabled" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal__inner modal-content">
+      <div class="modal__centered medium-up--text-center">
+        <div class="modal__centered-content">
+          <div class="modal-body">
+            <div class="text-center logo-img"><img src="{{ 'logo.svg' | asset_url }}" alt="Efavourmart" itemprop="logo" height="200" width="200"></div>
+            <div class="mod_inner text-center">
+              <p>Your account is not active.</p>
+              <p>In order to proceed for returning items, you need to accept account invitation. Please press “Yes” button to proceed.</p>
+            </div>  
+
+          </div>
+          <div class="modal-footer"> 
+            <button type="button" class="btn btn-outline-dark send_invite">Yes</button>
+            <button type="button" class="btn btn-outline-dark close_customer_pop">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal--square modal--mobile-friendly modal-custom" id="customerAccount-thankyou-modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal__inner modal-content">
+      <div class="modal__centered medium-up--text-center">
+        <div class="modal__centered-content">
+          <div class="modal-body">
+            <div class="text-center logo-img"><img src="{{ 'logo.svg' | asset_url }}" alt="Efavourmart" itemprop="logo" height="200" width="200"></div>
+            <div class="mod_inner text-center">
+              <p>“ Thank you”</p>
+              <p>Please refer to your email to account activation. Please activate it and then come back to proceed with your return.</p>
+            </div>
+          </div>
+          <div class="modal-footer"> 
+            <button type="button" class="btn btn-outline-dark close_customer_pop modal-toggle">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal" id="imgmodal'+i+'" role="dialog" tabindex="-1"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Add Addition Info</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><p class="text-center"></p><div id="modal-img"><input type="file" class="customer_img" name="customer_img_'+i+'" id="customer_img_'+i+'"><br><lable id="sku_lbl_'+i+'">Enter SKU number <span style="color: red;">*</span></label><input type="text" value="" id="sku_val_'+i+'" name="sku_val_'+i+'"></div><div class="modal-footer"><button type="button" class="btn btn-outline-dark Add">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></div></div></div></div></div> -->
+<script>
+  var shop = Shopify.shop;
+  var return_order ='';
+  var unique_code = '';
+  var orders_id = '';
+  var email = '';
+  var order_num = '';
+  var selected = new Array();
+  var disabled_cust_id = '';
+  var APP_URL = 'https://rma.efmt.app/rma-one/public/';
+  $(document).ready(function(e){
+    $("body").on('change', 'input[type=checkbox]',function () {
+      const checked = $(this).is(':checked');
+      if(checked ==true){
+        selected.push(this.value);
+      }else{
+        const index = selected.indexOf(this.value);
+        if (index > -1) {
+          selected.splice(index, 1);
+        }
+      }
+    });
+    $("body").on('change', '.quantity',function () {
+      if(this.value <= 0){
+        $(this).val(1);
+      }else if(this.value > $(this).attr('max')){
+        $(this).val($(this).attr('max'));
+      }
+    });
+
+    //Reason change function
+    $("body").on('change', '.reason',function () {
+      var ind = $(this).attr('data-id');
+      closePopUp();
+      if(this.value == 'Damaged Product'){
+        $('#imgmodal'+ind).addClass('modal--is-active');$('body').addClass('modal-open');
+        $('#customer_img_'+ind).css('display', 'inline-block');
+        $('#customer_img_'+ind).addClass('customer_cls_'+ind);
+        $('.sku_val_'+ind).css('display', 'none');
+        $('#sku_val_'+ind).css('display', 'none');
+        $('#sku_val_'+ind).removeClass('sku_cls_'+ind);
+        $('#sku_lbl_'+ind).css('display', 'none');
+      }else if(this.value == 'Wrong Product Shipped'){
+        $('#imgmodal'+ind).addClass('modal--is-active');$('body').addClass('modal-open');
+        $('#customer_img_'+ind).css('display', 'none');
+        $('#customer_img_'+ind).removeClass('customer_cls_'+ind);
+        $('.sku_val_'+ind).css('display', 'inline-block');
+        $('#sku_val_'+ind).css('display', 'inline-block');
+        $('#sku_val_'+ind).addClass('sku_cls_'+ind);
+        $('#sku_lbl_'+ind).css('display', 'inline-block');
+      }else{
+        $('#customer_img_'+ind).css('display', 'none');
+        $('#customer_img_'+ind).removeClass('customer_cls_'+ind);
+        $('.sku_val_'+ind).css('display', 'none');
+        $('#sku_val_'+ind).css('display', 'none');
+        $('#sku_val_'+ind).removeClass('sku_cls_'+ind);
+        $('#sku_lbl_'+ind).css('display', 'none');
+      }
+    });
+
+
+    $('.create_request').click(function(){
+      if (selected.length > 0) {
+        var lineitem = new Array();
+        var fd = new FormData();
+        fd.append('count', selected.length);
+        for(var k=0; k < selected.length; k++){
+          const div = document.querySelector('#customer_img_'+selected[k]);
+          if(div.classList.contains('customer_cls_'+selected[k])){
+            //console.log($('#customer_img_'+selected[k])[0].files[0]);
+            if($('#customer_img_'+selected[k])[0].files[0] == '' || $('#customer_img_'+selected[k])[0].files[0] == undefined || $('#customer_img_'+selected[k])[0].files[0] == 'undefined'){
+              $('.error2').show();
+              $('.error2').text("Please Upload Image");
+              $('#imgmodal'+selected[k]).addClass('modal--is-active');$('body').addClass('modal-open');
+              setTimeout(function(){ $('.error2').hide(); }, 5000);
+              return false;
+            }else{
+              fd.append('file_'+k, $('#customer_img_'+selected[k])[0].files[0]);
+            }
+          } 
+
+          const sku_cls = document.querySelector('#sku_val_'+selected[k]);
+          if(sku_cls.classList.contains('sku_cls_'+selected[k])){
+            if($('#sku_val_'+selected[k]).val() == ''){
+              $('.error2').show();
+              $('#imgmodal'+selected[k]).addClass('modal--is-active');$('body').addClass('modal-open');
+              $('.error2').text("Please enter SKU ID");
+              setTimeout(function(){ $('.error2').hide(); }, 5000);
+              return false;
+            }
+          }
+          //           if($('.customer_img_'+selected[k]).length != 0) {
+          //             console.log("HAI");
+          //             if($('.customer_img_'+selected[k])[0].files[0] == ''){
+          //               console.log("I");
+          //             	return false;
+          //             }else{
+          //               console.log("AI");
+          //             	fd.append('file_'+k, $('#customer_img_'+selected[k])[0].files[0]);
+          //             }
+          //         }
+          //console.log($('#id_'+selected[k]).val());	
+          fd.append('id_'+k, $('#id_'+selected[k]).val());
+          fd.append('quantity_'+k, $('#quantity_'+selected[k]).val());
+          fd.append('price_'+k, $('#price_'+selected[k]).text());
+          // fd.append('type_'+k, $('#type_'+selected[k]).val());
+          fd.append('reason_'+k, $('#reason_'+selected[k]).val());
+          fd.append('note_'+k, $('#note_'+selected[k]).val());
+          fd.append('title_'+k, $('#title_'+selected[k]).text());
+          fd.append('sku_val_'+k, $('#sku_val_'+selected[k]).val());
+        }
+
+        var order_id = $('#order_id').val();
+        var customer_email = $('#customer_email').val();
+        var customer_id = $('#customer_id').val();
+        fd.append('order_id', order_id);
+        fd.append('shop', shop);
+        fd.append('customer_id',customer_id);
+        fd.append('customer_email', customer_email);
+        $(this).addClass('active');
+        $(this).html('<img class="loader" src="'+APP_URL+'images/gif-images.gif">');
+        // return false;
+        $.ajax({
+          url: APP_URL+"create_return",
+          type: "POST",
+          data: fd,
+          enctype: 'multipart/form-data',
+          contentType: false,
+          processData: false,
+          dataType: "json",
+          cache: false,
+//           timeout: 800000,
+          success: function(searchResult){
+            console.log(searchResult);
+            selected =[];
+            if(searchResult.error){
+              getretun_form(email,order_num);
+              $('.create_request').removeClass('active');
+              $('.create_request').html('Submit');
+              $('.error2').show();
+              if(searchResult.error.message){
+                $('.error2').text(searchResult.error.message);
+              }else if(searchResult.error){
+                $('.error2').text(searchResult.error);
+              }else{
+                $('.error2').text(searchResult.error.message);
+              }
+              
+              setTimeout(function(){ $('.error2').hide(); }, 5000);
+            }else if(searchResult.customer){
+              console.log(searchResult);
+              disabled_cust_id = searchResult.customer_data.id;
+              $('.create_request').removeClass('active');
+              $('.create_request').html('Submit');
+              $('#customerAccountDisabled').addClass('modal--is-active');$('body').addClass('modal-open');
+            }else{
+              if(searchResult.chat == true){
+                $('.submitcase').text('Start Chat');
+              }
+              $('.create_request').removeClass('active');
+              $('.create_request').html('Submit');
+              $('#modal-cases').html(searchResult.template);
+              return_order = searchResult.return_order;
+              unique_code = searchResult.orders.orderunique_id;
+              orders_id = searchResult.orders.id;
+              //               $('#mymodal').modal({backdrop: 'static', keyboard: false, show: true});
+              $('#mymodal').addClass('modal--is-active');$('body').addClass('modal-open');
+              getretun_form(email,order_num);
+            }
+          },
+          error: function(err){
+            console.log(err);
+            selected =[];
+//             getretun_form(email,order_num);
+//             $('.create_request').removeClass('active');
+//             $('.create_request').html('Submit');
+            //console.log("Error in fetchProductInfo: " + err);
+          }
+        });
+      }else{
+        $('.error2').show();
+        $('.error2').text("Please select at least one item to return");
+        setTimeout(function(){ $('.error2').hide(); }, 5000);
+      }
+    });
+
+    $('.return-buttonbtn').click(function(){
+      selected =[];
+      //$('#thankyou-modal').modal('show');
+      email = $('#email').val();
+      order_num = $('#order_num').val();
+      if(email == '' &&  order_num ==''){
+        $('.error').show();
+        $('.error').text("Please Enter value");
+        setTimeout(function(){ $('.error').hide(); }, 5000);
+      }else if(email == ''){
+        $('.error').show();
+        $('.error').text("Please Enter Email");
+        setTimeout(function(){ $('.error').hide(); }, 5000);
+      }else if(order_num == ''){
+        $('.error').show();
+        $('.error').text("Please Enter Order Number");
+        setTimeout(function(){ $('.error').hide(); }, 5000);
+      }else if( !validateEmail(email)) { 
+        $('.error').show();
+        $('.error').text("Please Enter valid Email");
+        setTimeout(function(){ $('.error').hide(); }, 5000);
+      }else{
+        $(this).addClass('active');
+        $(this).html('<img class="loader" src="'+APP_URL+'images/gif-images.gif">');
+        $('.customer').hide();
+        $('.oneordr_tbld').hide();
+        $('.allorder_tbld').hide();
+        $('.order_number').html('');
+        getretun_form(email,order_num);
+      } 
+    });
+    function getretun_form(email,order_num){
+      $.ajax({
+        url: APP_URL+"return_form",
+        type: "POST",
+        data: {'email':email,'order_num':order_num, 'shop':shop},
+        dataType: "json",
+        success: function(searchResult){
+          $('.return-buttonbtn').html('Lookup');
+          $('.return-buttonbtn').removeClass('active');
+          if(searchResult.orders){ 
+            var line_items=searchResult.line_items;
+            var order=searchResult.orders;
+            var status= order.financial_status;
+            var total_price = order.total_price;
+            var customer = order.customer;
+            var data=[];
+            var cust_name ='';
+            var customer_id = '';
+            var email = order.email;
+            if(customer){
+              customer_id =customer.id;
+              cust_name = customer.first_name+' '+customer.last_name;
+            }
+            $('.customer').show();
+            for(var i=0; i < line_items.length; i++){
+              //|| order.fulfillment_status !='partial '
+              var fulfillment_s = false ;
+              var fulfillment_status = '';
+              //console.log(fulfillment_s);
+              if(line_items[i].fulfillment_status =='fulfilled'){
+                fulfillment_s = true;
+              }
+              if(line_items[i].order_status == 'undefined' || line_items[i].order_status == undefined){
+                fulfillment_status ='';
+              }else{
+                fulfillment_status = line_items[i].order_status;
+              }
+              //              if(line_items[i].fulfillment_status ==){
+              //              	fulfillment_s = true;
+              //              }
+              if('selected' in line_items[i] || fulfillment_s ==false){
+                // if(fulfillment_s==false){
+                //  fulfillment_status = line_items[i].order_status;
+                // }
+                data += '<tr disabled class="disable" style="background:#e2e2e2;  color: #868686;"><td><input type="checkbox" checked="" disabled></td><td id="title_'+i+'">'+line_items[i].title+'</td><td style="overflow: scroll; overflow-y: hidden;">'+line_items[i].sku+'</td><td id="price_'+i+'">$'+line_items[i].pre_tax_price+'</td><td><input type="number" class="quantity" min="1" max="'+line_items[i].quantity+'" id="quantity_'+i+'" value="'+line_items[i].quantity+'" disabled style="width:100%;"></td><!--<td><select disabled class="type" id="type_'+i+'" name="type_'+i+'"><option value="Store Credit">Credit</option><option value="Refund">Refund</option></select></td>--><td><select class="reason" data-id="'+i+'" id="reason_'+i+'" name="reason'+i+'" disabled><option value="No Longer Needed">No Longer Needed</option><option value="Wrong Product Ordered">Wrong Product Ordered</option><option value="Changed Mind">Changed Mind</option><option value="Arrived Too Late">Arrived Too Late</option><option value="Price Too High">Price Too High</option><option value="Wrong Product Shipped" data-id="'+i+'">Wrong Product Shipped</option><option value="Damaged Product" data-id="'+i+'">Damaged Product</option><option value="Other">Other</option></select></td><td><textarea disabled class="note" id="note_'+i+'" name="note_'+i+'"></textarea></td><td>'+line_items[i].responceId+'</td><td>'+fulfillment_status+'</td></tr>';
+              }else{
+                if('qua_left' in line_items[i]){
+                  data += '<tr><td><input type="checkbox" name="lineitems[]" value="'+i+'" class="lineitem-check"></td><td id="title_'+i+'">'+line_items[i].title+'<input type="hidden" id="id_'+i+'" value="'+line_items[i].id+'"></td><td style="overflow: scroll; overflow-y: hidden;">'+line_items[i].sku+'</td><td id="price_'+i+'">$'+line_items[i].pre_tax_price+'</td><td><input type="number" class="quantity" data-maxlength="'+line_items[i].qua_left+'" id="quantity_'+i+'" min="1"  value="'+line_items[i].qua_left+'" style="width:100%;"></td><!--<td><select class="type" id="type_'+i+'" name="type_'+i+'"><option value="Store Credit">Credit</option><option value="Refund">Refund</option></select></td>--><td><select class="reason" data-id="'+i+'" id="reason_'+i+'" name="reason'+i+'"><option value="No Longer Needed">No Longer Needed</option><option value="Wrong Product Ordered">Wrong Product Ordered</option><option value="Changed Mind">Changed Mind</option><option value="Arrived Too Late">Arrived Too Late</option><option value="Price Too High">Price Too High</option><option value="Wrong Product Shipped" data-id="'+i+'">Wrong Product Shipped</option><option value="Damaged Product" data-id="'+i+'">Damaged Product</option><option value="Other">Other</option></select> <div class="modal modal--square modal--mobile-friendly modal-custom" id="imgmodal'+i+'" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal__inner modal-content"><div class="modal__centered medium-up--text-center"><div class="modal__centered-content"><div class="modal-header"><h5 class="modal-title">Attached Image</h5><button type="button" class="close close_customer_pop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><p class="text-center"></p><div class="sku_val_'+i+'" style="display:none;"><lable>SKU ID</label><input type="text" value="" id="sku_val_'+i+'" name="sku_val_'+i+'"></div><div id="modal-img"><input type="file" class="customer_img" name="customer_img_'+i+'" id="customer_img_'+i+'" style="display:none;"></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary close close_customer_pop" data-dismiss="modal">Submit</button><button type="button" class="btn btn-secondary close close_customer_pop" data-dismiss="modal">Cancel</button></div></div></div></div></div></div></td><td><textarea class="note" id="note_'+i+'" name="note_'+i+'"></textarea></td><td>'+line_items[i].responceId+'</td><td>'+fulfillment_status+'</td></tr>';
+                }else{
+                  data += '<tr><td><input type="checkbox" name="lineitems[]" value="'+i+'" class="lineitem-check"></td><td id="title_'+i+'">'+line_items[i].title+'<input type="hidden" id="id_'+i+'" value="'+line_items[i].id+'"></td><td style="overflow: scroll; overflow-y: hidden;">'+line_items[i].sku+'</td><td id="price_'+i+'">$'+line_items[i].pre_tax_price+'</td><td><input type="number" class="quantity" data-maxlength="'+line_items[i].quantity+'" id="quantity_'+i+'" min="1"  value="'+line_items[i].quantity+'" style="width:100%;"></td><!--<td><select class="type" id="type_'+i+'" name="type_'+i+'"><option value="Store Credit">Credit</option><option value="Refund">Refund</option></select></td>--><td><select class="reason" data-id="'+i+'" id="reason_'+i+'" name="reason'+i+'"><option value="No Longer Needed">No Longer Needed</option><option value="Wrong Product Ordered">Wrong Product Ordered</option><option value="Changed Mind">Changed Mind</option><option value="Arrived Too Late">Arrived Too Late</option><option value="Price Too High">Price Too High</option><option value="Wrong Product Shipped" data-id="'+i+'">Wrong Product Shipped</option><option value="Damaged Product" data-id="'+i+'">Damaged Product</option><option value="Other">Other</option></select> <div class="modal modal--square modal--mobile-friendly modal-custom" id="imgmodal'+i+'" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal__inner modal-content"><div class="modal__centered medium-up--text-center"><div class="modal__centered-content"><div class="modal-header"><h5 class="modal-title">Attached Image</h5><button type="button" class="close close_customer_pop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><p class="text-center"></p><div class="sku_val_'+i+'" style="display:none;"><lable>SKU ID</label><input type="text" value="" id="sku_val_'+i+'" name="sku_val_'+i+'"></div><div id="modal-img"><input type="file" class="customer_img" name="customer_img_'+i+'" id="customer_img_'+i+'" style="display:none;"></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary close close_customer_pop" data-dismiss="modal">Submit</button><button type="button" class="btn btn-secondary close close_customer_pop" data-dismiss="modal">Cancel</button></div></div></div></div></div></div></td><td><textarea class="note" id="note_'+i+'" name="note_'+i+'"></textarea></td><td>'+line_items[i].responceId+'</td><td>'+fulfillment_status+'</td></tr>';
+                }             
+              }
+            }
+            $('#ordertableb').html(data);
+            $('.cust_name').html('<b>Customer Name: </b><span>'+cust_name+'</span>');
+            $('.order_created').html('<b>Purchase Date: </b><span>'+moment(order.created_at,"YYYY-MM-DD").format("MMM DD YYYY")+'</span>');
+            $('.order_number').html('<b>Order Number: </b><span>'+order.name+'</span>');
+            $('#order_id').val(order.id);
+            $('#customer_id').val(customer_id);
+            $('#customer_email').val(email);
+            $('.oneordr_tbld').show();
+            $('.allorder_tbld').hide();
+          }else if(searchResult.all_orders){
+            var order_html = '';
+            var allorders = searchResult.all_orders;
+            if(allorders[0].orders.customer){
+              customer_id =allorders[0].orders.customer.id;
+              cust_name = allorders[0].orders.customer.first_name+' '+allorders[0].orders.customer.last_name;
+            }
+            for(var k=0; k < allorders.length; k++){
+              order_html+=`<tr class="showorder_${k} ${allorders[k].orders.fulfillment_status ? '':'disabled'}" data-line_items="${encodeURIComponent(JSON.stringify(allorders[k].line_items))}" data-order="${encodeURIComponent(JSON.stringify(allorders[k].orders))}" onclick="showordertbl(${k});">
+<td><a href="javascript:void(0);">${allorders[k].orders.name}</a></td>
+<td>${moment(allorders[k].orders.created_at).format("MMM d YYYY, h:mm a")}</td>
+<td>$${allorders[k].orders.total_price}</td>
+<td>${allorders[k].orders.fulfillment_status == null ? 'unfulfilled': allorders[k].orders.fulfillment_status}</td>
+<td>${allorders[k].orders.status? allorders[k].orders.status : ''}</td>
+  </tr>`;
+            }
+            // console.log(order_html);
+            $('#order_id').val('');
+            $('#customer_id').val('');
+            $('#customer_email').val('');
+            $('.order_created').html('');
+            $('.customer').show();
+            $('.oneordr_tbld').hide();
+            $('.allorder_tbld').show();
+            $('.cust_name').html('<b>Customer Name: </b><span>'+cust_name+'</span>');
+            $('#allordertableb').html(order_html);
+            $('.return-buttonbtn').removeClass('active');
+          }else{
+            $('.error').show();
+            $('.error').text(searchResult.error);
+            setTimeout(function(){ $('.error').hide(); }, 5000);
+          }
+        },
+        error: function(err){
+          $('.return-buttonbtn').html('Lookup');
+          $('.return-buttonbtn').removeClass('active');
+          // console.log("Error in fetchProductInfo: " + err);
+          $('.error').show();
+          $('.error').text(err);
+          setTimeout(function(){ $('.error').hide(); }, 5000);
+        }
+      });
+    }
+    function showordertbl(k){
+      // console.log(k);
+      const div = document.querySelector('.showorder_'+k);
+      // console.log(div.classList.contains('disabled'));
+      // console.log(div);
+      if(div.classList.contains('disabled')){
+        return false;
+      }else{
+        var order = $('.showorder_'+k).data('order');
+        order = JSON.parse(decodeURIComponent(order));
+        var line_items = $('.showorder_'+k).data('line_items');
+        line_items = JSON.parse(decodeURIComponent(line_items));
+        //console.log(order);
+        // console.log(line_items);
+        var data=[];
+        for(var i=0; i < line_items.length; i++){
+          var fulfillment_s = false ;
+          var fulfillment_status = '';
+          //console.log(line_items[i]);
+          if(line_items[i].fulfillment_status =='fulfilled'){
+            fulfillment_s = true;
+          }
+          if(line_items[i].order_status == 'undefined' || line_items[i].order_status == undefined){
+            fulfillment_status ='';
+          }else{
+            fulfillment_status = line_items[i].order_status;
+          }
+          if('selected' in line_items[i] || fulfillment_s ==false){
+            // if(fulfillment_s==false){
+            // fulfillment_status = 'Unfulfilled';
+            // }
+            data += '<tr disabled class="disable" style="background:#e2e2e2;  color: #868686;"><td><input type="checkbox" checked="" disabled></td><td id="title_'+i+'">'+line_items[i].title+'<input type="hidden" id="id_'+i+'" value="'+line_items[i].id+'"></td><td style="overflow: scroll; overflow-y: hidden;">'+line_items[i].sku+'</td><td id="price_'+i+'">$'+line_items[i].pre_tax_price+'</td><td><input type="number" class="quantity" min="1" max="'+line_items[i].quantity+'" id="quantity_'+i+'" value="'+line_items[i].quantity+'" disabled></td><!--<td><select disabled class="type" id="type_'+i+'" name="type_'+i+'"><option value="Store Credit">Credit</option><option value="Refund">Refund</option></select></td>--><td><select class="reason" data-id="'+i+'" id="reason_'+i+'" name="reason'+i+'" disabled><option value="No Longer Needed">No Longer Needed</option><option value="Wrong Product Ordered">Wrong Product Ordered</option><option value="Changed Mind">Changed Mind</option><option value="Arrived Too Late">Arrived Too Late</option><option value="Price Too High">Price Too High</option><option value="Wrong Product Shipped" data-id="'+i+'">Wrong Product Shipped</option><option value="Damaged Product" data-id="'+i+'">Damaged Product</option><option value="Other">Other</option></select></td><td><textarea disabled class="note" id="note_'+i+'" name="note_'+i+'"></textarea></td><td>'+line_items[i].responceId+'</td><td>'+fulfillment_status+'</td></tr>';
+          }else{
+            data += '<tr><td><input type="checkbox" name="lineitems[]" value="'+i+'" class="lineitem-check"></td><td id="title_'+i+'">'+line_items[i].title+'<input type="hidden" id="id_'+i+'" value="'+line_items[i].id+'"></td><td style="overflow: scroll; overflow-y: hidden;">'+line_items[i].sku+'</td><td id="price_'+i+'">$'+line_items[i].pre_tax_price+'</td><td><input type="number" class="quantity" min="1" max="'+line_items[i].quantity+'" id="quantity_'+i+'" value="'+line_items[i].quantity+'"></td><!--<td><select class="type" id="type_'+i+'" name="type_'+i+'"><option value="Store Credit">Credit</option><option value="Refund">Refund</option></select></td>--><td><select class="reason" data-id="'+i+'" id="reason_'+i+'" name="reason'+i+'"><option value="No Longer Needed">No Longer Needed</option><option value="Wrong Product Ordered">Wrong Product Ordered</option><option value="Changed Mind">Changed Mind</option><option value="Arrived Too Late">Arrived Too Late</option><option value="Price Too High">Price Too High</option><option value="Wrong Product Shipped" data-id="'+i+'">Wrong Product Shipped</option><option value="Damaged Product" data-id="'+i+'">Damaged Product</option><option value="Other">Other</option></select> <div class="modal modal--square modal--mobile-friendly modal-custom" id="imgmodal'+i+'" role="dialog" tabindex="-1"><div class="modal-dialog"><div class="modal__inner modal-content"><div class="modal__centered medium-up--text-center"><div class="modal__centered-content"><div class="modal-header"><h5 class="modal-title">Attached Image</h5><button type="button" class="close close_customer_pop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"><p class="text-center"></p><div class="sku_val_'+i+'" style="display:none;"><lable>SKU ID</label><input type="text" value="" id="sku_val_'+i+'" name="sku_val_'+i+'"></div><div id="modal-img"><input type="file" class="customer_img" name="customer_img_'+i+'" id="customer_img_'+i+'" style="display:none;"></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary close close_customer_pop" data-dismiss="modal">Cancel</button></div></div></div></div></div></div></td><td><textarea class="note" id="note_'+i+'" name="note_'+i+'"></textarea></td><td>'+line_items[i].responceId+'</td><td>'+fulfillment_status+'</td></tr>';
+          }
+        }
+        $('#order_id').val(order.id);
+        $('#customer_id').val(order.customer.id);
+        $('#customer_email').val(order.customer.email);
+        $('.order_created').html('<b>Purchase Date: </b><span>'+moment(order.created_at).format("MMM d YYYY")+'</span>');
+        $('#ordertableb').html(data);
+        $('.oneordr_tbld').show();
+        $('.allorder_tbld').hide();
+        $('.order_number').html('<b>Order Number: </b><span>'+order.name+'</span>');
+        $('.back').css('display', 'initial');
+        $('.back').css('margin-right', '10px');
+      }
+    }
+
+    $("body").on('change', "input[name='cases']", function () {
+      var caseSel = $("input[name='cases']:checked").val();
+      if(caseSel && caseSel != undefined){
+        $('.case-error').text('');
+        //        $('.submitcase').removeClass('disable-btn');
+        //        $('.submitcase').prop( "disabled", false );
+      }
+    }); 
+
+    $('.submitcase').click(function(){
+      var cc = $("input[name='cases']:checked").val();
+      if(cc == '' || cc == undefined){
+        $('.case-error').text('Please select a case from above');
+      }else{
+        var returnOption = $("input[name='cases']:checked").attr('data-option');
+        var returnLabel = $("input[name='cases']:checked").attr('data-retunlabel');
+        var returnPrice = $("input[name='cases']:checked").attr('data-retunPrice');
+        var issueRealTime = $("input[name='cases']:checked").attr('data-issueRealTime');
+        console.log('cc='+cc);console.log('returnLabel='+returnLabel);
+        if(cc != ''){
+          if(cc == 'chat'){
+            window.open(`https://vue.comm100.com/chatWindow.aspx?siteId=1000552&planId=95000000-0000-0000-0000-008e000f4468#`);
+            $('#mymodal').removeClass('modal--is-active');$('body').removeClass('modal-open');
+          }else{
+            $('#thankyou-modal .case-thanks-text').addClass('hide');
+            $('#thankyou-modal .default').removeClass('hide');
+            if(cc == 'storeCredit'){
+              $('#thankyou-modal .credit').removeClass('hide');$('#thankyou-modal .default').addClass('hide');
+            }else if(cc == 'refund' && !returnLabel){
+              $('#thankyou-modal .refund-without-label').removeClass('hide');$('#thankyou-modal .default').addClass('hide');
+            }else if(cc == 'refund' && returnLabel){
+              $('#thankyou-modal .refund-with-label').removeClass('hide');$('#thankyou-modal .default').addClass('hide');
+            }
+
+            $(this).addClass('active');
+            $(this).html('<img class="loader" src="'+APP_URL+'images/gif-images.gif">');
+            $.ajax({
+              url: APP_URL+"confirm",
+              type: "POST",
+              data: {'cases':cc,'return_order':return_order, 'id': orders_id, 'returnLabel': returnLabel, 'returnPrice': returnPrice, 'returnOption': returnOption, 'issueRealTime': issueRealTime, 'shop':shop},
+              dataType: "json",
+              success: function(searchResult){
+                $('.submitcase').html('Submit');
+                $('.submitcase').removeClass('active');
+                $('#mymodal').removeClass('modal--is-active');$('body').removeClass('modal-open');
+                $('#thankyou-modal').addClass('modal--is-active');$('body').addClass('modal-open');
+                getretun_form(email,order_num);
+              }
+            });
+          }
+        }
+      }
+    });
+    $('.back').click(function(){
+      $('.oneordr_tbld').hide();
+      $('.allorder_tbld').show();
+      $('.order_number').html('');
+      $('.order_created').html('');
+      $('.back').css('display', 'none');
+    });
+    $('.cancle').click(function(){
+      var email = $('#email').val();
+      var order_num = $('#order_num').val();
+      $(this).addClass('active');
+      $(this).html('<img class="loader" src="'+APP_URL+'images/gif-images.gif">');
+      $.ajax({
+        url: APP_URL+"cancle_request",
+        type: "POST",
+        data: {'return_order':return_order, 'id': orders_id},
+        dataType: "json",
+        success: function(searchResult){
+          $('.cancle').html('Cancel Return Request');
+          $('.cancle').removeClass('active');
+          $('#mymodal').removeClass('modal--is-active');$('body').removeClass('modal-open');
+          $('#cancel-modal').addClass('modal--is-active');$('body').addClass('modal-open');
+          getretun_form(email,order_num);
+        }
+      });
+    });
+    function validateEmail($email) {
+      ///var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+      var emailReg = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return emailReg.test( $email );
+    }
+    //For Quantity Update
+    $("body").on('change', '.quantity', function () {
+      if(parseInt($(this).val()) > parseInt($(this).attr('data-maxlength'))){
+        $(this).val(parseInt($(this).attr('data-maxlength')));
+      }
+    });
+
+    $('#thankyou-modal .close').click(function(){
+      $('#thankyou-modal').removeClass('modal--is-active');$('body').removeClass('modal-open');
+    });
+
+    var max_chars = 400;
+    $("body").on('keydown', '.note', function (e) {
+      if ($(this).val().length >= max_chars) { 
+        $(this).val($(this).val().substr(0, max_chars));
+      }
+    });
+    $("body").on('keyup', '.note', function (e) {
+      if ($(this).val().length >= max_chars) { 
+        $(this).val($(this).val().substr(0, max_chars));
+      }
+    });
+    $("body").on('change', '.note', function (e) {
+      if ($(this).val().length >= max_chars) { 
+        $(this).val($(this).val().substr(0, max_chars));
+      }
+    });
+
+    function closePopUp(){
+      $('.close_customer_pop').click(function(){
+        console.log('no');
+        $(this).parents('.modal').removeClass('modal--is-active');$('body').removeClass('modal-open');
+      });
+    }
+
+    closePopUp();
+
+    $('.send_invite').click(function(){
+      $(this).addClass('active');
+      $(this).html('<img class="loader" src="'+APP_URL+'images/gif-images.gif">');
+      $.ajax({
+        url: APP_URL+"customer/send_invite",
+        type: "POST",
+        data: {'shop':shop, 'customer_id':disabled_cust_id},
+        dataType: "json",
+        success: function(result){
+          $('.send_invite').html('Yes');
+          $('.send_invite').removeClass('active');
+          $('#customerAccountDisabled').removeClass('modal--is-active');$('body').removeClass('modal-open');
+          if(result.invite){
+            $('#customerAccount-thankyou-modal').addClass('modal--is-active');$('body').addClass('modal-open');
+          }else{
+            $('#lookup_form .error').text(result.customer_invite);
+          }
+        }
+      });
+    });
+  });
+
+
+  // Quick & dirty toggle to demonstrate modal toggle behavior
+  //   $('.modal-toggle').on('click', function(e) {
+  //     e.preventDefault();
+  //     $('#modal-custom').toggleClass('is-visible');
+  //   });
+</script>

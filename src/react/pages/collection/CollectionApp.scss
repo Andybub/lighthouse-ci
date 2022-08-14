@@ -1,0 +1,11 @@
+.main-container {
+  @include respondLG {
+    min-width: 100%;
+  }
+}
+.result-container {
+  @include respondXXL {
+    flex: 0 0 80%;
+    max-width: 80%;
+  }
+}

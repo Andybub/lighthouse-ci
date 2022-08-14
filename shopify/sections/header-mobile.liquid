@@ -1,0 +1,155 @@
+<!-- header-mobile.liquid -->
+{%- assign index_active = 1 -%}
+{%- if canonical_url contains 'category' -%}
+  {%- assign index_active = 2 -%}
+{%- endif -%}
+{%- capture content_header_mb -%}
+<div class="headermb-header">
+  <span class="mobile-menu-close close-menu float-right"><i class="fkt-close"></i></span>
+  {%- if section.settings.use_search -%}
+  <div class="w-100 float-left">
+    <div class="search-bar d-md-none">{% render 'tw-search-bar' %}</div>
+  </div>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+  <div class="w-100 float-left">
+    <div class="d-flex justify-content-start">
+      <div class="overflow-scroll-wrapper">                  
+        <ul class="nav nav-pills-mobile nav-border-anim flex-nowrap" role="tablist">
+          {%- for block in section.blocks -%}
+          <li class="nav-item">
+            <a class="nav-link{%if forloop.index == index_active%} active{%endif%}" data-toggle="tab" href="#tab-{{block.id}}" role="tab" aria-controls="tab-{{block.id}}" aria-selected="{%if forloop.first%}false{%else%}true{%endif%}" data-type="{{block.type}}">{{block.settings.title}}</a>
+          </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+    <div class="border-top" style="opacity: 0.5; margin-top: -5px"></div>
+  </div>
+  {%- endif -%}
+</div>
+<div class="headermb-content-wrapper{% if section.settings.use_search %} has_search-box{% endif %}">
+  <div class="" style="min-height: 100vh">
+  {%- if section.blocks.size > 0 -%}
+    <div class="tab-content tab-container">
+      {%- for block in section.blocks -%}
+      <div id="tab-{{block.id}}" class="tab-pane fade{%if forloop.index == index_active%} show active{%endif%}" role="tabpanel">
+      {%- case block.type -%}
+        {%- when 'item_categories_1' -%}
+          <nav class="mobile-cats-nav">
+            <ul class="mobile-cats-menu list-unstyled">
+              {%- for link in linklists[block.settings.menu_links].links -%}
+              <li><a class="{%if link.title contains '[special]' %}mobile-cats-lead{%endif%}" href="{{link.url}}" aria-label="{{link.title | remove: '[special]'}}">{{link.title | remove: '[special]'}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+        {%- when 'tw_item_menu' -%}
+          <nav class="mobile-nav mb-2i">
+            <ul class="mobile-menu">
+              <li><a href="/pages/shop-the-looks">Shop The look</a></li>
+              <li><a href="/blogs/home">Blog</a></li>
+              <li><a href="/account{% unless customer %}/login{% endunless %}"><i class="icomoon icomoon-nav-account mr-1 align-middle" aria-hidden="true"></i>{% if customer %}Hi, {{ customer.first_name | truncate: 10 }}{% else %}My Account{% endif %}</a></li>
+              <li><a href="/pages/swym-wishlist"><i class="icomoon icomoon-wishlist mr-1 align-middle" aria-hidden="true"></i>Wishlist</a></li>
+              <li><a href="/pages/track-your-order"><i class="icomoon icomoon-nav-order-status mr-1 align-middle" aria-hidden="true"></i>Order Status</a></li>
+              <li><a href="/pages/returns-form"><i class="icomoon icomoon-nav-returns mr-1 align-middle" aria-hidden="true"></i>Return</a></li>
+            </ul>
+          </nav>
+          <nav class="mobile-nav text-center mb-2i">
+            <ul class="mobile-menu">
+              <li><a href="/pages/contact-us" class="border-bottom-0">Contact</a></li>
+              <li><a href="/pages/free-shipping" class="border-bottom-0">Shipping</a></li>
+              <li><a href="/pages/frequently-asked-questions" class="border-bottom-0">FAQ</a></li>
+              <li><a href="/pages/shopping-guides" class="border-bottom-0">Shopping Guide</a></li>
+              <li><a href="http://ehomemart.com/" class="border-bottom-0" target="_blank">Shop Our Brand > {{ 'ehmt-logo.svg' | asset_url | img_tag: 'ehomemart' }}</a></li>
+            </ul>
+          </nav>
+          <div class="socials_ style-02 style-02-small text-center">
+            {%-render "kt_socials"-%}
+          </div>
+      {%- endcase -%}
+      </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+  </div>
+</div>
+<div class="headermb-footer" style="height: 50px;"></div>
+{%- endcapture -%}
+{%- if section.settings.use_lazy -%}
+  {%- if template != 'cart.mobile-menu' -%}
+  <aside data-section-id="{{ section.id }}" data-section-type="header-mobile-section">
+    <div class="mobile-menu-container mobile-menu-light">
+      <div class="mobile-menu-wrapper lazyload" data-include="{{routes.cart_url}}?view=mobile-menu"></div>
+    </div>
+  </aside>
+  {%- endif -%}
+  {%- if template == 'cart.mobile-menu' -%}<!--lz_sc-->
+    {{- content_header_mb | strip_newlines | remove: '  ' | remove: '  ' -}}<!--lz_sc-->
+  {%- endif -%}
+{%- else -%}
+  <aside data-section-id="{{ section.id }}" data-section-type="header-mobile-section">
+    <div class="mobile-menu-container mobile-menu-light">
+      <div class="mobile-menu-wrapper">      
+        {{- content_header_mb | strip_newlines | remove: '  ' | remove: '  ' -}}
+      </div>
+    </div>
+  </aside>
+{%- endif -%}
+{% schema %}
+  {
+  "name": "Header mobile",
+  "class": "section-header-mobile",
+  "settings": [
+    {
+      "type": "header",
+      "content": "== Header mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_lazy",
+      "label": "Use Lazyload?"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_search",
+      "label": "Use Search box?",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item_categories_1",
+      "name": "Item categories_1",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Select menu"
+        },
+        {
+          "type": "link_list",
+          "id": "menu_links",
+          "label": "Choose the parent item menu"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Tab title",
+          "default":"Item tab"
+        }
+      ]
+    },
+    {
+      "type": "tw_item_menu",
+      "name": "TW Item menu",
+      "settings": [
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Tab title",
+          "default":"Item tab"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

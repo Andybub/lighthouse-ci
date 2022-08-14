@@ -1,0 +1,36 @@
+<script>
+  {% comment %} ========= walter added for CartBehavior Traking Start ========= {% endcomment %}
+  document.addEventListener('DOMContentLoaded', function() {
+    var tw_trcking_usr, ts, tw_trcking_CartItems, tw_trcking_Obj, { note, attributes, requires_shipping, currency, total_weight, cart_level_discount_applications, items, ...tw_trcking_CartInfo } = tw_cart, noneID, CartSession;
+    if (!localStorage.getItem('noneID') && (typeof (localStorage.getItem('noneID')) !== 'undefined')) { noneID = 'EF-' + Math.random().toString(36).replace(/[^a-z1-9]+/g, '').substr(0, 8) + '-' + Math.random().toString(36).replace(/[^a-z1-9]+/g, '').substr(0, 6); localStorage.setItem('noneID', noneID); } else { noneID = localStorage.getItem('noneID'); }
+    if (!localStorage.getItem('CartSession') && (typeof (localStorage.getItem('CartSession')) !== 'undefined')) { CartSession = 'CS-' + Math.random().toString(36).replace(/[^a-z1-9]+/g, '').substr(0, 10); localStorage.setItem('CartSession', CartSession); } else { CartSession = localStorage.getItem('CartSession'); }
+    if (!sessionStorage.getItem('ip_address')) { $.getJSON('https://jsonip.com/?callback=?').done(function (data) { var ip_address = window.JSON.parse(JSON.stringify(data, null, 2)); ip_address = ip_address.ip; sessionStorage.setItem('ip_address', ip_address); }); }
+    {% comment %}
+    // debug
+    console.log('tw_trcking_Cart:', tw_trcking_Cart)
+    console.log('noneID:', noneID)
+    console.log('CartSession:', CartSession)
+    console.log('_cID:', __st["cid"])
+    { { 'h6ltupG60dessw3' | md5 } }
+    {% endcomment %}
+    ts = {{ 'now' | date: "%s" }};
+    tw_trcking_CartItems = { items: (tw_cart.items.map(({ id, properties, key, gift_card, grams, discounts, taxable, featured_image, image, handle, url, requires_shipping, product_description, variant_options, options_with_values, product_has_only_default_variant, line_level_discount_allocations, line_level_total_discount, variant_title, title, ...rest }) => { return rest; })), 'nid': noneID, 'cid': __st["cid"], 'cs': CartSession, 'ts': ts, 'op': 'cart', 'ip': sessionStorage.getItem('ip_address') };
+    tw_trcking_Obj = { 
+      "body": { "cartinfo": Object.assign({}, tw_trcking_CartInfo, tw_trcking_CartItems)}
+    };
+  
+    function tw_c_tracker(tw_trcking_Obj) {
+      //console.log( tw_trcking_Obj )
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      var raw = JSON.stringify(tw_trcking_Obj)
+      var requestOptions = { method: 'POST', headers: myHeaders, body: raw, redirect: 'follow' };
+      fetch("https://tracker.efmt.app/v1/behavior-tracking", requestOptions)
+        .then(response => response.json())
+        .then(result => console.log())
+        .catch(error => console.log('error', error));
+    }
+    tw_c_tracker(tw_trcking_Obj);
+  });
+  {% comment %} //========= walter added for CartBehavior Traking Start=========  {% endcomment %}
+</script>

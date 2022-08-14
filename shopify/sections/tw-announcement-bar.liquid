@@ -1,0 +1,206 @@
+{%- assign dateNow = 'now' | date: '%c' -%}
+{%- assign dateNow = dateNow | date: '%s' | times: 1 -%}
+{%- assign bannerSet = 'off' %}
+{%- for block in section.blocks %}
+  {%- assign start = block.settings.startHeader | date: '%s' | times: 1 %}
+  {%- assign end = block.settings.endHeader | date: '%s' | times: 1 %}
+  {%- if dateNow > start and dateNow < end and block.settings.headerMessage != blank %}
+    {%- assign bannerSet = 'on' %}
+    {%- assign discount = block.settings -%}
+    {%- break %}
+  {%- endif %}
+{%- endfor %}
+<div class="container-fluid d-none d-lg-block">
+  <div class="container announcement-container d-flex justify-content-between">
+    {%- if bannerSet == 'on' %}
+      <a href="{{ discount.headerMessageUrl }}" class="btn-discount gtm-top-promo">
+        <span class="message-1">{{ discount.headerMessage }}{%- if discount.discountCode != blank -%} - {%- endif -%}</span>
+        {%- if discount.discountCode != blank -%}<span class="message-2">Code: {{ discount.discountCode }}</span>{%- endif -%}
+        <span class="countdown" style="display: none"></span>
+      </a>
+    {%- elsif bannerSet == 'off' %}
+      <p class="no-banner">Welcome to efavormart!</p>
+    {%- endif %}
+    <div class="right-container d-flex">
+      <a href="http://ehomemart.com/" class="btn-cobrand" target="_blank">
+        Shop Our Brand > {{ 'ehmt-logo-white.svg' | asset_url | img_tag: 'ehomemart' }}
+      </a>
+      <a href="/pages/free-shipping" class="btn-shipping">Shipping</a>
+      <a href="/pages/returns-form" class="btn-returns">Returns</a>
+      <a href="/pages/track-your-order" class="btn-track-your-order">
+        <i class="icomoon-nav-order-status" aria-hidden="true"></i>
+        <span>Order Status</span>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+  {%- if discount -%}
+    window.TW = window.TW || {};
+    window.TW.DiscountBanner = {{ discount | json }};
+    window.TW.DiscountBanner.startHeader = {{ start }};
+    window.TW.DiscountBanner.endHeader = {{ end }};
+  {%- endif -%}
+</script>
+
+{% schema %}
+{
+  "name": "Announcement",
+  "class": "announcement-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Over Cart Icon Header"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "html",
+      "name": "Discount Announcement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "discount title",
+          "info": "ex: 3/15-PATTY10"
+        },
+        {
+          "type": "text",
+          "id": "startHeader",
+          "label": "start time",
+          "info": "Enter a starting date - Example: April 1 2022 12:00:00 AM"
+        },
+        {
+          "type": "text",
+          "id": "endHeader",
+          "label": "stop time",
+          "info": "Enter an stop date - Example: April 2 2022 11:59:59 PM"
+        },
+        {
+          "type": "text",
+          "id": "discountCode",
+          "label": "Discount code",
+          "info": "ex: FLASH10"
+        },
+        {
+          "type": "radio",
+          "id": "discountType",
+          "label": "Discount Type",
+          "options": [
+            {
+              "value": "sitewide",
+              "label": "Sitewide"
+            },
+            {
+              "value": "weekly",
+              "label": "Weekly (Specific collections)"
+            }
+          ],
+          "default": "weekly"
+        },
+        {
+          "type": "header",
+          "content": "Specific collections (weekly only)"
+        },
+        {
+          "type": "collection",
+          "id": "specificCollection1",
+          "label": "Collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "specificCollection2",
+          "label": "Collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "specificCollection3",
+          "label": "Collection 3"
+        },
+        {
+          "type": "collection",
+          "id": "specificCollection4",
+          "label": "Collection 4"
+        },
+        {
+          "type": "collection",
+          "id": "specificCollection5",
+          "label": "Collection 5"
+        },
+        {
+          "type": "header",
+          "content": "Desktop"
+        },
+        {
+          "type": "text",
+          "id": "headerMessage",
+          "label": "Top bar message",
+          "info": "ex: Take 10% off! Use code: "
+        },
+        {
+          "type": "text",
+          "id": "headerMessageUrl",
+          "label": "Top bar message URL"
+        },
+        {
+          "type": "header",
+          "content": "Mobile PDP"
+        },
+        {
+          "type": "text",
+          "id": "mobileMessageText",
+          "label": "Top bar message",
+          "info": "ex: Selected Products Sale 10% Off!"
+        },
+        {
+          "type": "header",
+          "content": "PDP / Quick-View Promotion"
+        },
+        {
+          "type": "text",
+          "id": "pdpDiscountMessage",
+          "label": "Discount Message",
+          "info": "ex: Extra 10% OFF"
+        },
+        {
+          "type": "image_picker",
+          "id": "pdpCopiedSuccessImage",
+          "label": "Copied success image (option)"
+        },
+        {
+          "type": "html",
+          "id": "pdpCopiedSuccessMessage",
+          "label": "Copied success message (HTML)",
+          "info": "ex: Code copied! You'll get 10% off on <b>Yellow, Orange, Brown, Black colors products</b>"
+        },
+        {
+          "type": "header",
+          "content": "Cart page"
+        },
+        {
+          "type": "paragraph",
+          "content": "Full filled all fields under here, then Discount Banner and Apply Button will show on Cart page no matter Sitewide or Weekly Promo"
+        },
+        {
+          "type": "text",
+          "id": "cartPageMessage",
+          "label": "Cart discount message",
+          "info": "ex: Get 10% off Sitewide"
+        },
+        {
+          "type": "text",
+          "id": "cartPageButtonText",
+          "label": "Cart discount button text",
+          "info": "ex: Apply Code: FLASH10"
+        },
+        {
+          "type": "html",
+          "id": "cartPageApplySuccessMessage",
+          "label": "Apply success message (HTML)",
+          "info": "ex: Congratulation! You'll get 10% off <b>SITEWIDE</b>"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

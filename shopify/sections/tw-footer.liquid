@@ -1,0 +1,182 @@
+<footer class="w-100" data-section-id="{{ section.id }}" data-section-type="footer-section">
+  <div class="footer content_{{ section.id }}">
+    <div class="footer-top container-fluid">
+      <div class="tw-klaviyo-subscribe container">
+        <div class="row">
+          <div class="col-sm-10 offset-sm-1 d-flex flex-column flex-lg-row align-items-center">
+            <div class="cta-heading col-lg-4 m-0 py=0">
+              {%-if section.settings.edm-title-%}<h3 class="cta-title">{{ section.settings.edm-title }}</h3>{%-endif-%}
+              {%-if section.settings.edm-desc-%}<h4 class="cta-desc">{{ section.settings.edm-desc }}</h4>{%-endif-%}
+            </div>
+            <div class="klaviyo-messages d-none">
+              <div class="success-message">
+                {{ section.settings.edm-success-html }}
+              </div>
+            </div>
+            <form id="klaviyo-subscribe-form" class="newletter klaviyo-subscribe-form col-lg-8 d-flex flex-column flex-lg-row flex-lg-nowrap align-items-center align-items-lg-end" novalidate="novalidate">
+              <div class="input-group w-100 d-flex flex-column align-items-stretch">
+                <div class="error-message d-none order-1 order-lg-0"></div>
+                <input type="email" class="form-control" value="{% if customer %}{{ customer.email }}{% endif %}" name="email" id="k_id_email" placeholder="{{ section.settings.edm-placeholder }}" required/>
+                <span class="icomoon-danger d-none"></span>
+              </div>
+              <div class="input-group klaviyo_form_actions w-auto mt-4 mt-lg-0 ml-lg-2"><button class="btn btn-primary klaviyo_submit_button" type="submit">{{ section.settings.edm-btn-text }}<i class="fkt-long-arrow-right"></i></button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-middle container">
+      <div class="row">
+        <div class="col-lg-4 col-xxl-6">
+          <div class="widget widget-about">
+            <a href="{{shop.url}}" class="d-block" style="max-width: {{ 111 | times: 1.0 | divided_by: 10 }}rem">
+              <img class="footer-logo lazyload" width="237" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name | escape }}">
+            </a>
+            <div class="widget-about-info">
+              <div class="contact-info">{{section.settings.contact-info}}</div>
+              <div class="payment-icons">
+                <span class="widget-about-title">Payment Method</span>
+                <img data-src="{{ 'icon_footer_payment_applepay.svg' | asset_url }}" class="lazyload" alt="apple pay">
+                <img data-src="{{ 'icon_footer_payment_paypal.svg' | asset_url }}" class="lazyload" alt="paypal">
+                <img data-src="{{ 'icon_footer_payment_visa.svg' | asset_url }}" class="lazyload" alt="visa">
+                <img data-src="{{ 'icon_footer_payment_master.svg' | asset_url }}" class="lazyload" alt="master">
+                <img data-src="{{ 'icon_footer_payment_ae.svg' | asset_url }}" class="lazyload" alt="american express">
+                <img data-src="{{ 'icon_footer_payment_diner.svg' | asset_url }}" class="lazyload" alt="diners club">
+                <img data-src="{{ 'icon_footer_payment_discover.svg' | asset_url }}" class="lazyload" alt="discover">
+                <img data-src="{{ 'icon_footer_payment_jcb.svg' | asset_url }}" class="lazyload" alt="jcb">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-3">
+          <div class="widget widget-customer-care widget-border-top">
+            <h4 class="tw-widget-title">Customer Care</h4>
+            <ul class="widget-list list-unstyled">
+              {%- assign linksHandle = section.settings.customer-links | default: 'footer-customer-care' -%}
+              {%-for link in linklists[linksHandle].links -%}
+                <li><a href="{{ routes.root_url | replace: '/', ''}}{{link.url}}">{{link.title}}</a></li>
+              {%-endfor-%}
+              <li><script>(function(){var s = document.createElement('script'),e = ! document.body ? document.querySelector('head') : document.body;s.src = 'https://acsbapp.com/apps/app/assets/js/acsb.js';s.async = s.defer = true;s.onload = function(){acsbJS.init({statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : false,hideTrigger : false,language : 'en',position : 'right',leadColor : '#7E3D7E',triggerColor : '#146ff8',triggerRadius : '50%',triggerPositionX : 'left',triggerPositionY : 'bottom',triggerIcon : 'default',triggerSize : 'medium',triggerOffsetX : 20,triggerOffsetY : 20,mobile : {triggerSize : 'small',triggerPositionX : 'left',triggerPositionY : 'center',triggerOffsetX : 0,triggerOffsetY : 0,triggerRadius : '0'}});};e.appendChild(s);}());</script><a href="javascript:" data-acsb-custom-trigger="true">Accessibility</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xxl-3">
+          <div class="widget widget-get-connected widget-border-top">
+            <h4 class="tw-widget-title">Get Connected</h4>
+            <ul class="widget-list list-unstyled d-flex justify-content-between">
+              <li><a target="_blank" class="icon-fallback-text" href="https://www.efavormart.com/blogs/home"
+                 title="Official Blog">
+                <span class="icomoon icomoon-blog" aria-hidden="true"></span>
+                <span class="fallback-text">Blog</span>
+              </a></li>
+              <li><a target="_blank" class="icon-fallback-text" href="https://www.facebook.com/efavormartfans"
+                title="efavormart.com on Facebook" rel="nofollow">
+                <span class="icomoon icomoon-facebook" aria-hidden="true"></span>
+                <span class="fallback-text">Facebook</span>
+              </a></li>
+              <li><a target="_blank" class="icon-fallback-text" href="https://www.instagram.com/efavormartofficial/"
+                title="efavormart.com on Instagram" rel="nofollow">
+                <span class="icomoon icomoon-instagram" aria-hidden="true"></span>
+                <span class="fallback-text">Instagram</span>
+              </a></li>
+              <li><a target="_blank" class="icon-fallback-text" href="https://www.pinterest.com/efavormartofficial"
+                title="efavormart.com on Pinterest" rel="nofollow">
+                <span class="icomoon icomoon-pinterest" aria-hidden="true"></span>
+                <span class="fallback-text">Pinterest</span>
+              </a></li>
+              <li><a target="_blank" class="icon-fallback-text" href="https://twitter.com/efavormartfans"
+                title="efavormart.com on Twitter" rel="nofollow">
+                <span class="icomoon icomoon-twitter" aria-hidden="true"></span>
+                <span class="fallback-text">Twitter</span>
+              </a></li>
+              <li><a target="_blank" class="icon-fallback-text" href="https://www.youtube.com/efavormartparties"
+                title="efavormart.com on YouTube" rel="nofollow">
+                <span class="icomoon icomoon-youtube" aria-hidden="true"></span>
+                <span class="fallback-text">YouTube</span>
+              </a></li>
+            </ul>
+            <div class="bbb-style">
+              <div class="bbb">
+                <a id="bbblink" target="_blank" href="http://www.bbb.org/sanjose/business-reviews/party-supplies/ya-ya-creations-in-city-of-industry-ca-13186051#bbbseal" title="Ya Ya Creations, Party Supplies, City Of Industry, CA">
+                  <img class="lazyload" width="149" height="79" id="bbblinkimg" data-src="{{ 'bbb_149x.png' | asset_url }}"  alt="Ya Ya Creations, Party Supplies, City Of Industry, CA" />
+                </a>
+              </div>
+              <div class="wedding-wire">
+                <a id="wp-ratedWA" target="_blank" href="https://www.weddingwire.com/biz/efavormart-com/0763286799d59445.html" title="WeddingWire Couples' Choice Award Winner 2022">
+                  <img class="lazyload" width="74" height="74" id="wp-ratedWA-img-2022" data-src="{{ 'badge-weddingawards_icon_2022_1.png' | file_img_url }}" alt="WeddingWire Couples' Choice Award Winner 2022" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <p class="footer-copyright m-0">{{ section.settings.copyright }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "tw-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "EDM subscription"
+    },
+    {
+      "type": "text",
+      "id": "edm-title",
+      "label": "Title",
+      "default": "Get 10% OFF"
+    },
+    {
+      "type": "text",
+      "id": "edm-desc",
+      "label": "Description",
+      "default": "Join our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "edm-placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your Email Address"
+    },
+    {
+      "type": "text",
+      "id": "edm-btn-text",
+      "label": "Submit button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "html",
+      "id": "edm-success-html",
+      "label": "Success message (HTML)",
+      "default": "<strong>Thanks for subscribing!</strong><br>Check your email for a confirmation message."
+    },
+    {
+      "type": "html",
+      "id": "contact-info",
+      "label": "Contact information (HTML)",
+      "default": "<p class='title'>Live Chat Availability:</p><p>Mon-Fri | 5:00 am - 11:30 pm<br>Sat-Sun | 9:00 am - 6:00 pm</p><p class='email'>General Questions: <a href='mailto:sales@efavormart.com'>sales@efavormart.com</a></p>"
+    },
+    {
+      "type": "link_list",
+      "id": "customer-links",
+      "label": "Customer Care links"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Copyright",
+      "default": "Copyright &copy; 2022 efavormart.com"
+    }
+  ]
+}
+{% endschema %}

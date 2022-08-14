@@ -1,0 +1,12 @@
+node_modules
+
+.DS_Store
+.idea
+.vscode
+*.log
+
+# ignore compiled files
+shopify/assets/tw-*
+!shopify/assets/tw-tracking-3rd-party.js
+
+.zshrc

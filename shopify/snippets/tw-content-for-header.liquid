@@ -1,0 +1,57 @@
+{%- assign original_content = content_for_header -%}
+{%- assign urls_remove_head = original_content | split: 'var urls = [' -%}
+{%- assign content_head = urls_remove_head.first -%}
+{%- assign urls_remove_head = urls_remove_head.last -%}
+{%- assign urls_remove_end = urls_remove_head | split: '];' -%}
+{%- assign content_end = '' -%}
+{%- for match in urls_remove_end -%}
+  {%- if forloop.first == false -%}
+    {%- assign content_end = content_end | append: match -%}
+    {%- if forloop.last == false -%}
+      {%- assign content_end = content_end | append: '];' -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign urls_remove_end = urls_remove_end.first -%}
+{%- assign urls = urls_remove_end | split: ',' -%}
+{%- assign filter_keys = 'comm100,instantsearchplus,getshogun,productcustomizer,motivator,okasconcepts,shippingratescalculator,backinstock,codeblackbelt' | split: ',' -%}
+{%- assign new_content = '' -%}
+{%- assign match_content = '' -%}
+{%- for url in urls -%}
+  {%- assign match = false -%}
+  {%- for key in filter_keys -%}
+    {%- if url contains key -%}
+      {%- assign match = true -%}
+      {%- if template == 'cart' and key == 'shippingratescalculator' -%}
+        {%- if match_content == '' -%}
+          {%- assign match_content = url -%}
+        {%- else -%}
+          {%- assign match_content = match_content | append: ',' | append: url -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if match -%}{% continue %}{%- endif -%}
+  {%- if new_content == '' -%}
+    {%- assign new_content = url -%}
+  {%- else -%}
+    {%- assign new_content = new_content | append: ',' | append: url -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign new_content = new_content | prepend: 'var urls = [' | prepend: content_head | append: '];' | append: content_end -%}
+{%- assign new_content = new_content | replace: 's.async = true;', 's.defer = true;' -%}
+{{ new_content }}
+
+<script>
+  (function() {
+    var urls = [{{ match_content }}];
+    for (var i = 0; i < urls.length; i++) {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.defer = true;
+      s.src = urls[i];
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+  })();
+</script>

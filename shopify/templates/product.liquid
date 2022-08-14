@@ -1,0 +1,36 @@
+{%- liquid
+  assign product_not_available = false
+  if product.type == 'SHOPSTORM_HIDDEN_PRODUCT'
+    assign product_not_available = true
+  endif
+  for tag in product.tags
+    assign downcaseTag = tag | downcase
+    if downcaseTag contains 'isp_promo_ads'
+      assign product_not_available = true
+      break
+    endif
+  endfor
+-%}
+{%- if product_not_available == true -%}
+  <div class="container">Product is not available</div>
+  {%- break -%}
+{%- endif -%}
+
+{%- liquid
+  if settings.use_ask
+  echo '<div class="lazyload lazypreload" data-include="'
+  echo product.url
+  echo '?view=ask"></div>'
+  endif
+  if settings.use_wide
+    render 'photoswipe'
+  endif
+  section 'product-template'
+-%}
+{%- comment -%}
+  if type == 'Personalized'
+    section 'production-lead-time'
+  endif
+  section 'kt_recentlyViewedProducts'
+  section 'kt_related-products'
+{%- endcomment -%}

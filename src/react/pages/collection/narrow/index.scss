@@ -1,0 +1,29 @@
+.narrow-container {
+  @include respondMax(414) {
+    margin-bottom: 12px;
+  }
+
+  .btn-remove-tag {
+    color: #5e5e5e;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding: 4px 10px;
+
+    i {
+      color: #111;
+    }
+  }
+
+  .btn-remove-all-tag {
+    color: #5e5e5e;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 4px 10px;
+  }
+}

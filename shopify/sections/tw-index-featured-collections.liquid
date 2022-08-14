@@ -1,0 +1,167 @@
+{% for block in section.blocks %}
+  <div class="container mt-3 mb-5">
+    <h2 class="title-text text-center mb-1">Featured Collection</h2>
+    <div class="wrap">
+      <div class="collections-container d-flex justify-content-between">
+        {% for i in (1..5) %}
+          {% assign target = "collection-" | append: i %}
+          {% if block.settings[target] != blank %}
+            {% assign collection = collections[block.settings[target]] %}
+            <a class="featured_collection_banner d-block gtm-featured-collections" href="{{ collection.url }}">
+              {% assign img = target | append: "-image" %}
+              {% if block.settings[img] != blank %}
+                {% assign imgSrc = block.settings[img] %}
+              {% else %}
+                {% assign imgSrc = collection.image %}
+              {% endif %}
+              {% assign titleTarget = target | append: "-title" %}
+              {% if block.settings[titleTarget] != blank %}
+                {% assign title = block.settings[titleTarget] %}
+              {% else %}
+                {% assign title = collection.title %}
+              {% endif %}
+              <div class="content position-relative">
+                <picture class="d-block position-relative rounded-circle">
+                  <source class="" media="(max-width: 991px)" srcset="{{ imgSrc | img_url: '160x', scale: 2 }}" />
+                  <img class="position-absolute w-100" src="{{ imgSrc | img_url: '196x' }}" alt={{ title | json }} />
+                </picture>
+                <h3 class="m-0 text-center d-inline-block">{{ title }}</h3>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% schema %}
+{
+  "name": "Index Feat Collections",
+  "class": "tw-featured-collections",
+  "presets": [
+    {
+      "name": "Featured Collections",
+      "category": "Custom Content"
+    }
+  ],
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Featured Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "block title"
+        },
+        {
+          "type": "header",
+          "content": "Collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection-1",
+          "label": "Collection 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection-1-image",
+          "label": "alternative image",
+          "info": "optional"
+        },
+        {
+          "type": "text",
+          "id": "collection-1-title",
+          "label": "Title",
+          "info": "optional if different from the collection's name"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "collection-2",
+          "label": "Collection 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection-2-image",
+          "label": "alternative image",
+          "info": "optional"
+        },
+        {
+          "type": "text",
+          "id": "collection-2-title",
+          "label": "Title",
+          "info": "optional if different from the collection's name"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 3"
+        },
+        {
+          "type": "collection",
+          "id": "collection-3",
+          "label": "Collection 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection-3-image",
+          "label": "alternative image",
+          "info": "optional"
+        },
+        {
+          "type": "text",
+          "id": "collection-3-title",
+          "label": "Title",
+          "info": "optional if different from the collection's name"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 4"
+        },
+        {
+          "type": "collection",
+          "id": "collection-4",
+          "label": "Collection 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection-4-image",
+          "label": "alternative image",
+          "info": "optional"
+        },
+        {
+          "type": "text",
+          "id": "collection-4-title",
+          "label": "Title",
+          "info": "optional if different from the collection's name"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 5"
+        },
+        {
+          "type": "collection",
+          "id": "collection-5",
+          "label": "Collection 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection-5-image",
+          "label": "alternative image",
+          "info": "optional"
+        },
+        {
+          "type": "text",
+          "id": "collection-5-title",
+          "label": "Title",
+          "info": "optional if different from the collection's name"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

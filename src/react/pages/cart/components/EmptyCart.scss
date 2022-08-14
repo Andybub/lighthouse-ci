@@ -1,0 +1,18 @@
+.cart-empty-container {
+  margin: 0 auto;
+  padding: 30px 0;
+  max-width: 400px;
+  .cart-empty-pic {
+    margin-bottom: 15px;
+  }
+  .cart-tags {
+    margin-right: -15px;
+    a {
+      margin-right: 15px;
+      margin-bottom: 15px;
+      padding: 5px 15px;
+      color: #222;
+      white-space: nowrap;
+    }
+  }
+}

@@ -1,0 +1,201 @@
+@mixin collapse {
+  .head {
+    i {
+      transform: rotate(-90deg);
+    }
+  }
+  .body {
+    padding: 0;
+    height: 0;
+    border-bottom: 0;
+  }
+}
+.stl-filters-container {
+  position: sticky;
+  top: 160px;
+  padding-right: 20px;
+  width: 20%;
+  @include respondMax(768) {
+    position: relative;
+    top: 0;
+    margin-bottom: 5px;
+    padding-right: 0;
+    padding-left: 3px;
+    width: auto;
+    z-index: 1;
+  }
+  &.toggle-on {
+    .stl-filter-block {
+      display: block;
+    }
+    .stl-filters-inner {
+      @include respondMax(768) {
+        transform: translateX(-100%);
+      }
+    }
+  }
+
+  .btn-toggle-on {
+    display: none;
+    @include respondMax(768) {
+      display: block;
+      padding: 10px;
+      background-color: #6d3f6e;
+      border: 0;
+      color: white;
+      font-size: 14px;
+      line-height: 14px;
+      border-radius: 5px;
+    }
+    & > * {
+      vertical-align: middle;
+    }
+    i {
+      margin-right: 6px;
+    }
+  }
+
+  .stl-filter-block {
+    display: none;
+    @include respondMax(768) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(black, 0.4);
+    }
+  }
+
+  .stl-filters-inner {
+    position: sticky;
+    top: 100px;
+    @include respondMax(768) {
+      position: fixed;
+      padding: 10px 3.5%;
+      padding-bottom: 100px;
+      top: 57px;
+      left: 100%;
+      width: 70%;
+      height: calc(100% - 57px);
+      overflow: scroll;
+      background-color: white;
+      transition: transform 0.3s;
+    }
+    .btn-toggle-off {
+      display: none;
+      @include respondMax(768) {
+        display: block;
+        margin-left: -14px;
+        padding: 14px;
+        background-color: white;
+        border: 0;
+        font-size: 14px;
+        line-height: 14px;
+      }
+    }
+    .head {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px #C6C6C6 solid;
+      cursor: pointer;
+      span {
+        display: inline-block;
+        padding: 12px 0;
+        font-size: 18px;
+        line-height: 100%;
+        text-transform: uppercase;
+      }
+      i {
+        transform: rotate(0);
+        font-size: 20px;
+      }
+    }
+
+    .stl-selected-tags-container {
+      margin-bottom: 0;
+      padding-bottom: 10px;
+      border-bottom: 1px #C6C6C6 solid;
+
+      &.collapse {
+        border-bottom: 0;
+        @include collapse;
+        button {
+          display: none;
+        }
+      }
+
+      .body {
+        margin-bottom: 0;
+        padding-top: 12px;
+        padding-bottom: 0;
+        overflow: auto;
+
+        li {
+          display: inline-block;
+          margin-right: 10px;
+          margin-bottom: 12px;
+          padding: 0 10px;
+          font-size: 14px;
+          background-color: rgba(white, 1);
+          border: 1px solid #C6C6C6;
+          border-radius: 20px;
+          cursor: pointer;
+          & > * {
+            vertical-align: middle;
+          }
+          span {
+            margin-right: 5px;
+            text-transform: capitalize;
+          }
+        }
+      }
+
+      button {
+        color: #5E5E5E;
+        border: 0;
+        font-size: 14px;
+        text-decoration: underline;
+        background-color: transparent;
+      }
+    }
+
+    .stl-selectable-tags-container {
+      .stl-tags-group {
+        margin-bottom: 0;
+        &.collapse {
+          display: block;
+          @include collapse;
+        }
+        .body {
+          margin: 0;
+          padding: 10px;
+          max-height: 1000px;
+          background-color: #F7F7F7;
+          border-bottom: 1px solid #C6C6C6;
+          overflow: auto;
+          transition: height .8s;
+          li {
+            vertical-align: middle;
+            & > * {
+              vertical-align: middle;
+            }
+            input {
+              margin-right: 5px;
+            }
+            label {
+              display: inline-block;
+              text-transform: capitalize;
+              color: #5E5E5E;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}

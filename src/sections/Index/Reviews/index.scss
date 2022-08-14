@@ -1,0 +1,51 @@
+.app-placeholder {
+  background-image: var(--imglazy);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.tw-reviews-container {
+  padding-top: 10px;
+  min-height: 249px;
+
+  @include respondMD {
+    min-height: 251px;
+  }
+
+  @include respondLG {
+    min-height: 222px;
+  }
+}
+
+.btn-stamped-reviews-widget {
+  img {
+  }
+
+  .total-reviews {
+    left: 0;
+    right: 0;
+    top: 26%;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: 1.5px 1.5px 0 rgba(black, 0.3);
+
+    @include respondXL {
+      font-size: 20px;
+    }
+
+    @include respondXXL {
+      font-size: 28px;
+    }
+  }
+}
+
+#tw-react-sitewide-review-carousel {
+  padding-left: var(--grid-gutter);
+  padding-right: var(--grid-gutter);
+  max-width: var(--max-container);
+
+  @include respondLG {
+    max-width: 83.333333%;
+  }
+}

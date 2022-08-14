@@ -1,0 +1,16 @@
+<script>
+  var additionalCheckoutButtons = {{ additional_checkout_buttons | json }};
+  var contentForAdditionalCheckoutButtons = {{ content_for_additional_checkout_buttons | json }};
+</script>
+
+<div id="react-cart" class="container"></div>
+<div class="shipping-rates-calculator-desktop-container d-none"></div>
+<div class="shipping-rates-calculator-mobile-container d-none"></div>
+
+{% if cart.item_count > 0 %}
+  <script>var tw_cart = {{ cart | json }};</script>
+{% else %}
+  <script>var tw_cart = [];</script>
+{% endif %}
+
+{% render 'tw-cart-tracking' %}

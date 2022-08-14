@@ -1,0 +1,31 @@
+.selected-filter-container {
+  .body {
+    max-height: none;
+    mask-image: none;
+
+    button {
+      color: #111;
+      font-size: 14px;
+      line-height: 21px;
+      text-transform: capitalize;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 35px;
+      margin: 0 16px 11px 0;
+      padding: 4px 17px;
+
+      i {
+        color: #999;
+        margin-left: 10px;
+        vertical-align: middle;
+      }
+    }
+
+    .btn-remove-all-tag {
+      color: #5e5e5e;
+      text-decoration: underline;
+      background: transparent;
+      padding: 4px;
+    }
+  }
+}

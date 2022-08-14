@@ -1,0 +1,11 @@
+{% if header_title != '' %}
+  <h3 class="h2">{{ header_title }}</h3>
+{% endif %}
+<div class="collection-listing-banner-wrapper">
+  <div class="hero" style="flex: 1 1 100%; max-width: 100%;">
+    <a href="{{ linked_url }}">
+      {% if block_title != '' %}<h3>{{ block_title }}</h3>{% endif %}
+      <img src="{{ featured_image | img_url: 'master' }}" class="three-column-image" alt="{{ alt_text }}">
+    </a>
+  </div>
+</div>

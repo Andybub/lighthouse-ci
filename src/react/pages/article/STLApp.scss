@@ -1,0 +1,12 @@
+#tw-stl-app {
+  margin-bottom: 30px;
+}
+
+.stl-main-title {
+  @include seoTagStyleInherit;
+
+  margin-bottom: 14px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}

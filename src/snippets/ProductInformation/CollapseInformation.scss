@@ -1,0 +1,67 @@
+#collapse-information {
+  max-height: 380px;
+  display: block;
+  overflow-y: hidden;
+  transition: max-height 0.3s $easeOutCubic;
+
+  h2 {
+    @include seoTagStyleInherit;
+    color: #000;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+
+  .h3 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+
+  .btn-collapse {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: linear-gradient(0deg, rgb(255 255 255 / 1) 50%, rgb(255 255 255 / 0) 100%);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0) 0%, #fff 63.02%);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1.5rem;
+
+    .btn {
+      min-width: 0;
+      background: #f5f5f5;
+      border: 1.5px #dadada solid;
+      border-radius: 4px;
+      padding: 4px 10px;
+
+      @at-root .desktop &:hover {
+        background: #fff;
+        border-color: #999;
+      }
+    }
+
+    .icomoon-arrow-3 {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &.show {
+    // max-height: none;
+
+    .btn-collapse {
+      height: auto;
+      background: white;
+      position: relative;
+      bottom: 0;
+    }
+
+    .icomoon-arrow-3 {
+      transform: rotate(90deg);
+    }
+  }
+}

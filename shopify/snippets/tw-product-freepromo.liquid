@@ -1,0 +1,70 @@
+<div class="free-promotions">
+  <div class="free-shipping promotion-wrap">
+    <div class="promotion-tab">
+      <span class="icomoon-shipping"></span>
+      <p class="promotion-tab-text">
+        <span class="promotion-tab-link">
+          {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+            {%- unless product.type == 'Personalized' or product.type == 'Pew Bows' -%}
+              {%- assign now = 'now' -%}
+              {%- assign currentHour = now | date: '%H' | plus: 0 -%}
+              {%- if currentHour < 13 -%}
+                {%- assign deliveryRange = (1..7) -%}
+              {%- else -%}
+                {%- assign deliveryRange = (1..8) -%}
+              {%- endif -%}
+              {%- assign deliveryDays = 0 -%}
+              {%- for i in deliveryRange -%}
+                {%- assign seconds = deliveryDays | plus: 1 | times: 86400 -%}
+                {%- assign weekDay = now | date: '%s' | plus: seconds | date: '%u' | plus: 0 -%}
+                {%- if weekDay == 6 -%}
+                  {%- assign deliveryDays = deliveryDays | plus: 3 -%}
+                {%- elsif weekDay == 7 -%}
+                  {%- assign deliveryDays = deliveryDays | plus: 2 -%}
+                {%- else -%}
+                  {%- assign deliveryDays = deliveryDays | plus: 1 -%}
+                {%- endif -%}
+              {% endfor %}
+              {%- assign deliverySec = deliveryDays | times: 86400 -%}
+              {%- assign noon = now | date: '%F' | append: ' 13:00:00' -%}
+              {%- assign deliveryDate = noon | date: '%s' | plus: deliverySec | date: '%b %e' -%}
+              <span class="estimate-delivery">Arrive before <span class="delivery-date">{{ deliveryDate }}</span> | </span>
+            {%- endunless -%}
+          {%- endif -%}
+          <span class="status status-1">Free Shipping</span>
+          <span class="status status-2" style="display: none"> (<span class="price-diff"></span> to go)</span>
+        </span>
+        <span class="icomoon-check" style="display: none"></span>
+        {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+          <span class="in-stock-message">In Stock</span>
+        {%- endif -%}
+      </p>
+    </div>
+    <div class="promotion-popup" style="display: none">
+      <div class="promotion-popup-content">
+        <button class="icomoon-close"></button>
+        <p class="promotion-popup-title"><i class="icomoon-exclamation"></i>Shipping Note</p>
+        <p class="promotion-popup-text">Free Shipping for Orders $49+ in the contiguous 48 US States. (Excludes AK, HI, US Territories, APO/FPO, International Countries)</p>
+        <p class="promotion-popup-text">Please enter your address in checkout for special shipping rate, UPS does not deliver to PO Box.</p>
+      </div>
+    </div>
+  </div>
+  {%- assign skuFirstKey = product.selected_or_first_available_variant.sku | split: "_" | first -%}
+  {%- unless skuFirstKey == "PER" -%}
+    <div class="free-returns promotion-wrap">
+      <div class="promotion-tab">
+        <span class="icomoon-nav-returns"></span>
+        <p class="promotion-tab-text promotion-tab-link">Flexible Return 180 Days</p>
+      </div>
+      <div class="promotion-popup" style="display: none">
+        <div class="promotion-popup-content">
+          <button class="icomoon-close"></button>
+          <p class="promotion-popup-title"><i class="icomoon-exclamation"></i>Return Policy</p>
+          <p class="promotion-popup-text">Return for Refund within 60 days:<br>Refunds will be sent back to same payment used.</p>
+          <p class="promotion-popup-text">Return for Exchange within 180 days:<br>You’ll be given the full merchandise value of your qualifying return in the form of a store credit code to use on a new order via email.</p>
+          <a class="promotion-popup-link" href="/pages/returns-form#scroll2info" target="_blank">Learn more about returns.</a>
+        </div>
+      </div>
+    </div>
+  {%- endunless -%}
+</div>

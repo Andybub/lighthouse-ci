@@ -1,0 +1,26 @@
+#ProductPhoto .discount-badge {
+  width: 15%;
+  // max-width: 87px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 1;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+.product-discount-banner {
+  color: #fff;
+  background: #7e3c7e;
+
+  .use-code {
+    text-decoration: underline;
+  }
+
+  .code {
+    color: #fff2c2;
+  }
+}

@@ -1,0 +1,43 @@
+{%- liquid
+  assign new_content = checkout_scripts
+  if checkout_scripts contains 'var urls = ['
+    assign new_content = ''
+    assign original_content = checkout_scripts
+    assign urls_remove_head = original_content | split: 'var urls = ['
+    assign content_head = urls_remove_head.first
+    assign urls_remove_head = urls_remove_head.last
+    assign urls_remove_end = urls_remove_head | split: '];'
+    assign content_end = ''
+    for match in urls_remove_end
+      if forloop.first == false
+        assign content_end = content_end | append: match
+        if forloop.last == false
+          assign content_end = content_end | append: '];'
+        endif
+      endif
+    endfor
+    assign urls_remove_end = urls_remove_end.first
+    assign urls = urls_remove_end | split: ','
+    assign filter_keys = 'instantsearchplus,getshogun,productcustomizer,motivator,okasconcepts,shippingratescalculator,backinstock,swym,broken-link-manager,productreviews' | split: ','
+    
+    for url in urls
+      assign match = false
+      for key in filter_keys
+        if url contains key
+          assign match = true
+        endif
+      endfor
+      if match
+        continue
+      endif
+      if new_content == ''
+        assign new_content = url
+      else
+        assign new_content = new_content | append: ',' | append: url
+      endif
+    endfor
+    assign new_content = new_content | prepend: 'var urls = [' | prepend: content_head | append: '];' | append: content_end
+    assign new_content = new_content | replace: 's.async = true;', 's.defer = true;'
+  endif
+-%}
+{{ new_content }}

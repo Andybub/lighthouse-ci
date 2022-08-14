@@ -1,0 +1,255 @@
+$color-dark-gray: #565656;
+
+#reviews-promo-page {
+  .arrow-custom {
+    position: relative;
+    width: 100%;
+    height: 3px;
+    background-color: $color-dark-gray;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 3px;
+      background-color: $color-dark-gray;
+      top: 0;
+      right: 0;
+    }
+
+    &::before {
+      transform-origin: top right;
+      transform: translateY(-.5px) rotate(-45deg);
+    }
+
+    &::after {
+      transform-origin: bottom right;
+      transform: translateY(.5px) rotate(45deg);
+    }
+  }
+
+  .section-header {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    .page-title {
+      font-size: 28px;
+    }
+  }
+
+  .banner-img {
+    width: 100%;
+  }
+
+  .divider {
+    margin: 15px 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+  }
+
+  .steps-content-main {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .steps-content-sub {
+    margin: 10px 0;
+    color: #707070;
+    font-size: 14px;
+  }
+
+  .steps {
+    margin-bottom: 15px;
+
+    .steps-wrapper {
+      max-width: 320px;
+      margin: 0 auto;
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+
+      .step-arrow {
+        align-self: center;
+        margin: 30px 0;
+        width: 60px;
+        transform: rotate(90deg) scaleX(.7);
+      }
+
+      .step {
+        flex: 1;
+        position: relative;
+        padding: 15px;
+        padding-bottom: 90px;
+        border: 2px solid #000;
+        border-radius: 8px;
+        box-shadow: 2px 5px 10px rgba(#000, .2);
+
+        .step-num {
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translate(-50%, -50%);
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: #c4c4c4;
+          font-size: 24px;
+          text-align: center;
+          line-height: 40px;
+        }
+
+        .step-content {
+          min-height: 100px;
+          font-size: 17.6px;
+          line-height: 22px;
+
+          a {
+            text-decoration: underline;
+          }
+        }
+
+        .step-icons {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          padding: 15px;
+          width: 100%;
+
+          img {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .steps-btn-wrapper {
+      margin-bottom: 50px;
+      text-align: center;
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        border: 0;
+        border-radius: 30px;
+        padding: 12px 40px;
+        line-height: 1.42;
+        font-size: .9375em;
+        font-weight: 700;
+        text-transform: capitalize;
+        color: #fff;
+        background-color: #7e3d7e;
+        user-select: none;
+
+        .arrow-custom {
+          margin-left: 10px;
+          width: 12px;
+          background-color: #fff;
+          transform: scale(.8);
+
+          &::before,
+          &::after {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .reviews {
+    position: relative;
+    margin: 30px 0 50px;
+
+    .swiper {
+      overflow: hidden;
+    }
+
+    .swiper-wrapper {
+      margin-top: 15px;
+
+      .swiper-slide {
+        // margin: 0 10px;
+        padding-bottom: 15px;
+        width: auto;
+
+        img {
+          border: 1px solid rgba(#565656, .1);
+          border-radius: 8px;
+          box-shadow: 2px 5px 10px rgba(#000, .2);
+        }
+      }
+    }
+
+    .swiper-buttons {
+      .swiper-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 99px;
+        border: 0;
+        background-color: #fff;
+        box-shadow: 0px 0px 10.7197px rgba(0, 0, 0, 0.25);
+        z-index: 1;
+        &::before {
+          display: none;
+        }
+        &-prev {
+          left: 0;
+          transform: translateX(-30%);
+        }
+        &-next {
+          right: 0;
+          transform: translateX(30%);
+          i {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+
+  @include respondSM {
+    .reviews {
+      .swiper-buttons {
+        .swiper-button {
+          &-prev {
+            transform: translateX(-50%);
+          }
+          &-next {
+            transform: translateX(50%);
+          }
+        }
+      }
+    }
+  }
+
+  @include respondMD {
+    .steps {
+      .steps-wrapper {
+        max-width: 100%;
+        padding: 50px 0 50px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .step-arrow {
+          margin: 0 10px;
+          transform: none;
+        }
+
+        .step {
+          .step-num {
+            width: 48px;
+            height: 48px;
+            font-size: 28px;
+            line-height: 48px;
+          }
+        }
+      }
+    }
+  }
+  @include respondXL {
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 90%;
+    max-width: 1000px;
+  }
+}

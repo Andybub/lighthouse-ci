@@ -1,0 +1,12 @@
+.rating-stars-render {
+  margin-right: 5px;
+  padding-bottom: 5px;
+  min-width: 110px;
+  line-height: revert;
+
+  .rating-star {
+    color: #f7c244;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+}

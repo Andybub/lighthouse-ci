@@ -1,0 +1,379 @@
+.content_for_page {
+  > header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: white;
+  }
+
+  .shopify-challenge__button {
+    margin-top: 30px;
+    color: #fff;
+    background-color: #7e3c7e;
+    border-radius: 99px;
+  }
+}
+
+.search-bar {
+  width: 100%;
+  background: #f5f5f5;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  padding: 10px 15px;
+  z-index: 2;
+  border-top: #dadada 1px solid;
+
+  @include respondMin(375) {
+    top: 57px;
+  }
+
+  @include respondMin(767) {
+    width: 100%;
+    position: relative;
+    background: transparent;
+    border: 0;
+    top: auto;
+    left: auto;
+    margin-right: 10px;
+    padding: 0;
+    z-index: auto;
+  }
+
+  form {
+    @include respondMin(767) {
+      border: #b6b6b6 1px solid;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    input {
+      width: 100%;
+      background: #fff;
+      border: 1px solid #dadada;
+      border-radius: 0;
+      padding: 4px 0 4px 15px;
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        appearance: none;
+      }
+
+      @include respondMin(767) {
+        border: 0;
+      }
+    }
+
+    button {
+      width: 44px;
+      min-width: auto;
+      color: white;
+      background: #7e3c7e;
+      border: 0;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: transparent;
+      }
+
+      @include respondMin(767) {
+        width: auto;
+        height: 100%;
+        color: #5e5e5e;
+        font-size: 17px;
+        line-height: 1;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 16px;
+      }
+
+      i {
+        font-size: 18px;
+        margin: 0 !important;
+      }
+    }
+  }
+}
+
+.top-header-container {
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: none;
+  @include respondLG {
+    max-width: var(--max-container);
+  }
+
+  .header-control {
+    .icomoon-nav-menu {
+      font-size: 21px;
+
+      @include respondMin(375) {
+        font-size: 24px;
+      }
+
+      @include respondMin(414) {
+        font-size: 28px;
+      }
+    }
+  }
+
+  .header-logo {
+    width: 50%;
+
+    @include respondMin(767) {
+      width: auto;
+      margin-right: 25px;
+    }
+
+    .btn-logo {
+      @include respondMin(375) {
+        width: 122px;
+      }
+
+      @include respondLG {
+        width: 182px;
+      }
+
+      h1 {
+        @include seoTagStyleInherit;
+        line-height: initial;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .header-account-links {
+    font-size: 12px;
+    font-weight: 500;
+
+    a {
+      color: #5e5e5e;
+      line-height: 1;
+
+      i {
+        font-size: 20px;
+      }
+    }
+
+    .btn-shop-by-occasion,
+    .btn-on-sale {
+      border-radius: 35px;
+      padding: 5px 12px;
+
+      &:hover {
+        background: #ddd;
+      }
+
+      i {
+        margin-right: 6px;
+      }
+
+      span {
+        white-space: nowrap;
+      }
+    }
+
+    .btn-shop-by-occasion {
+      color: $colorPurple;
+      background: #f5f5f5;
+      margin-right: 12px;
+
+      &:hover {
+        color: #580a58;
+      }
+    }
+
+    .btn-on-sale {
+      margin-right: 20px;
+
+      &:hover {
+        color: #111;
+      }
+    }
+
+    .btn-account {
+      max-width: 80px;
+      margin-right: 16px;
+
+      span {
+        max-width: 100%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: block;
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+    }
+
+    .btn-search,
+    .btn-chat {
+      margin-right: 12px;
+
+      @include respondMin(375) {
+        margin-right: 16px;
+      }
+
+      i {
+        font-size: 24px;
+
+        @include respondMin(375) {
+          font-size: 28px;
+        }
+
+        @include respondLG {
+          font-size: 23px;
+        }
+      }
+    }
+
+    .btn-logout {
+      margin-right: 12px;
+
+      @include respondMin(375) {
+        margin-right: 16px;
+      }
+    }
+
+    .btn-wishlist {
+      margin-right: 12px;
+
+      @include respondMin(375) {
+        margin-right: 16px;
+      }
+
+      &#swym-inject-header {
+        right: auto;
+        top: auto;
+      }
+    }
+
+    .btn-cart {
+      .cart-count {
+        width: 22px;
+        height: 22px;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 22px;
+        text-align: center;
+        background: #ff7474;
+        border: 0;
+        border-radius: 50%;
+        top: -10px;
+        right: -10px;
+
+        @include respondLG {
+          top: -12px;
+        }
+      }
+    }
+
+    .btn-account,
+    .btn-logout,
+    .btn-wishlist,
+    .btn-cart {
+      align-items: center;
+      flex-direction: column;
+
+      &:hover {
+        color: #7e3c7e;
+      }
+
+      i {
+        font-size: 24px;
+
+        @include respondMin(375) {
+          font-size: 28px;
+        }
+
+        @include respondLG {
+          font-size: 23px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  &.show-search-bar-menu {
+    .search-bar {
+      display: block !important;
+    }
+
+    .dropdown-block {
+      display: block !important;
+    }
+
+    .show-search-menu {
+      display: block !important;
+    }
+  }
+}
+
+// override Molla style
+.headermb-header {
+  @include respondMD {
+    height: 8rem;
+  }
+}
+
+.headermb-content-wrapper.has_search-box {
+  @include respondMD {
+    top: 7.5rem;
+  }
+}
+
+.mobile-menu > li > a {
+  text-transform: capitalize;
+}
+
+// TODO use primary-color
+.section-header-mobile {
+  .mobile-menu-wrapper {
+    font-size: 14px;
+  }
+
+  .nav.nav-pills-mobile {
+    .nav-link {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 20px;
+
+      &::before {
+        background-color: #7e3c7e;
+      }
+
+      &.active {
+        color: #7e3c7e;
+        border-bottom-color: #7e3c7e;
+
+        &::before {
+          background-color: #7e3c7e;
+        }
+      }
+    }
+  }
+
+  .headermb-content-wrapper {
+    .mobile-nav {
+      a {
+        i {
+          font-size: 19px;
+        }
+        img {
+          height: 12px;
+        }
+      }
+    }
+  }
+}

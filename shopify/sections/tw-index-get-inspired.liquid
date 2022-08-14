@@ -1,0 +1,139 @@
+{%- assign dateNow = 'now' | date: '%c' -%}
+{%- assign dateNow = dateNow | date: '%s' | times: 1 -%}
+{%- assign minimumTime = 86400000 -%}
+<div class="container-fluid mt-3 mb-3 {% if off_mobile %} d-none d-lg-block{% elsif off_desktop %} d-lg-none{% endif %}">
+  <div class="get-inspired-content container pt-2i pb-2i pt-lg-3i pb-lg-3i">
+    {% for block in section.blocks %}
+      {% assign slideDeckStart = block.settings.start | date: '%s' | times: 1 %}
+      {% assign slideDeckEnd = block.settings.stop | date: '%s' | times: 1 %}
+      {% if dateNow > slideDeckStart and dateNow < slideDeckEnd %}
+        <div class="row justify-content-between align-items-center flex-lg-row flex-lg-nowrap">
+          <div class="stl-container col-12 col-lg-8 order-lg-1 d-flex justify-content-between mb-2i mb-lg-0i pb-1i pb-lg-0i">
+            <a class="btn-stl prevent-children d-block col-10 col-md-8 mr-4" href="{{ block.settings["url-1"] }}">
+              <img class="lazyload" data-src="{{ block.settings["img-1"] | image_url: width: 500 }}" alt="">
+              <p class="text-center m-0">{{ block.settings["desc-1"] }} <i class="fkt-long-arrow-right"></i></p>
+            </a>
+            <a class="btn-stl prevent-children d-block col-10 col-md-8" href="{{ block.settings["url-2"] }}">
+              <img class="lazyload" data-src="{{ block.settings["img-2"] | image_url: width: 500 }}" alt="">
+              <p class="text-center m-0">{{ block.settings["desc-2"] }} <i class="fkt-long-arrow-right"></i></p>
+            </a>
+          </div>
+          <div class="head col-12 col-lg-4 order-lg-0 text-center text-lg-left">
+            <h3 class="title font-weight-bold text-uppercase mb-1i">{{ block.settings["main-title"] }}</h3>
+            <p class="sub-title mb-2i">{{ block.settings.subtitle }}</p>
+            <a class="btn gtm-stl-inspired prevent-children border-0" href="{{ block.settings.btn_url }}">{{ block.settings.btn_text }}<i class="fkt-long-arrow-right"></i></a>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Index Get Inspired",
+  "class": "tw-get-inspired-container",
+  "presets": [
+    {
+      "name": "Index Get Inspired",
+      "category": "Custom Content"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "off_desktop",
+      "label": "Turn off on Desktop?",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "off_mobile",
+      "label": "Turn off on Mobile?",
+      "default": false
+    }
+  ],
+  "blocks" : [
+    {
+      "type": "event",
+      "name": "Events",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "block title",
+          "info": "ex: 12/1-Christmas"
+        },
+        {
+          "type": "text",
+          "id": "main-title",
+          "label": "main title",
+          "info": "ex: Christmas is just around the corner"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "subtitle",
+          "info": "ex: Make this year the cosiest Christmas ever!"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Get Inspired Button URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Get Inspired Button Text",
+          "default": "Get Inspired"
+        },
+        {
+          "type": "image_picker",
+          "id": "img-1",
+          "label": "image 1"
+        },
+        {
+          "type": "url",
+          "id": "url-1",
+          "label": "url 1"
+        },
+        {
+          "type": "text",
+          "id": "desc-1",
+          "label": "description 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "img-2",
+          "label": "image 2"
+        },
+        {
+          "type": "url",
+          "id": "url-2",
+          "label": "url 2"
+        },
+        {
+          "type": "text",
+          "id": "desc-2",
+          "label": "description 2"
+        },
+        {
+          "type": "header",
+          "content": "Display Period"
+        },
+        {
+          "type": "text",
+          "id": "start",
+          "label": "start time",
+          "info": "Enter a starting date - Example: April 1 2022 00:00:00 PM"
+        },
+        {
+          "type": "text",
+          "id": "stop",
+          "label": "stop time",
+          "info": "Enter a stop date - Example: April 2 2022 23:59:59 PM"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

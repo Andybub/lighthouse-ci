@@ -1,0 +1,29 @@
+{% liquid
+  assign overMaxLimit = ''
+  if maxLimit > 0 and cart.items.size >= maxLimit
+    assign overMaxLimit = 'd-none'
+  endif
+  assign onlyCustomize = true
+  for cartItem in cart.items
+    if cartItem.product.id != 6552844959790 and cartItem.properties["_production_cost_quantity"] == null
+      assign onlyCustomize = false
+    endif
+  endfor
+%}
+<div class="free-motivator-message text-center {{ overMaxLimit }}">
+  <ul class="message-list">
+    <li class="free-shipping" data-subtotal="{{ cart.total_price }}">
+      <p class="over-threshold {% if cart.total_price < 49 %}d-none{% endif %}">
+        <i class="icomoon-check"></i> Free Shipping
+      </p>
+      <p class="under-threshold {% if cart.total_price >= 49 %}d-none{% endif %}">
+        Only <span class="price-diff">{{ 4900 | minus: cart.total_price | money }}</span> until Free Shipping
+      </p>
+    </li>
+    {%- unless onlyCustomize -%}
+      <li class="free-returns">
+        <p><i class="icomoon-check"></i> Flexible Return 180 Days</p>
+      </li>
+    {%- endunless -%}
+  </ul>
+</div>

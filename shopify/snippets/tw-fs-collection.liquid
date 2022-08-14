@@ -1,0 +1,16 @@
+{%- comment -%}
+  Display items from sub-categories if:
+  1. at mobile
+  2. has related sub-categories and force_display_isp_products !== true
+{%- endcomment -%}
+{% render 'tw-related-sub-categories' %}
+{% render 'tw-collection-metafields' %}
+
+<div id="react-collection"
+     class="container"
+     data-title={{ collection.title | json }}
+     data-id="{{ collection.id }}"
+     data-handle={{ collection.handle | json }}></div>
+
+{% comment %} title, description for SEO {% endcomment %}
+<div id="collection-description" class="description d-none" hidden>{{ collection.description | split: '<!---split--->' | last }}</div>

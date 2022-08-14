@@ -1,0 +1,157 @@
+{%- assign dateNow = 'now' | date: '%c' -%}
+{%- assign dateNow = dateNow | date: '%s' | times: 1 -%}
+{%- assign minimumTime = 86400000 -%}
+{% for block in section.blocks %}
+  {%- assign slideDeckStart = block.settings.start | date: '%s' | times: 1 %}
+  {%- assign slideDeckEnd = block.settings.stop | date: '%s' | times: 1 %}
+  {%- if dateNow > slideDeckStart and dateNow < slideDeckEnd %}
+    <div class="container mt-3 mb-3">
+      <div class="title-container row justify-content-center align-items-center d-lg-none">
+        <p class="title-text m-0">{{ block.settings.period-title }}</p>
+      </div>
+      <div class="collections-container row">
+        {% for i in (1..4) %}
+          {% assign target = "selected-collection-" | append: i %}
+          {% if block.settings[target] != blank %}
+            {% assign collection = collections[block.settings[target]] %}
+            <a class="gtm-home-selected col-6 col-lg-3 mb-3 h3 font-weight-bold" href="{{ collection.url }}">
+              {% assign img_target = target | append: "-image" %}
+              {% if block.settings[img_target] != blank %}
+                {% assign img_src = block.settings[img_target] %}
+              {% else %}
+                {% assign img_src = collection.image %}
+              {% endif %}
+              <div class="content position-relative">
+                <picture>
+                  <source class="" media="(max-width: 900px)" srcset="{{ img_src | img_url: '400x' }}"/>
+                  <img class="w-100" src="{{ img_src | img_url: '240x' }}" alt="{{ collection.title }}"/>
+                </picture>
+                <div class="block position-absolute w-100 h-100"></div>
+                <p class="position-absolute w-100 m-0 text-center">{{ collection.title }}</p>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+{% schema %}
+{
+  "name": "Index Selected Categories",
+  "class": "tw-selected-categories",
+  "presets": [
+    {
+      "name": "Selected Categories",
+      "category": "Custom Content"
+    }
+  ],
+  "settings": [],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Selected Categories",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "block title"
+        },
+        {
+          "type": "text",
+          "id": "period-title",
+          "label": "period title"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "selected-collection-1",
+          "label": "Collection 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "selected-collection-1-image",
+          "label": "Collection 1 alternative image"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "selected-collection-2",
+          "label": "Collection 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "selected-collection-2-image",
+          "label": "Collection 2 alternative image"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 3"
+        },
+        {
+          "type": "collection",
+          "id": "selected-collection-3",
+          "label": "Collection 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "selected-collection-3-image",
+          "label": "Collection 3 alternative image"
+        },
+        {
+          "type": "header",
+          "content": "Select Collection 4"
+        },
+        {
+          "type": "collection",
+          "id": "selected-collection-4",
+          "label": "Collection 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "selected-collection-4-image",
+          "label": "Collection 4 alternative image"
+        },
+        {
+          "type": "header",
+          "content": "Sale Period"
+        },
+        {
+          "type": "text",
+          "id": "start",
+          "label": "start time",
+          "info": "Enter a starting date - Example: April 1 2017 8:45:00 PM"
+        },
+        {
+          "type": "text",
+          "id": "stop",
+          "label": "stop time",
+          "info": "Enter an stop date - Example: April 2 2017 10:00:00 PM"
+        },
+        {
+          "type": "checkbox",
+          "id": "countdown_enable",
+          "label": "Turn on countdown timer for mobile?",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% stylesheet %}
+.simple-format .countdown-clock {
+  display: inline-block;
+  margin-left: 10px;
+}
+.simple-format .countdown-clock span {
+  display: inline-block;
+  margin: 0 -1px;
+}
+{% endstylesheet %}

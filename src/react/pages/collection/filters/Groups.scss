@@ -1,0 +1,10 @@
+.group-container {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 6rem;
+
+  @include respondLG {
+    // padding-right: 1rem;
+    padding-bottom: 3rem;
+  }
+}

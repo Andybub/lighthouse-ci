@@ -1,0 +1,57 @@
+<header>
+  {%-section 'tw-announcement-bar' %}
+  <div class="top-header-container container d-flex justify-content-between align-items-center">
+    <div class="header-logo d-flex align-items-center">
+      <div class="header-control d-block d-lg-none order-first pl-0">
+        <div class="control-inner">
+          <div class="mobile-block block-menu-bar">
+            <div class="menu-bar menu-toggle">
+              <i class="icomoon icomoon-nav-menu" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="/" class="btn-logo">
+        {%-if template.name == 'index' -%}
+          <h1>
+            <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="" width="100" height="31" />
+          </h1>
+        {%- else -%}
+          <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" itemprop="logo" class="" width="100" height="31" />
+        {%- endif -%}
+      </a>
+    </div>
+    <div class="search-bar d-md-block" style="display: none">{% render 'tw-search-bar' %}</div>
+    <div class="d-flex header-account-links align-items-center">
+      <a href="/pages/shop-the-looks" class="btn-shop-by-occasion d-none d-lg-flex align-items-center">
+        <i class="icomoon icomoon-nav-shop-all-categories" aria-hidden="true"></i>
+        <span>Shop By Occasion</span>
+      </a>
+      <a href="/collections/sale" class="btn-on-sale d-none d-lg-flex align-items-center">
+        <i class="icomoon icomoon-on-sale" aria-hidden="true"></i>
+        <span>On Sale</span>
+      </a>
+      <a href="/account" class="btn-account d-none d-lg-flex align-items-center">
+        <i class="icomoon icomoon-nav-account" aria-hidden="true"></i>
+        <span class="text">{% if customer %}Hi, {{ customer.first_name | truncate: 10 }}{% else %}Account{% endif %}</span>
+      </a>
+      <a href="javascript:" class="btn-search d-md-none">
+        <i class="icomoon icomoon-nav-research" aria-hidden="true"></i>
+      </a>
+      <a href="/pages/contact-us" class="btn-chat d-lg-none">
+        <i class="icomoon icomoon-nav-chat" aria-hidden="true"></i>
+      </a>
+      <a href="#swym-wishlist" class="btn-wishlist d-flex align-items-center" id="swym-inject-header">
+        <i class="icomoon icomoon-wishlist" aria-hidden="true"></i>
+        <span class="text d-none d-lg-inline">Wishlist</span>
+      </a>
+      <a href="/cart" class="btn-cart d-flex align-items-center position-relative">
+        <i class="icomoon icomoon-nav-cart" aria-hidden="true"></i>
+        <span class="text d-none d-lg-inline">Cart</span>
+        <span class="cart-count cartCount position-absolute{% if cart_item_count < 1 %} d-none{% endif %}">{% render 'tw-cart-count-helper' %}</span>
+      </a>
+    </div>
+    <div class="dropdown-block" style="display: none"></div>
+  </div>
+  {%-render 'tw-top-nav' %}
+</header>

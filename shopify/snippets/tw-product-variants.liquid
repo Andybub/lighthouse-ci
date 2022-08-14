@@ -1,0 +1,159 @@
+{%- comment -%} #1 priority: Set by metafield {%- endcomment -%}
+{%- assign collection_handle = product.metafields.related_collection.color -%}
+{%- comment -%} #2 priority: Set by product tag {%- endcomment -%}
+{%- if collection_handle == blank -%}
+  {%- for tag in product.tags -%}
+    {%- if tag contains "color-" -%}
+      {%- assign collection_handle = tag | remove: "color-" | strip | prepend: "color-" -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- comment -%} #3 priority: Inferred from first variant's options {%- endcomment -%}
+{%- if collection_handle == blank -%}
+  {%- for option in product.options_with_values -%}
+    {%- assign downcase_name = option.name | downcase -%}
+    {%- if downcase_name == 'color' or downcase_name == 'colour' -%}
+      {%- assign collection_handle = "color-" | append: option.values.first | handle -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- unless collection_handle == blank -%}
+  {%- assign colour_collection = collections[collection_handle] -%}
+{%- endunless -%}
+
+<div class="tw-product-variants">
+  {%- assign related_collection = tag | remove: "variant:" | handleize -%}
+  {%- assign variant_label = 'Color' -%}
+  {%- for tag in product.tags -%}
+    {%- if tag contains 'variant_label:' -%}
+      {%- assign variant_label = tag | remove: 'variant_label:' | capitalize -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- assign found_colour = false -%}
+
+  {%- for tag in product.tags -%}
+    {%- if tag contains "variant:" or tag contains "variant-" -%}
+      {%- assign found_colour = true -%}
+      {% break %}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless found_colour -%}
+    <div class="variant-container variant-color-container no-swatches mt-0">
+      <div class="shop-color-no-swatches d-flex justify-content-end">
+      {%- unless colour_collection == blank -%}
+        <a class="gtm-more-in shop-more-in-color-link" href="{{ colour_collection.url }}">{{ "More in " | append: colour_collection.title }}</a>
+      {%- endunless -%}
+      </div>
+    </div>
+  {%- endunless -%}
+
+  {%- for tag in product.tags -%}
+    {%- if tag contains "variant:" or tag contains "variant-" -%}
+      <div class="variant-container variant-color-container d-flex justify-content-between flex-wrap">
+        {%- assign related_collection = tag | remove: "variant:" | handleize -%}
+        <p class="variantcolor-title">{{ variant_label }}: <strong><span class="color-hover"></span></strong></p>
+        {%- unless colour_collection == blank -%}
+          <a class="gtm-more-in shop-more-in-color-link" href="{{ colour_collection.url }}">{{ "More in " | append: colour_collection.title }}</a>
+        {%- endunless -%}
+        {%- assign found_colour = true -%}
+        <ul class="color-variant w-100 d-flex flex-wrap">
+          {%- for colprod in collections[related_collection].products -%}
+            {% comment %}If colorname override is set, don't check tags for colors{% endcomment %}
+            {%- assign colorname = colprod.metafields.colorname.override | default: '' -%}
+            {%- if colorname == '' -%}
+              {%- for tag in colprod.tags -%}
+                {%- if tag contains 'color-' -%}
+                  {%- capture colorname -%}{{ colorname }}/{{ tag | remove: 'color-' | capitalize }}{%- endcapture -%}
+                  {% comment %}If splitcolor is set, only add the first color to the list {% endcomment %}
+                  {%- if colprod.metafields.splitcolor.disable != blank -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- assign colorname = colorname | remove_first: '/' -%}
+            {%- endif -%}
+            <li class="li-color {% if colprod.id == product.id %} selected{% endif %}" data-color="{{ colorname | replace: '-', ' ' }}">
+              <a href="{{ colprod.url }}">
+                {%- comment -%} TW-EFMT-43 PDP Variant Color Image {%- endcomment -%}
+                {%- assign whtbkgd_image = '' -%}
+                {%- for image in colprod.images -%}
+                  {%- if image.alt contains '#whtbkgd' -%}
+                    {%- assign whtbkgd_image = image.src -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if whtbkgd_image == '' -%}
+                  <img src="{{ colprod.featured_image | img_url: '66x66' }}">
+                {%- else -%}
+                  <img src="{{ whtbkgd_image | img_url: '66x66' }}">
+                {%- endif -%}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <button class="related-products-more-btn" style="display: none">
+          <span class="more-count"></span>More Options<span class="icomoon-arrow-3"></span>
+        </button>
+      </div>
+    {%- endif -%}
+
+    {%- if tag contains "variantsizev-" -%}
+      <div class="variant-container variant-size-container">
+        {%- assign related_sizecollection = tag | handleize -%}
+        {%- assign self_variant_size = product.metafields.global.variant_size -%}
+        <p class="variantsize-title">Size: <strong><span class="size-hover">{{ self_variant_size }}</span></strong></p>
+        <ul class="size-variant w-100 d-flex flex-wrap">
+          {%- for sizeprod in collections[related_sizecollection].products -%}
+            {%- assign sizeprodtag_size = sizeprod.metafields.global.variant_size -%}
+            {% comment %} keep old method (TW-EFMT-72) {% endcomment %}
+            {%- if sizeprodtag_size == blank -%}
+              {%- for sizeprodtag in sizeprod.tags -%}
+                {%- assign sizeprodtagdowncase = sizeprodtag | downcase -%}
+                {%- if sizeprodtagdowncase contains "size-" -%}
+                  {%- assign sizeprodtag_size = sizeprodtagdowncase | remove: "size-" -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            <li class="li-size{% if sizeprod.id == product.id %} selected{% endif %}" data-size="{{ sizeprodtag_size | replace: '-', ' ' | replace: '"', '&quot;' }}">
+              <a href="{{ sizeprod.url }}">{{ sizeprodtag_size | replace: '-', ' ' | replace: '"', '&quot;' }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <button class="related-products-more-btn" style="display: none">
+          <span class="more-count"></span>More Options<span class="icomoon-arrow-3"></span>
+        </button>
+        {% if product.type == 'Tablecloths' %}
+          <button class="gtm-size-chart prevent-children btn-size-chart" data-product-id="{{ product.id }}" data-toggle="modal" data-target="#size-chart-modal">
+            <i class="icomoon-size-chart"></i>
+            <span>Size Chart</span>
+          </button>
+        {% endif %}
+      </div>
+    {%- endif -%}
+
+    {%- if tag contains "variantstylev-" -%}
+      <div class="variant-container variant-style-container">
+        {%- assign related_stylecollection = tag | handleize -%}
+        <p class="variantstyle-title">Style: <strong><span class="style-hover"></span></strong></p>
+        <ul class="style-variant w-100 d-flex flex-wrap">
+          {%- for styleprod in collections[related_stylecollection].products -%}
+            {%- for styleprodtag in styleprod.tags -%}
+              {%- assign styleprodtagdowncase = styleprodtag | downcase -%}
+              {%- if styleprodtagdowncase contains "vstylev-" -%}
+                {%- assign styleprodtag_style = styleprodtagdowncase | remove: "vstylev-" -%}
+                <li class="li-style{% if styleprod.id == product.id %} selected{% endif %}"
+                    data-style="{{ styleprodtag_style | capitalize | replace: '-', ' ' | replace: '"', '&quot;' }}">
+                  <a href="{{ styleprod.url }}">{{ styleprodtag_style | capitalize | replace: '-', ' ' | replace: '"', '&quot;' }}</a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+        <button class="related-products-more-btn" style="display: none">
+          <span class="more-count"></span>More Options<span class="icomoon-arrow-3"></span>
+        </button>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>

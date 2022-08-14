@@ -1,0 +1,14 @@
+<div id="gift-button" class="gift-button-container" style="display:none">
+  <a href="/pages/refer-a-friend" id="open-button" class="open-button">
+    <div class="btn-contents">
+      <div class="gift-icon"></div>	
+      <span class="trigger-text">refer a friend<br>gift $10, get 10%!</span>
+    </div>
+  </a>
+</div>
+
+<script>
+  if (Shopify.Checkout.isOrderStatusPage || Shopify.Checkout.step === "thank_you") {
+    document.getElementById("gift-button").style.display = "block";
+  }
+</script>

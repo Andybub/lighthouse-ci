@@ -1,0 +1,349 @@
+@use 'sass:math';
+
+.stl-detail-container {
+  width: 460px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: 0;
+  bottom: 0;
+
+  @include respondMax(900) {
+    width: 100%;
+    z-index: 1;
+  }
+
+  ul {
+    margin: 0;
+    list-style: none;
+  }
+
+  .stl-detail-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(black, 0.25);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+
+    @include respondMax(900) {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @include respondMax(414) {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .btn-back {
+    background: none;
+    border: 0;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+
+    @include respondMax(900) {
+      top: 0;
+    }
+
+    .icomoon-arrow-3 {
+      margin-right: 8px;
+    }
+  }
+
+  .stl-detail-scroller {
+    position: absolute;
+    top: 60px;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+
+    @include respondMax(768) {
+      top: 30px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .stl-detail-scroll-view {
+      padding: 0 16px 32px;
+    }
+  }
+
+  .product-img {
+    min-height: 120px;
+    font-size: 0;
+
+    img {
+      width: 100%;
+      max-height: 380px;
+      display: block;
+      object-fit: contain;
+      object-position: center center;
+    }
+  }
+
+  .product-info {
+    .title {
+      font-size: 16px;
+      line-height: 21px;
+      margin-bottom: 4px;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+
+      .factory-price {
+        strong {
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 24px;
+        }
+
+        .regular-price {
+          color: #999;
+          font-size: 16px;
+          text-decoration: line-through;
+          margin-left: 8px;
+        }
+      }
+
+      .money-saved {
+        color: #f03f33;
+        font-size: 16px;
+        margin-left: 5px;
+      }
+    }
+
+    .variant-container {
+      .title {
+        font-size: 20px;
+        text-transform: capitalize;
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+
+        li {
+          font-size: 16px;
+          background-color: rgba(#f5f5f5, 1);
+          border: 2px rgba($colorPurpleHover, 0) solid;
+          border-radius: 8px;
+          margin: 0 0 12px;
+          padding: 7px 5px;
+          cursor: pointer;
+
+          &.active {
+            cursor: default;
+          }
+
+          &:hover,
+          &.active {
+            border: 2px rgba($colorPurpleHover, 1) solid;
+          }
+
+          &.empty {
+            height: 0;
+            border: 0;
+            padding: 0;
+            cursor: default;
+            pointer-events: none;
+
+            &:hover {
+              border: 0;
+            }
+          }
+        }
+      }
+
+      .btn-more {
+        width: 100%;
+        color: #111;
+        font-size: 16px;
+        text-align: center;
+        display: block;
+        background-color: white;
+        border: 1px solid #999;
+        border-radius: 33px;
+        margin-top: -4px;
+        margin-bottom: 12px;
+        padding: 11px 0;
+
+        &:hover {
+          border: 1px rgba($colorPurpleHover, 1) solid;
+        }
+      }
+    }
+
+    // stylelint-disable no-descending-specificity
+    .variant-size-container {
+      ul {
+        li {
+          min-width: math.percentage(math.div(86, 382));
+          text-align: center;
+          margin-left: 3px;
+          margin-right: 3px;
+        }
+      }
+    }
+
+    .variant-color-container {
+      ul {
+        justify-content: space-between;
+
+        li {
+          font-size: 0;
+          background-color: transparent;
+          margin-right: 0;
+          padding: 0;
+          overflow: hidden;
+
+          img {
+            width: 66px;
+
+            @include respondMax(390) {
+              width: 60px;
+            }
+          }
+
+          &.empty {
+            width: 66px;
+
+            @include respondMax(390) {
+              width: 60px;
+            }
+          }
+        }
+      }
+    }
+
+    .variant-style-container {
+      ul {
+        li {
+          min-width: math.percentage(math.div(86, 382));
+          text-align: center;
+          margin-left: 3px;
+          margin-right: 3px;
+        }
+      }
+    }
+
+    .variant-default-container {
+      ul {
+        flex-direction: column;
+
+        li {
+          display: flex;
+          flex-wrap: wrap;
+          margin-right: 0;
+          padding-left: 16px;
+
+          .txt-variant-name {
+            color: #111;
+            font-size: 16px;
+            margin-right: 3px;
+          }
+
+          .txt-each-saving {
+            font-size: 16px;
+
+            .txt-each-price {
+              color: #5e5e5e;
+              margin-right: 3px;
+            }
+
+            .txt-saving-percentage {
+              color: #ff7474;
+            }
+          }
+        }
+      }
+    }
+
+    .bottom-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .quantity-container {
+        width: 36%;
+      }
+
+      & > button,
+      & > a {
+        @include button;
+
+        width: 60%;
+        font-weight: normal;
+        text-align: center;
+        position: relative;
+        padding: 9px 0 !important;
+
+        @include respondMax(900) {
+          width: 100%;
+          margin-left: 12px;
+        }
+
+        @include respondMax(414) {
+          padding: 12px 0 !important;
+        }
+
+        &.is-success {
+          background-color: #580a58 !important;
+        }
+
+        &.is-loading {
+          padding: 4px 0 !important;
+
+          @include respondMax(414) {
+            padding: 7px 0 !important;
+          }
+
+          > svg {
+            width: 38px;
+            height: 38px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+
+        &.is-customize,
+        &.btn-klaviyo-bis-trigger {
+          width: 100% !important;
+        }
+
+        .preorder-message {
+          color: #f03f33;
+          font-size: 12px;
+          line-height: 16px;
+          text-align: center;
+          display: block;
+          position: absolute;
+          left: -12px;
+          right: -12px;
+          bottom: -16px;
+        }
+      }
+    }
+
+    .almost-gone-message {
+      width: 100%;
+      color: #f03f33;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: center;
+      margin-top: 6px;
+    }
+  }
+}

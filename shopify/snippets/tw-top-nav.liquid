@@ -1,0 +1,66 @@
+<div class="top-nav-container position-relative container d-none d-lg-block">
+  <ul class="site-nav top-nav d-flex">
+  {%- assign is_child_current_assigned = false -%}
+  {%- for link in linklists['1-top-navigation'].links -%}
+    {%- if forloop.index < 13 -%}
+      {%- if is_child_current_assigned == false and link.child_current -%}
+        {%- assign is_child_current = true -%}
+        {%- assign is_child_current_assigned = true -%}
+      {%- else -%}
+        {%- assign is_child_current = false -%}
+      {%- endif -%}
+      <li class="{% if link.current or is_child_current %}is-current{% endif %}">
+        <a class="gtm-top-nav" href="{{ link.url }}">{{ link.title }}</a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+  </ul>
+  <div class="top-nav-block" style="display: none"></div>
+  {%- assign title_remove_start_array = "Banquet,Folding" | split: "," %}
+  {%- assign title_remove_end_array = "Tablecloths,Table Skirt,Table Runner,Table Overlay,Cloth Napkins,Chair Cover,Chair Sashes,Bolts" | split: "," %}
+  <div class="top-nav-expand" style="display: none">
+    {%- for lv_1_link in linklists['1-top-navigation'].links -%}
+      {%- if forloop.index < 13 -%}
+      <ul class="lv-2-list flex-wrap justify-content-center">
+        {%- for lv_2_link in lv_1_link.links -%}
+        <li class="lv-2-link">
+          <div class="img-container">
+            <a class="gtm-top-nav" href="{{ lv_2_link.object.url }}">
+              <img class="lazyload" data-src="{{ lv_2_link.object.featured_image | image_url: width: 200, format: 'pjpg' }}" alt="{{ lv_2_link.object.title }}" width="174" height="174">
+            </a>
+          </div>
+          <div class="d-flex flex-column">
+            <a class="lv-2-title gtm-top-nav" href="{{ lv_2_link.url }}">{{ lv_2_link.title }}</a>
+            {%- if lv_2_link.links.size > 0 -%}
+            <ul class="lv-3-list">
+              {%- for lv_3_link in lv_2_link.links -%}
+              <li class="lv-3-link">
+                {%- assign title = lv_3_link.title -%}
+                {%- for str in title_remove_start_array -%}
+                  {%- if title contains str -%}
+                    {%- assign title = title | remove_first: str | strip -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- assign title = title | split: " " | reverse | join: " " %}
+                {%- for str in title_remove_end_array -%}
+                  {%- assign str_reverse = str | split: " " | reverse | join: " " | strip -%}
+                  {%- if title contains str_reverse -%}
+                    {%- assign title = title | remove_first: str_reverse | strip -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- assign title = title | split: " " | reverse | join: " " -%}
+                <a class="lv-3-title gtm-top-nav" href="{{ lv_3_link.url }}">{{ title }}</a>
+              </li>
+              {%- endfor -%}
+            </ul>
+            {%- endif -%}
+          </div>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>

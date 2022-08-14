@@ -1,0 +1,41 @@
+.shipment-tracker-container {
+  max-width: 700px;
+
+  input {
+    &.onerror {
+      border-color: red !important;
+    }
+
+    &[type='text'],
+    &[type='email'] {
+      border: 1.5px solid #eaeaea;
+      color: #333;
+    }
+  }
+
+  label {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  .btn-submit {
+    color: #fff;
+    background-color: #7e3d7e;
+    padding: 11.5px 40px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .shipment-status {
+    span {
+      &.onerror {
+        color: red;
+      }
+    }
+  }
+
+  .shipment-status .order-loading-gif {
+    display: none;
+    margin-right: 10px;
+  }
+}

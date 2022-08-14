@@ -1,0 +1,116 @@
+
+{%- layout none -%}
+{%- paginate search.results by 250 -%}
+  {%- capture productIds -%}
+    [
+    {%- for item in search.results -%}
+      {%- assign has_color = false -%}
+      {%- assign has_size = false -%}
+      {%- assign collection_handle = '' -%}
+      {%- assign collection_size_handle = '' -%}
+      {%- assign collection_style_handle = '' -%}
+      {%- for tag in item.tags -%}
+        {%- if tag contains 'variant-' -%}{%- assign collection_handle = tag -%}{%- endif -%}
+        {%- if tag contains 'variantsizev-' -%}{%- assign collection_size_handle = tag -%}{%- endif -%}
+        {%- if tag contains 'variantstylev-' -%}{%- assign collection_style_handle = tag -%}{%- endif -%}
+        {%- if tag contains 'color-' -%}{%- assign has_color = true -%}{%- endif -%}
+        {%- if tag contains 'size-' -%}{%- assign has_size = true -%}{%- endif -%}
+      {%- endfor -%}
+
+      {%- assign isCaseProd = false -%}
+      {%- assign caseQty = 0 -%}
+      {%- for tag in item.tags -%}
+        {%- if tag contains 'case_calc-' -%}
+          {%- assign isCaseProd = true -%}
+          {%- assign caseQty = tag | replace: 'case_calc-' | times: 1 %}
+          {%- break -%}
+        {%- elsif tag contains 'Case-' -%}
+          {% assign isCaseProd = true %}
+          {% assign caseQty = tag | replace: 'Case-' | times: 1 %}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- assign unit_name = "" -%}
+      {%- if item.metafields.each -%}
+        {%- assign unit_name = item.metafields.each.unit_name -%}
+      {%- endif -%}
+
+      {%- assign txtSoldOut = '' -%}
+      {%- assign custom_variants = "" -%}
+      {%- for variant in item.variants -%}
+        {%- unless forloop.first -%}
+          {%- assign txtSoldOut = txtSoldOut | append: ' # ' -%}
+        {%- endunless -%}
+        {%- assign variantMetafield = variant.metafields.deposco['Sold Out'] -%}
+        {%- if variantMetafield != blank -%}
+          {%- assign metafieldSplit = variantMetafield | split: ' ' | reverse -%}
+          {%- assign metaDate = metafieldSplit[0] | date: '%B %d %Y' -%}
+          {%- assign formattedInStockMessage = variantMetafield | replace: metafieldSplit[0], metaDate -%}
+          {%- assign txtSoldOut = txtSoldOut | append: formattedInStockMessage | replace: "Sold Out until", "Preorder: Available on" -%}
+        {%- else -%}
+          {%- assign txtSoldOut = txtSoldOut | append: " " -%}
+        {%- endif -%}
+
+        {%- if forloop.first -%}
+          {%- assign custom_variants = "[" -%}
+        {%- endif -%}
+        {%- assign variant_json = variant | json -%}
+        {%- assign variant_json = variant_json | remove_first: "{" -%}
+
+        {%- assign threshold = variant.metafields.deposco['threshold'] -%}
+        {%- if threshold != blank -%}
+          {%- assign threshold = threshold | plus: 0 -%}
+        {%- else -%}
+          {%- assign threshold = "0" | plus: 0 -%}
+        {%- endif -%}
+        {%- assign threshold_json = '"threshold":' | append: threshold | append: ',' -%}
+        {%- assign variant_json = variant_json | prepend: threshold_json -%}
+
+        {%- assign sold_out = variant.metafields.deposco['Sold Out'] -%}
+        {%- if sold_out != blank -%}
+          {%- assign metafieldSplit = sold_out | split: ' ' | reverse -%}
+          {%- assign metaDate = metafieldSplit[0] | date: '%B %d %Y' -%}
+          {%- assign formattedInStockMessage = sold_out | replace: metafieldSplit[0], metaDate -%}
+          {%- assign sold_out = formattedInStockMessage | replace: "Sold Out until", "Preorder: Available on" -%}
+        {%- else -%}
+          {%- assign sold_out = "" -%}
+        {%- endif -%}
+        {%- assign sold_out = '"sold_out":"' | append: sold_out | append: '",' -%}
+        {%- assign variant_json = variant_json | prepend: sold_out -%}
+
+        {%- assign variant_json = variant_json | prepend: "{" -%}
+        {%- assign custom_variants = custom_variants | append: variant_json -%}
+        {%- if forloop.last -%}
+          {%- assign custom_variants = custom_variants | append: "]" -%}
+        {%- endif -%}
+        {%- unless forloop.last -%}
+          {%- assign custom_variants = custom_variants | append: "," -%}
+        {%- endunless -%}
+
+      {%- endfor -%}
+
+      ,{
+        "id": {{- item.id | json -}},
+        "title": {{- item.title | escape | json -}},
+        "handle": {{- item.handle | json -}},
+        "price": {{- item.price | json -}},
+        "compare_at_price": {{- item.compare_at_price | json -}},
+        "image_url": {{- item.featured_image.src | img_url: '118x', scale: 1, format: 'pjpg' | json -}},
+        "variants": {{- custom_variants -}},
+        "sold_out": {{- txtSoldOut | split: ' # ' | json -}},
+        "has_color": {{- has_color | json -}},
+        "has_size": {{- has_size | json -}},
+        "collection": {{- collection_handle | json -}},
+        "collection_size": {{- collection_size_handle | json -}},
+        "collection_style": {{- collection_style_handle | json -}},
+        "isCaseProd": {{- isCaseProd | json -}},
+        "caseQty": {{- caseQty | json -}},
+        "unit_name": {{- unit_name | json -}},
+        "available": {{- item.available | json -}},
+        "type": {{- item.type | json -}}
+      }
+    {%- endfor -%}
+    ]
+  {%- endcapture -%}
+  {{- productIds | remove_first: "," | strip_newlines -}}
+{%- endpaginate -%}

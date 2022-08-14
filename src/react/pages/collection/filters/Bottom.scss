@@ -1,0 +1,36 @@
+.bottom-container {
+  width: 100%;
+  max-width: 576px;
+  bottom: 0;
+  left: 0;
+  background: white;
+  padding: 1rem var(--grid-gutter);
+  transform: translateY(100px);
+  transition: transform 0.3s;
+  //   z-index: 10;
+
+  &[data-visible="true"] {
+    transform: translateY(0);
+  }
+
+  &.searching {
+    pointer-events: none;
+  }
+
+  .btn-clear-all-filters,
+  .btn-apply-filters {
+    border: 0;
+    border-radius: 4px;
+    // border-radius: 8px;
+  }
+
+  .btn-clear-all-filters {
+    color: #646d80;
+    background-color: #efefef;
+  }
+
+  .btn-apply-filters {
+    color: white;
+    background-color: black;
+  }
+}

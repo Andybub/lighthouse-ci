@@ -1,0 +1,29 @@
+{%- capture content -%}
+  {% assign metafields = collection.metafields %}
+  {
+    "global": {
+      "size_chart": {{ metafields.global.size_chart | default: false }},
+      "filter": "{{ metafields.global.filter | default: "" }}",
+      "looks": {{ metafields.global.featured_stl | default: "" | split: "," | json }},
+      "force_display_isp_products": {{ metafields.global.force_display_isp_products | default: false }},
+      "block_order": {{ metafields.global.block_order | default: false | json }},
+      "sub_categories_source_handle": "{{ metafields.global.sub_categories_source_handle | default: "" }}",
+      "products_per_sub": {{ metafields.global.products_per_sub | default: 3 }}
+      {% if metafields.global.header_image_desktop %}
+      ,"header_image_desktop": {{ metafields.global.header_image_desktop | default: "" | file_img_url: "1350x" | json }}
+      {% endif %}
+      {% if metafields.global.header_image_mobile %}
+      ,"header_image_mobile": {{ metafields.global.header_image_mobile | default: "" | file_img_url: "700x" | json }}
+      {% endif %}
+    }
+    {% if metafields.bestseller %}
+      {% assign display = metafields.bestseller.display | downcase %}
+      {% if display == "true" %}
+        ,"bestseller": {"slides":{{ metafields.bestseller.slider | newline_to_br | strip_newlines | split: "<br />" | json }}}
+      {% endif %}
+    {% endif %}
+  }
+{%- endcapture -%}
+<script type="application/json" id="metafields">
+  {{- content | strip_newlines -}}
+</script>

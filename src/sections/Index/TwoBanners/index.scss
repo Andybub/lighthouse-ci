@@ -1,0 +1,54 @@
+.tw-two-banners-container {
+  margin-bottom: 50px;
+  .two-banner-content {
+    padding: 0 15%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .two-banner-content-title {
+      margin-bottom: 2%;
+      color: #fff;
+      font-size: 18px;
+      line-height: 143%;
+      text-shadow: 0px 0px 16.8449px rgba(0, 0, 0, 0.85);
+      h3 {
+        @include seoTagStyleInherit;
+      }
+    }
+    .two-banner-content-btn {
+      display: inline-block;
+      padding: 2% 12px;
+      border-bottom: 2px solid #fff;
+      font-size: 14px;
+      font-weight: 500;
+      text-shadow: 0px 0px 16.8449px rgba(0, 0, 0, 0.85);
+      color: #fff;
+      background-color: rgba(#fff, 0);
+      letter-spacing: 0.13em;
+    }
+  }
+
+  a {
+    @media (hover: hover) {
+      &:hover {
+        .two-banner-content {
+          .two-banner-content-btn {
+            text-shadow: none;
+            color: #000;
+            background-color: rgba(#fff, 1);
+          }
+        }
+      }
+    }
+  }
+
+  @include respondSM {
+    .two-banner-content {
+      padding: 0 18%;
+      .two-banner-content-title {
+        font-size: 21px;
+      }
+    }
+  }
+}

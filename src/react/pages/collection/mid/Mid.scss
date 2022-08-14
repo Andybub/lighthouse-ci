@@ -1,0 +1,54 @@
+.mid-container {
+  top: 55px;
+  z-index: 4;
+  background: white;
+
+  @include respondMin(375) {
+    top: 57px;
+  }
+
+  @include respondLG {
+    z-index: 1;
+  }
+
+  .count {
+    line-height: 1.4;
+  }
+
+  .sort-by {
+    right: 0;
+
+    .select-container {
+      .text {
+      }
+
+      select {
+        width: 150px;
+        font-size: 16px;
+        text-indent: -200px;
+        background: white;
+        border-color: #d7d7d7;
+        padding: 4px 28px 4px 10px;
+        cursor: pointer;
+        appearance: none;
+      }
+
+      .selected-text {
+        color: #999;
+        pointer-events: none;
+        font-size: 13px;
+        top: 0;
+        left: 0;
+        padding: 8px 28px 8px 10px;
+      }
+
+      .ico {
+        color: #999;
+        pointer-events: none;
+        top: 0;
+        right: 10px;
+        margin-top: 5%;
+      }
+    }
+  }
+}

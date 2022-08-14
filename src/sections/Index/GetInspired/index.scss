@@ -1,0 +1,85 @@
+@use 'sass:math';
+
+.tw-get-inspired-container {
+  & > .container-fluid {
+    background: #e0d3c5;
+  }
+
+  .get-inspired-content {
+    padding-left: 0;
+    padding-right: 0;
+
+    @include respondLG {
+      padding-left: var(--grid-gutter);
+      padding-right: var(--grid-gutter);
+    }
+
+    .stl-container {
+      overflow: auto;
+
+      @include respondLG {
+        overflow: visible;
+      }
+
+      .btn-stl {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem 1rem 0;
+        filter: drop-shadow(0 2px 4px rgb(0 0 0 / 25%));
+
+        @include respondLG {
+          flex-basis: calc(50% - 1rem);
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          height: 168px;
+          object-fit: cover;
+          object-position: center center;
+
+          @include respondLG {
+            height: 191px;
+          }
+
+          @include respondXL {
+            height: 207px;
+          }
+        }
+
+        p {
+          color: black;
+          font-size: 16px;
+          line-height: 15px;
+          background: white;
+          padding: 0.8rem 0;
+        }
+      }
+    }
+
+    .head {
+      .title {
+        color: #5e5e5e;
+        font-size: 26px;
+        letter-spacing: 0.025em;
+        line-height: 1.4;
+      }
+
+      .sub-title {
+        color: #5e5e5e;
+        font-size: 17px;
+        letter-spacing: 0.075em;
+        line-height: 1.4;
+      }
+
+      .btn {
+        color: #7e3c7e;
+        font-size: 16px;
+        background: white;
+        border-radius: 50rem;
+        padding: 6px 20px;
+        min-width: auto;
+      }
+    }
+  }
+}

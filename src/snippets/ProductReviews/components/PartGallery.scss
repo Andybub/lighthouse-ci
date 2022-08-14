@@ -1,0 +1,44 @@
+.part-gallery-container {
+  margin-bottom: 16px;
+
+  p {
+    color: #000;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .btn-view-all {
+    padding: 0;
+    color: #333;
+    font-size: 16px;
+    background-color: transparent;
+    border: 0;
+
+    i {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .gallery-item {
+    padding: 4px !important;
+    width: 98px;
+    color: #333;
+    font-size: 16px;
+    background-color: transparent;
+    border: 0;
+
+    @include respondMD {
+      width: 110px;
+    }
+
+    .photo {
+      width: 100%;
+    }
+
+    .play-icon {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

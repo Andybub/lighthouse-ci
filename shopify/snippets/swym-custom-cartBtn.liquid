@@ -1,0 +1,94 @@
+<script class="swym-cart-override">
+  function tryParseJSON (jsonString){
+    try {
+      var o = JSON.parse(jsonString);
+      if (o && typeof o === "object") {
+        return o;
+      }
+    }
+    catch (e) { }
+    return false;
+  };
+  function swymCallbackFn() {
+    // your API calls go here
+    //over ride the swym cart api to support preorder and personalize products
+    var ctx = this;
+    var replayAddToCartOriginalFn = _swat.api.replayAddToCart; // save the default function first.
+    window._swat.replayAddToCart = function() {
+      var gArguments = arguments; // save the original arguments
+      var product = gArguments[0]; // product.
+      var variantId = gArguments[1]; // variant id;
+      // var inventoryURL = product.du + "?view=inventory"; // inventory url
+      var inventoryURL = product.du + ((product.du.indexOf("?") > -1) ? "&view=inventory" : "?view=inventory"); // inventory url
+      var params = {
+        du: product.du,
+        empi: product.id,
+        epi: variantId
+      };
+      _swat.getProductDetails(params, function(productJson) {
+        // console.log(productJson, "Product Type", productJson);
+        if (productJson.type == "Personalized") {
+          // redirect
+          window.location.href = product.du;
+        } else {
+          //        Check for inventory data
+          SwymUtils.ajaxGET(inventoryURL, function(response) {
+            console.log("works", tryParseJSON(response.responseText))
+            if (response && response.status == 200 && response.responseText !== "" && tryParseJSON(response.responseText)) {
+              //console.log(response)
+              var responseObj = JSON.parse(response.responseText);
+              responseObj.inventory.forEach(function(inventoryVariant) {
+                if (variantId == inventoryVariant.id) {
+                  // add to cart based on inventory.
+                  if (inventoryVariant.preorder) {
+                    addCustomProductToCart(inventoryVariant, product, variantId);
+                  } else {
+                    replayAddToCartOriginalFn.apply(this, gArguments);
+                  }
+                }
+              })
+            } else {
+              replayAddToCartOriginalFn.apply(this, gArguments);
+            }
+          }, ctx);
+        }
+      });
+    };
+    function addCustomProductToCart(inventoryVariant, product, variantId) {
+      var date_diff = inventoryVariant.available_date.replace("Preorder: Available on", "").trim();
+      /* product.properties = {
+        "In Stock": inventoryVariant.available_date,
+        date_diff: date_diff
+      }; */
+      product.properties = {
+        "date_diff": date_diff,
+        "In Stock": "Preorder: Available on " + date_diff
+      };
+      let formData = {
+        'items': [{
+          quantity: 1,
+          id: variantId,
+          properties: product.properties
+        }]
+      };
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        _swat.openCartPage();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        console.log("Preorder Fail");
+      });
+    }
+  }
+  if (!window.SwymCallbacks) {
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(swymCallbackFn);
+</script>

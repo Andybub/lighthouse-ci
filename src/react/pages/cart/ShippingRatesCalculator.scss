@@ -1,0 +1,75 @@
+.cbb-shipping-rates-calculator {
+  margin: 0 auto !important;
+  padding-top: 0 !important;
+  padding-bottom: 1rem !important;
+  padding-left: var(--grid-gutter) !important;
+  padding-right: var(--grid-gutter) !important;
+  max-width: var(--max-container) !important;
+
+  @include respondMD {
+    --grid-gutter: 10px;
+  }
+
+  // padding: 0 !important;
+  // max-width: none !important;
+
+  .cbb-shipping-rates-calculator-header {
+    font-family: $font;
+  }
+
+  .cbb-shipping-rates-calculator-change-shipping-address {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .cbb-shipping-rates-calculator-chooser {
+    display: flex !important;
+    flex-direction: column;
+
+    @include respondMD {
+      flex-direction: row;
+    }
+
+    .cbb-shipping-rates-calculator-map {
+      flex: 1 1 100%;
+      max-width: 100%;
+      width: auto !important;
+
+      @include respondMD {
+        flex: 1 1 40%;
+        max-width: 40%;
+        height: auto !important;
+      }
+    }
+
+    .cbb-shipping-rates-rate-list {
+      flex: 1 1 100%;
+      max-width: 100%;
+      width: auto !important;
+
+      @include respondMD {
+        flex: 1 1 60%;
+        max-width: 60%;
+      }
+    }
+  }
+
+  .cbb-shipping-rates-calculator-shipping-address-chooser {
+    input,
+    select {
+      font-family: $font;
+      appearance: none !important;
+      padding-left: 1rem !important;
+      font-size: inherit !important;
+      border-width: 1px !important;
+      border-color: #eaeaea !important;
+      border-style: solid !important;
+      border-radius: 0 !important;
+    }
+  }
+
+  .cbb-shipping-rates-calculator-update-button {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+}

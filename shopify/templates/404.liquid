@@ -1,0 +1,23 @@
+{%comment%} {%section '404-template'%} {%endcomment%}
+
+<div class="container page-content">
+  <div class="row mt-5 mb-7">
+    <div class="col-12">
+      <div class="main-container mx-auto">
+        <div class="d-flex flex-md-row flex-column-reverse align-items-center">
+          <div class="left-container text-center">
+            <p class="title">Whoops! Page not Found</p>
+            <p class="sub">We committed a party foul and lost the page you were looking for!</p>
+            <a href="/collections" class="btn btn-shop-all">Shop All Our Categories</a>
+          </div>
+          <div class="right-container">
+            <img class="w-100" src="{{ '404.png' | asset_img_url: '800x' }}" alt="Whoops! Page not Found" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% render 'SEOManager-404' %} {% render 'BrokenLinkRedirect' %}
+ {% include 'BrokenLinkRedirect' %}

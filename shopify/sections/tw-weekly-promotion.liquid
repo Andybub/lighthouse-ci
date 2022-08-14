@@ -1,0 +1,293 @@
+{%- assign currentDate = 'now' | date: '%s' | times: 1 %}
+{%- assign contentStart = section.settings.content_start | date: '%s' | times: 1 %}
+{%- assign contentEnd = section.settings.content_end | date: '%s' | times: 1 %}
+
+{%- if currentDate >= contentStart and currentDate < contentEnd %}
+<!-- currentDate:{{currentDate}} contentStart:{{contentStart}} contentEnd:{{contentEnd}} -->
+<react-weekly-promotion cloak>
+  {
+    "time": {
+      "contentStart": {{- contentStart | json -}},
+      "contentEnd": {{- contentEnd | json -}}
+    },
+    "data": [{%- for block in section.blocks -%}
+      {
+        "type": {{ block.type | json }},
+        "settings": {{- block.settings | json -}}
+        {%- if block.type == 'grid_products' -%}
+          ,"gridItems":
+          [
+            {%- capture gridItems -%}
+              {%- if block.settings.product_1 != blank %}
+                {% render 'tw-weekly-promotion-json', product: block.settings.product_1 %},
+              {%- endif %}
+              {%- if block.settings.product_2 != blank %}
+                {% render 'tw-weekly-promotion-json', product: block.settings.product_2 %},
+              {%- endif %}
+              {%- if block.settings.product_3 != blank %}
+                {% render 'tw-weekly-promotion-json', product: block.settings.product_3 %},
+              {%- endif %}
+              {%- if block.settings.product_4 != blank %}
+                {% render 'tw-weekly-promotion-json', product: block.settings.product_4 %},
+              {%- endif %}
+            {%- endcapture -%}
+            {% assign gridItems = gridItems | remove_last: "," %}
+            {{gridItems}}
+          ]
+        {%- endif -%}
+        {%- if block.type == 'grid_collection' -%}
+          ,"gridItems":
+          [{%- for product in block.settings.featured_collection.products limit: block.settings.products_to_show -%}
+            {% render 'tw-weekly-promotion-json', product: product %}
+            {%- if forloop.last == false -%} , {%- endif -%}
+          {%- endfor -%}]
+        {%- endif -%}
+      }{%- if forloop.last == false -%},{%- endif -%}
+    {%- endfor -%}]
+  }
+</react-weekly-promotion>
+{%- endif-%}
+
+{% schema %}
+  {
+    "name": "Weekly Promotion",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "promo_name",
+        "label": "Promotion Name",
+        "info": "reference only, ex: 01/01 Flash10"
+      },
+      {
+        "type": "header",
+        "content": "CONTENT SCHEDULE"
+      },
+      {
+        "type": "text",
+        "id": "content_start",
+        "label": "Content start",
+        "info": "ex: January 1 2021 11:00:00 AM"
+      },
+      {
+        "type": "text",
+        "id": "content_end",
+        "label": "Content end",
+        "info": "ex: January 31 2021 6:00:00 PM"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "title",
+        "name": "Title",
+        "settings": [
+          {
+            "type": "text",
+            "id": "block_name",
+            "label": "Block Name",
+            "info": "reference only",
+            "default": "Title"
+          },
+          {
+            "type": "text",
+            "id": "promo_title",
+            "label": "Promo title",
+            "info": "ex: 10% Off Flower Balls"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_timer",
+            "label": "Show timer?",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "timer_label",
+            "label": "Timer label",
+            "info": "If timer is displayed, optional label to show with timer",
+            "default": "Sale ends in"
+          }
+        ]
+      },
+      {
+        "type": "banner",
+        "name": "Banner",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "promo_banner_desktop",
+            "label": "Banner Image Desktop"
+          },
+          {
+            "type": "image_picker",
+            "id": "promo_banner_mobile",
+            "label": "Banner Image Mobile"
+          },
+          {
+            "type": "text",
+            "id": "promo_banner_alt",
+            "label": "Banner Image Alt Text"
+          }
+        ]
+      },
+      {
+        "type": "grid_collection",
+        "name": "Grid Collection",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block Name",
+            "info": "reference only",
+            "default": "Grid Collection"
+          },
+          {
+            "type": "text",
+            "id": "block_title",
+            "label": "Block title"
+          },
+          {
+            "type": "image_picker",
+            "id": "featured_image_desktop",
+            "label": "Featured image"
+          },
+          {
+            "type": "image_picker",
+            "id": "featured_image_mobile",
+            "label": "Featured image mobile"
+          },
+          {
+            "type": "text",
+            "id": "alt_text",
+            "label": "Image alt text"
+          },
+          {
+            "type": "url",
+            "id": "linked_url",
+            "label": "Url/link"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button text"
+          },
+          {
+            "type": "collection",
+            "id": "featured_collection",
+            "label": "Featured Collection"
+          },
+          {
+            "type": "range",
+            "id": "products_to_show",
+            "label": "Products to show",
+            "min": 12,
+            "max": 100,
+            "step": 1,
+            "default": 12
+          }
+        ]
+      },
+      {
+        "type": "grid_products",
+        "name": "Grid Products",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block Name",
+            "info": "reference only",
+            "default": "Grid Products"
+          },
+          {
+            "type": "text",
+            "id": "block_title",
+            "label": "Block title"
+          },
+          {
+            "type": "image_picker",
+            "id": "featured_image_desktop",
+            "label": "Featured image"
+          },
+          {
+            "type": "image_picker",
+            "id": "featured_image_mobile",
+            "label": "Featured image mobile"
+          },
+          {
+            "type": "text",
+            "id": "alt_text",
+            "label": "Image alt text"
+          },
+          {
+            "type": "url",
+            "id": "linked_url",
+            "label": "Url/link"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button text"
+          },
+          {
+            "type": "product",
+            "id": "product_1",
+            "label": "Products 1"
+          },
+          {
+            "type": "product",
+            "id": "product_2",
+            "label": "Products 2"
+          },
+          {
+            "type": "product",
+            "id": "product_3",
+            "label": "Products 3"
+          },
+          {
+            "type": "product",
+            "id": "product_4",
+            "label": "Products 4"
+          }
+        ]
+      },
+      {
+        "type": "body_footnote",
+        "name": "Body And Footnote",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "promo_body",
+            "label": "Content body"
+          },
+          {
+            "type": "richtext",
+            "id": "promo_footnote",
+            "label": "Content footnote"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Weekly Promotion",
+        "blocks": [
+          {
+            "type": "title"
+          },
+          {
+            "type": "banner"
+          },
+          {
+            "type": "grid_collection"
+          },
+          {
+            "type": "grid_products"
+          },
+          {
+            "type": "body_footnote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

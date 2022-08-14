@@ -1,0 +1,216 @@
+.react-weekly-promotion {
+  margin-bottom: 48px;
+
+  @include respondSM {
+    margin-bottom: 72px;
+  }
+
+  .hr-line {
+    padding-top: 1rem;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .title-block {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 30px;
+    letter-spacing: 0.005em;
+    font-weight: 700;
+
+    @include respondSM {
+      font-size: 24px;
+      line-height: 35px;
+    }
+
+    @include respondXL {
+      font-size: 28px;
+      line-height: 40px;
+    }
+
+    .timer-block {
+      display: block;
+      color: #f03f33;
+      font-weight: 500;
+
+      @include respondLG {
+        margin-left: 1rem;
+        display: inline-block;
+      }
+    }
+  }
+
+  .banner-block {
+    margin-bottom: 20px;
+    padding: 0;
+
+    @include respondLG {
+      padding-left: var(--grid-gutter);
+      padding-right: var(--grid-gutter);
+    }
+  }
+
+  // GridProductsBlock
+  .grid-products-block {
+    margin-bottom: 20px;
+
+    .grid-products-banner {
+      margin-bottom: 20px;
+
+      .grid-text-block {
+        padding: 22px 0;
+        left: 0;
+
+        @include respondSM {
+          padding: 32px 0;
+        }
+
+        @include respondLG {
+          padding: 18px 0 32px;
+        }
+
+        @include respondXL {
+          padding: 20px 0 40px;
+        }
+      }
+
+      .featured-image {
+        object-fit: cover;
+        height: 160px;
+
+        @include respondSM {
+          height: 225px;
+        }
+
+        @include respondLG {
+          height: 340px;
+        }
+
+        @include respondXL {
+          height: 360px;
+        }
+
+        @include respondXXL {
+          height: 510px;
+        }
+      }
+
+      .grid-products-title {
+        margin-bottom: 20px;
+        width: 50%;
+        padding-bottom: 15px;
+        color: white;
+        font-weight: 700;
+        text-shadow: 0px 0px 16px #000000;
+        letter-spacing: 0.045em;
+        word-wrap: break-word;
+        font-size: 24px;
+        line-height: 26px;
+
+        @include respondSM {
+          margin-bottom: 30px;
+          font-size: 34px;
+          line-height: 37px;
+        }
+
+        @include respondLG {
+          width: 75%;
+          margin-bottom: 0;
+          font-size: 22px;
+          line-height: 24px;
+        }
+
+        @include respondXL {
+          font-size: 26px;
+          line-height: 28px;
+        }
+      }
+
+      button {
+        color: #7e3c7e;
+        font-weight: 400;
+        line-height: 18px;
+        background: white;
+        border: 0;
+        border-radius: 50px;
+
+        font-size: 14px;
+        padding: 8px 30px;
+
+        @include respondLG {
+          padding: 10px 40px;
+        }
+
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .collection-products {
+      padding-top: 15px;
+
+      @include respondSM {
+        padding-top: 20px;
+      }
+
+      @include respondLG {
+        padding-top: 0;
+      }
+    }
+  }
+
+  // BodyAndFootnoteBlock
+  .body-and-footnote-block {
+    margin-bottom: 20px;
+    .promo_body {
+      font-size: 16px;
+    }
+
+    .promo_footnote {
+      color: #707070;
+      background-color: #eee;
+      padding: 8px 10px;
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+
+  .swiper-container {
+    margin-left: -10px;
+    padding-left: 10px;
+    width: calc(100% + 10px) !important;
+    @include respondLG {
+      margin-left: 0;
+      width: 100% !important;
+    }
+
+    .swiper-wrapper {
+      margin: 0;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      top: 30%;
+      min-width: initial;
+      width: 36px;
+      height: 36px;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 10.7197px rgba(0, 0, 0, 0.25);
+      border: 1px solid #e2e2e2;
+      border-radius: 100%;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    .swiper-button-prev {
+      transform: translateX(10px);
+    }
+
+    .swiper-button-next {
+      transform: rotate(180deg);
+    }
+  }
+}

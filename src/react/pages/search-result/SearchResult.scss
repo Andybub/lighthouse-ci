@@ -1,0 +1,22 @@
+.tw-react-search-result {
+  .result-wrap {
+    .title {
+      font-size: 18px;
+    }
+  }
+  .main-container {
+    @include respondLG {
+      min-width: 100%;
+    }
+  }
+  .container-wrap {
+    margin: 0 auto;
+    max-width: 750px;
+  }
+  .result-container {
+    @include respondXXL {
+      flex: 0 0 80%;
+      max-width: 80%;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign sold_out = false
+  assign preOrder = false
+  assign almostGone = false
+  assign threshold = current_variant.metafields.deposco['threshold'] | plus: 0
+  assign deposcoSoldOut = current_variant.metafields.deposco['Sold Out']
+  if deposcoSoldOut != blank and deposcoSoldOut != ''
+    assign deposcoSoldOut = deposcoSoldOut | downcase
+    assign deposcoBISDate = deposcoSoldOut | date: '%B %d %Y'
+  endif
+  if current_variant.inventory_quantity > 0
+    if threshold > 0 and current_variant.inventory_quantity < threshold
+      assign almostGone = true
+    endif
+  else
+    if current_variant.inventory_policy == 'continue' and deposcoSoldOut contains 'sold out until' and deposcoSoldOut != deposcoBISDate
+      assign preOrder = true
+    else
+      assign sold_out = true
+    endif
+  endif
+  unless section_id
+    assign section_id = 'product-template'
+  endunless
+-%}
+
+<div id="tw-sticky-atc" class="kt-stickyAddCart product-inner{% unless product.has_only_default_variant %} ktlz{%endunless%}" data-href="{{product.handle}}" data-show-name="true" data-ktlz="onLoad" data-image="{{ product.featured_image.src | img_url: '90x', format: 'pjpg' }}">
+  <form method="post" action="{{routes.cart_add_url}}" id="ProductSection-{{product.id}}-{{section_id}}" class="form form-ajax-- ktlz-form-pid-{{product.id}}" data-p-id="{{product.id}}" data-section-id="-{{product.id}}-{{section_id}}" data-options="{{product.options.size}}" data-pr-vrs="">
+    <div class="position-fixed {{settings.sticky_position}}">
+      <div class="container position-relative">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-12 col-md-6 d-none d-md-block">
+            <div class="row align-items-center">
+              {%- if settings.show_sticky_img -%}
+              {%- assign current_img_sticky = product.first_available_variant -%}
+              {%- if current_variant_sticky.featured_image == null -%}
+              {%- assign current_img_sticky = product -%}
+              {%- endif -%}
+              <div class="col-auto">
+                <div class="img_sticky product-thumb">
+                  {%- render 'image-grid-item', product: product, masonry: 'false', second_thumb: 'false', as_r: '1/1' -%}
+                </div>
+              </div>
+              {%- endif -%}
+              <div class="col">
+                <div class="title_sticky{% if settings.show_sticky_img %} mt-2 mb-2{%else%} mt-2 mb-2 mt-md-1 mb-md-1{% endif %}">
+                  <p class="m-0 text-truncate">{{product.title}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 text-right btns-group{%if settings.show_sticky_quantiny%}{%unless product.metafields.purchase.on_link != blank %} hasqty{%endunless%}{%endif%} py-1 py-md-0">
+            <div class="row no-gutters">
+              {%- unless product.metafields.purchase.on_link != blank %}
+              <div class="col-auto mr-4 quantity js-product-form__item--quantity{% if sold_out %} d-none{% endif %}">
+
+                <div class="control">
+                  <a class="btn-number qtyminus quantity-minus" href="#"></a>
+                  <input type="text" data-step="1" name="quantity" data-min="1" value="1" class="input-qty input-text qty text" size="4" pattern="[0-9]*">
+                  <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">
+                  <a class="btn-number qtyplus quantity-plus" href="#"></a>
+                </div>
+              </div> 
+              {%- endunless -%}
+              <div class="col btns-wrapper position-relative">
+                <button
+                  type="submit"
+                  class="gtm-pdpsticky-atc w-100 btn btn-primary rounded-pill sticky_add_to_cart_button"
+                  data-product-id="{{ product.id }}"
+                >
+                {%- if current_variant.inventory_quantity > 0 -%}
+                  <i class="fkt-cart-plus"></i>
+                  <span class="text-nowrap">{{ current_variant.price | money }}</span>
+                  {%- if almostGone -%}
+                  <small class="text-nowrap">(Only {{ current_variant.inventory_quantity }} left in stock!)</small>
+                  {%- endif -%}
+                {%- elsif preOrder -%}
+                  <span class="text-nowrap">Pre-order</span>
+                  <small class="text-nowrap">(Available on {{ deposcoBISDate }})</small>
+                {%- elsif sold_out -%}
+                  <i class="icomoon-email"></i>
+                  <span class="text-nowrap">Notify Me</span>
+                {%- endif -%}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div id="tw-sticky-tabs" class="d-md-none fixed-top">
+  <ul class="sticky-tabs row no-gutters">
+    <li class="sticky-tab col-4">
+      <a href="#information" class="btn-text py-2">Information</a>
+    </li>
+    <li class="sticky-tab col-4">
+      <a href="#reviews" class="btn-text py-2">Reviews <span class="reviews-count">({{ product.metafields.stamped.reviews_average | default: 0 |round: 1 }})</span></a>
+    </li>
+    <li class="sticky-tab col-4">
+      <a href="#relevant-products" class="btn-text py-2">Relevant Products</a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,159 @@
+.blog-content {
+  .main-title {
+    font-size: 24px;
+    line-height: 31px;
+
+    span {
+      color: #404040;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 23px;
+    }
+  }
+
+  .entry {
+    margin-bottom: 16px;
+    padding: 0;
+    box-shadow: 0 0 8px rgb(0 0 0 / 0.1);
+    @include respondLG {
+      margin-bottom: 24px;
+    }
+  }
+
+  .entry-list {
+    height: 90px;
+    overflow: hidden;
+
+    @include respondSM {
+      height: 175px;
+    }
+
+    @include respondLG {
+      height: 152px;
+    }
+
+    @include respondXL {
+      height: 186px;
+    }
+
+    .entry-media-wrap,
+    .entry-media {
+      margin-bottom: 0;
+      width: 90px;
+      height: 90px;
+
+      @include respondSM {
+        width: 175px;
+        height: 175px;
+      }
+
+      @include respondLG {
+        width: 195px;
+        height: 152px;
+      }
+
+      @include respondXL {
+        width: 240px;
+        height: 186px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .entry-body {
+      padding: 12px 12px 0;
+      flex: 1;
+
+      @include respondSM {
+        padding: 16px 16px 0;
+      }
+
+      .entry-text {
+        height: 55px;
+
+        @include respondSM {
+          height: 120px;
+        }
+
+        @include respondLG {
+          height: 110px;
+        }
+
+        @include respondXL {
+          height: 140px;
+        }
+      }
+
+      .entry-title {
+        @include textEllipsis(2);
+
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        line-height: 20px;
+
+        @include respondSM {
+          @include textEllipsis(3);
+        }
+
+        @include respondMD {
+          @include textEllipsis(2);
+
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 32px;
+        }
+      }
+
+      .entry-content {
+        p {
+          @include textEllipsis(2);
+
+          margin-bottom: 15px;
+          color: #333;
+          font-size: 14px;
+          line-height: 18px;
+
+          @include respondXL {
+            @include textEllipsis(3);
+
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 22px;
+          }
+        }
+      }
+
+      .entry-meta {
+        color: #999;
+        font-size: 13px;
+        line-height: 16px;
+
+        @include respondSM {
+          font-size: 14px;
+          line-height: 18px;
+        }
+
+        @include respondLG {
+          font-size: 13px;
+          line-height: 16px;
+        }
+
+        @include respondXL {
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.sidebar {
+  .widget-search .form-control {
+    border-radius: 40px;
+  }
+}

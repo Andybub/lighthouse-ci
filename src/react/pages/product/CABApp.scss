@@ -1,0 +1,19 @@
+#tw-cab-app {
+  margin-bottom: 30px;
+
+  @at-root .desktop & {
+    margin-bottom: 0;
+  }
+
+  .cab-container {
+    overflow-x: hidden;
+  }
+
+  .cab-title {
+    @include seoTagStyleInherit;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom: 14px;
+  }
+}

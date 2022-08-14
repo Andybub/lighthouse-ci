@@ -1,0 +1,115 @@
+$purple: #800080;
+$lightPurple: #F8F3F9;
+$darkPurple: #7e3d7e;
+$lightGrey:#eee;
+$darkGrey: #ccc;
+
+#size-chart-modal {
+  --grid-gutter: 5px;
+
+  select {
+    padding: 8px 28px 8px 10px;
+    border: 1px solid #eaeaea;
+    appearance: none;
+    color: #333;
+    background-color: #fff;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    line-height: 1.42;
+    text-indent: .01px;
+    cursor: pointer;
+  }
+
+  .modal-dialog {
+    .modal-content {
+      padding: 10px;
+      .modal-header {
+        border-bottom: none;
+        .modal-title {
+          font-size: 26px;
+          font-weight: 700;
+        }
+        .modal-sub-title {
+          margin-bottom: 0;
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+      .modal-body {
+        .row {
+          margin-bottom: 20px;
+        }
+        .left {
+          h3 {
+            padding: 10px;
+            border-radius: 5px 5px 0px 0px;
+            color: #fff;
+            background-color: $purple;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+        
+          select {
+            border-top: 0px;
+            border-radius: 0px 0px 5px 5px;
+            background-color: $lightPurple;
+            font-size: 16px;
+          }
+        }
+        .right {
+          #product-description {
+            margin: 0 auto;
+            padding: 10px 20px 0;
+            font-size: 13px;
+            line-height: 20px;
+          }
+        }
+        .measurement-grid {
+          display: none;
+          max-width: 100%;
+          overflow: auto;
+          th, td {
+            padding: 7px;
+            border: 1px solid #ddd;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+          }
+          .sub-header {
+            color: #000;
+            background: $lightPurple;
+            font-size: 12px;
+            font-weight:bold;
+            text-transform: uppercase;
+          }
+          .header {
+            color: #fff;
+            background: $darkPurple;
+            font-size: 12px;
+            font-weight:bold;
+            text-transform: uppercase;
+          }
+          .table-size-col {
+            width: 130px;
+            min-width: 90px;
+          }
+          .lightgrey-highlight {
+            background-color: $lightGrey;
+          }
+          .darkgrey-highlight {
+            background-color: $darkGrey;
+          }
+        }
+      }
+    }
+  }
+
+  @include respondMD {
+    padding-top: 100px;
+
+    .modal-dialog {
+      max-width: 700px;
+    }
+  }
+}

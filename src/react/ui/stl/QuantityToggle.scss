@@ -1,0 +1,50 @@
+.stl-quantity-container {
+  display: flex;
+  border: 1px solid #ddd;
+
+  .btn-minus,
+  .btn-plus {
+    width: 27px;
+    color: black;
+    font-size: 16px;
+    background-color: white;
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+    @include respondMax(900) {
+      width: 28px;
+    }
+  }
+
+  .btn-minus {
+    border-right: 1px solid #ddd;
+  }
+
+  .btn-plus {
+    border-left: 1px solid #ddd;
+  }
+
+  input {
+    width: 49px;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 7px 0;
+
+    @include respondMax(900) {
+      width: 42px;
+    }
+
+    &:focus {
+      border: 0;
+    }
+
+    @include respondMax(414) {
+      width: 40px;
+    }
+  }
+}

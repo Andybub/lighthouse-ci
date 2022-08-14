@@ -1,0 +1,22 @@
+<div class="container mt-3 mb-3 app-placeholder">
+  <div class="row justify-content-between align-items-center invisible">
+    <a class="btn-stamped-reviews-widget position-relative d-none d-lg-block col-lg-2" href="/pages/all-customer-reviews" target="_blank">
+      <img class="lazyload" data-src="{{ 'stamped_badge.svg' | asset_url }}" alt="">
+      <p class="total-reviews position-absolute text-center"></p>
+    </a>
+    <div id="tw-react-sitewide-review-carousel" class="reviews-content col-12 col-lg-10 position-relative"></div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Index Reviews",
+    "class": "tw-reviews-container",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Index Reviews",
+        "category": "Custom Content"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,334 @@
+.stl-modal-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 10;
+
+  @include respondMax(900) {
+    align-items: flex-start;
+  }
+
+  .stl-modal-block {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(black, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .stl-modal-content-container {
+    min-width: 900px;
+    max-width: 95%;
+    height: 800px;
+    min-height: 600px;
+    max-height: calc(100% - 24px);
+
+    @include respondMax(900) {
+      min-width: 768px;
+      height: calc(100% - 24px);
+      min-height: 0;
+      max-height: none;
+    }
+
+    @include respondMax(900) {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      height: 100%;
+    }
+
+    .stl-btn-back {
+      color: #999;
+      font-size: 24px;
+      line-height: 1;
+      display: none;
+      background-color: transparent;
+      border: 0;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 13px;
+
+      @include respondMax(900) {
+        display: block;
+      }
+
+      @include respondMax(768) {
+        top: 10px;
+        left: 0;
+        padding: 13px;
+      }
+
+      @include respondMax(390) {
+        top: 12px;
+        left: 0;
+        padding: 10px;
+      }
+    }
+
+    .stl-content-title {
+      width: 100%;
+      text-align: center;
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      @include respondMax(900) {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 3px;
+      }
+
+      .stl-title {
+        color: #111;
+        font-size: 24px;
+
+        @include respondMax(900) {
+          max-height: 48px;
+          line-height: 24px;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        @include respondMax(414) {
+          width: 80%;
+          margin-left: 8%;
+        }
+
+        @include respondMax(390) {
+          width: 76%;
+          margin-left: 12%;
+        }
+      }
+
+      .stl-submitted-by {
+        color: #5e5e5e;
+        font-size: 16px;
+        margin-left: 8px;
+
+        @include respondMax(900) {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .stl-btn-close {
+      color: #999;
+      line-height: 1;
+      background: none;
+      border: 0;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 16px;
+
+      @include respondMax(768) {
+        font-size: 20px;
+        top: 12px;
+        right: 0;
+        padding: 13px;
+      }
+    }
+
+    &.is-landscape {
+      height: auto;
+      min-height: 0;
+
+      @include respondMax(900) {
+        height: calc(100% - 24px);
+      }
+
+      @include respondMax(900) {
+        height: 100%;
+      }
+    }
+
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+    flex-direction: column;
+    background-color: rgba(white, 1);
+    border-radius: 8px;
+    position: relative;
+    padding: 32px;
+
+    @include respondMax(900) {
+      padding: 16px;
+    }
+
+    @include respondMax(768) {
+      border-radius: 0;
+      padding: 16px 0 0;
+    }
+
+    @include respondMax(414) {
+      padding-top: 12px;
+    }
+
+    &.no-submitted-by {
+      .stl-btn-back {
+        @include respondMax(768) {
+          top: 1px;
+        }
+      }
+
+      .stl-content-title {
+        @include respondMax(900) {
+          margin-bottom: 12px;
+        }
+      }
+
+      .stl-btn-close {
+        @include respondMax(768) {
+          top: 3px;
+        }
+      }
+    }
+
+    &.popup-product {
+      @include respondMax(900) {
+        .stl-content-title {
+          display: none;
+        }
+      }
+    }
+
+    .stl-model-content-wrapper {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      flex-grow: 1;
+      flex-shrink: 1;
+      position: relative;
+      overflow: hidden;
+
+      @include respondMax(900) {
+        justify-content: stretch;
+        flex-direction: column;
+      }
+    }
+
+    .stl-product-container {
+      width: 464px;
+      flex: 0 0 460px;
+      position: relative;
+      margin: 0 0 0 20px;
+
+      @include respondMax(900) {
+        width: 100%;
+        flex: 1 0 180px;
+        margin: 0;
+      }
+
+      .stl-product-list-container {
+        height: 100%;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        @include respondMax(900) {
+          width: auto;
+          position: absolute;
+          overflow: auto;
+        }
+      }
+
+      .stl-add-all-to-cart {
+        width: 100%;
+        min-height: 60px;
+        color: #7e3d7e;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: center;
+        position: relative;
+        padding: 16px 0;
+
+        @include respondMax(900) {
+          display: none;
+        }
+
+        .swiper-lazy-preloader {
+          border-right-color: #7e3d7e;
+          border-bottom-color: #7e3d7e;
+          border-left-color: #7e3d7e;
+        }
+
+        .text-link {
+          color: #7e3d7e;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      .stl-swiper-button-prev,
+      .stl-swiper-button-next {
+        width: 10%;
+        height: 80%;
+        color: #666;
+        font-size: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: 0;
+        position: absolute;
+        top: 6px;
+        padding: 0;
+        z-index: 1;
+
+        @include respondMin(901) {
+          display: none;
+        }
+
+        i {
+          display: inline-block;
+        }
+
+        &.is-disabled {
+          visibility: hidden;
+          pointer-events: none;
+        }
+      }
+
+      .stl-swiper-button-prev {
+        left: 1px;
+      }
+
+      .stl-swiper-button-next {
+        right: 1px;
+
+        i {
+          transform: rotate(180deg);
+        }
+      }
+
+      .swiper-button-disabled {
+        opacity: 0.25;
+      }
+    }
+  }
+}
+
+.klaviyo-bis-modal-container {
+  z-index: 999999999;
+
+  .block {
+    background-color: rgba(black, 0.5);
+  }
+
+  .content-container {
+    max-width: 400px;
+  }
+}

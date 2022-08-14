@@ -1,0 +1,157 @@
+@use 'sass:math';
+
+.acsb-trigger {
+  left: -99999px !important;
+  opacity: 0 !important;
+}
+
+.footer {
+  color: #333;
+  font-weight: 400;
+}
+
+.footer-top {
+  background: #e8e8e8;
+}
+
+.footer-middle {
+  .widget-about-info p {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 8px;
+
+    &.title,
+    &.email {
+      font-weight: 500;
+    }
+
+    a {
+      color: #aa85bc;
+
+      &:hover {
+        color: #561c56;
+      }
+    }
+  }
+
+  .widget-about-title {
+    width: 100%;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 35px;
+
+    > img {
+      max-height: 24px;
+      margin: 0 12px 20px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .tw-widget-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .widget-border-top {
+    border-top: 1px solid #ebebeb;
+    padding-top: 18px;
+
+    @include respondLG {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  .widget-customer-care {
+    .widget-list {
+      column-count: 2;
+
+      @include respondMD {
+        column-count: 3;
+      }
+
+      @include respondLG {
+        column-count: 2;
+      }
+    }
+  }
+
+  .widget-get-connected {
+    .widget-list {
+      max-width: 320px;
+    }
+
+    .icon-fallback-text {
+      color: #a287b6;
+      font-size: 0;
+      display: block;
+
+      .icomoon {
+        color: #a287b6;
+        font-size: 38px;
+        line-height: 1;
+      }
+    }
+
+    .bbb-style {
+      display: flex;
+      margin-top: 28px;
+
+      @include respondLG {
+        position: relative;
+      }
+
+      .bbb {
+        margin-right: 26px;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      #bbblink {
+        width: auto;
+        height: auto;
+        overflow: visible;
+
+        img {
+          max-width: 138px;
+          position: relative;
+
+          @include respondLG {
+            max-width: 124px;
+          }
+        }
+
+        &:hover img {
+          margin-left: 0;
+        }
+      }
+
+      .wedding-wire {
+        width: 74px;
+        height: auto;
+        text-align: center;
+
+        @include respondLG {
+          width: 60px;
+        }
+      }
+    }
+  }
+}
+
+.footer-bottom {
+  .footer-copyright {
+    font-weight: 300;
+  }
+}

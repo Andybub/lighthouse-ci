@@ -1,0 +1,10 @@
+<form action="/pages/search-results" method="get" class="search-bar-form d-flex justify-content-between" role="search">
+  <input type="search" name="q" value="" placeholder="What can we help you find?" class="search" aria-label="What can we help you find?" autocomplete="off">
+  <button type="submit" class="btn button-search"><i class="icomoon icomoon-nav-research" aria-hidden="true"></i></button>
+</form>
+<script>
+  var suggestedSearchQuery = [];
+  {%- for childlink in linklists['1-suggested-items'].links %}
+    suggestedSearchQuery.push({ label: {{ childlink.title | json }}, url: {{ childlink.url | json }}, type: "p" });
+  {%- endfor %}
+</script>

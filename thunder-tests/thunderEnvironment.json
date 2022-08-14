@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "eb784824-3c66-41a7-bdbe-83f1b24b4208",
+    "name": "Stamped",
+    "default": true,
+    "sortNum": 10000,
+    "created": "2022-07-21T05:33:09.739Z",
+    "modified": "2022-07-22T10:34:25.665Z",
+    "data": [
+      {
+        "name": "stampedApiKey",
+        "value": "pubkey-68uw0h6gWc9FHoXrOfpbl133nP4CXf"
+      },
+      {
+        "name": "stampedStoreUrl",
+        "value": "efavormart-new.myshopify.com"
+      },
+      {
+        "name": "stampedStoreHash",
+        "value": "67527"
+      },
+      {
+        "name": "stampedShopUrl",
+        "value": "www.efavormart.com"
+      }
+    ]
+  }
+]

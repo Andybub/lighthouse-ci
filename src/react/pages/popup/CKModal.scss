@@ -1,0 +1,16 @@
+#cart-keeper-modal {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .modal-dialog {
+    width: 80%;
+    height: auto;
+    max-width: 320px;
+    border-radius: 8px;
+    overflow: hidden;
+    @include respondMD {
+      max-width: 670px;
+    }
+  }
+}

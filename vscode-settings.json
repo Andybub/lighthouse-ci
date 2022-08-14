@@ -1,0 +1,22 @@
+{
+
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
+  "eslint.validate": ["javascript"],
+  "eslint.format.enable": true,
+
+  "stylelint.validate": ["css", "scss"],
+
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+
+  "files.associations": {
+    "*.liquid": "html"
+  }
+
+}

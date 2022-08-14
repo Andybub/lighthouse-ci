@@ -1,0 +1,70 @@
+{%- layout none -%}
+{%- paginate search.results by 50 -%}
+{%- capture productIds -%}
+  [
+    {%- for item in search.results -%}
+      {%- liquid
+        assign collections = ''
+        for collection in item.collections
+          if forloop.first
+            assign collections = collections | append: '['
+          endif
+          assign handle = collection.handle | json
+          assign collections = collections | append: handle
+          unless forloop.last
+            assign collections = collections | append: ','
+          endunless
+          if forloop.last
+            assign collections = collections | append: ']'
+          endif
+        endfor
+
+        assign variants = ''
+        for variant in item.variants
+          assign variantMetafield = variant.metafields.deposco['Sold Out'] | downcase
+          assign metaDate = variantMetafield | date: '%B %d %Y'
+
+          if forloop.first
+            assign variants = variants | append: '['
+          endif
+
+          assign variants = variants | append: '{'
+          assign variants = variants | append: '"id":' | append: variant.id | append: ','
+          assign variants = variants | append: '"inventory_quantity":' | append: variant.inventory_quantity | append: ','
+          assign variants = variants | append: '"inventory_policy":"' | append: variant.inventory_policy | append: '",'
+
+          assign threshold = variant.metafields.deposco['threshold']
+          if threshold != blank
+            assign threshold = threshold | plus: 0
+          else
+            assign threshold = "0" | plus: 0
+          endif
+          assign variants = variants | append: '"threshold":' | append: threshold | append: ','
+
+          if variantMetafield contains "sold out until" and metaDate != variantMetafield
+            assign sold_out = "Preorder: Available on " | append: metaDate
+          else
+            assign sold_out = ""
+          endif
+          assign variants = variants | append: '"sold_out":"' | append: sold_out | append: '"'
+
+          assign variants = variants | append: '}'
+          unless forloop.last
+            assign variants = variants | append: ','
+          endunless
+          if forloop.last
+            assign variants = variants | append: ']'
+          endif
+
+        endfor
+      -%}
+      ,{
+        "id": {{- item.id -}},
+        "collections": {{- collections -}},
+        "variants": {{- variants -}}
+      }
+    {%- endfor -%}
+  ]
+{%- endcapture -%}
+{{- productIds | remove_first: "," | strip_newlines -}}
+{%- endpaginate -%}

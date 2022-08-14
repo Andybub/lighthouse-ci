@@ -1,0 +1,26 @@
+{%- assign reviews_count = product.metafields.stamped.reviews_count | default: 0 -%}
+{%- assign reviews_average = product.metafields.stamped.reviews_average | default: 0 | round: 1 -%}
+<div class="stamped-product-reviews-badge" data-id="{{ product.id }}" data-product-sku="{{ product.selected_or_first_available_variant.sku }}" data-reviews="{{ reviews_count }}" data-rating="{{ reviews_average }}">
+  <span class="stamped-badge" data-rating="{{ reviews_average }}" data-lang="" aria-label="Rated {{ reviews_average }} out of 5 stars {{ reviews_count }}reviews">
+    <span class="stamped-starrating stamped-badge-starrating" aria-hidden="true">
+      {%- assign rating_int = reviews_average | floor -%}
+      {%- for i in (1..rating_int) -%}
+        <i class="spr-icon spr-icon-star" aria-hidden="true"></i>
+      {%- endfor -%}
+      {%- assign rating_float = reviews_average | minus: rating_int -%}
+      {%- if rating_float > 0 -%}
+        <i class="spr-icon spr-icon-star-half-alt" aria-hidden="true"></i>
+      {%- endif -%}
+      {%- assign start_at = rating_int -%}
+      {%- if rating_float > 0 -%}
+        {%- assign start_at = rating_int | plus: 1 -%}
+      {%- endif -%}
+      {%- for i in (start_at..4) -%}
+        <i class="spr-icon spr-icon-star-empty" aria-hidden="true"></i>
+      {%- endfor -%}
+    </span>
+    <span class="stamped-badge-caption" data-reviews="{{ reviews_count }}" data-rating="{{ reviews_average }}" data-label="reviews" aria-label="{{ reviews_count }} reviews" data-version="2">
+      {{ reviews_count }}<span style="display: none"> reviews</span>
+    </span>
+  </span>
+</div>

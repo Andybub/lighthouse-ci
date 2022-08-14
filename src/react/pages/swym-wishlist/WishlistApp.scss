@@ -1,0 +1,49 @@
+.wishlist-header {
+  h1 {
+    margin-bottom: 0;
+  }
+  border-bottom: 1px solid #c4c4c4;
+
+  .btn-clear {
+    cursor: pointer;
+  }
+}
+
+.list {
+  &.is-empty {
+    width: 80%;
+    @include respondLG {
+      width: 60%;
+    }
+
+    .title {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 25px;
+      letter-spacing: -0.025em;
+      color: #404040;
+    }
+    p {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 21p;
+      color: #999999;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #7e3c7e;
+      padding: 12px 20px;
+      border-radius: 40px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: #ffffff;
+      border: 1px solid transparent;
+      &:hover {
+        background-color: #ffffff;
+        color: #7e3c7e;
+        border: 1px solid #7e3c7e;
+      }
+    }
+  }
+}

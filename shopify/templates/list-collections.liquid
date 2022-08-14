@@ -1,0 +1,85 @@
+{% comment %}
+<div class="kt--filter-js">
+  {%- section 'collection-filter' -%}
+  <div class="pagination_ text-center d-none"></div>
+  {%- section 'list-collections-template' -%}
+</div>
+{% endcomment %}
+
+<div id="shop-all-categories" class="container page-content">
+  <div class="row mt-5 mb-7">
+    <div class="col-12">
+      <div class="swiper swiper-container swiper-shop-all-categories">
+        <div class="collection-listing-banner-wrapper swiper-wrapper">
+          <a
+            class="swiper-slide"
+            href="/collections/new-arrivals"
+            style="background-image: url({{ 'sac-banner-new-arrivals.jpg' | file_img_url: '800x' }})"
+          >
+            <div class="slide-content">
+              <div class="slide-title">NEW ARRIVALS</div>
+              <div class="slide-btn btn">
+                <span>Shop Now</span>
+                <i class="fkt-long-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+          <a
+            class="swiper-slide"
+            href="/collections/sale"
+            style="background-image: url({{ 'sac-banner-sale.jpg' | file_img_url: '800x' }})"
+          >
+            <div class="slide-content">
+              <div class="slide-title">ON SALE</div>
+              <div class="slide-btn btn">
+                <span>Shop Now</span>
+                <i class="fkt-long-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="collection-listing-page all-collection-page">
+        {%- for link in linklists['1-top-navigation']].links -%}
+          {%
+            unless link.title == 'Sale'
+            or link.title == 'New Arrivals'
+            or link.title == 'Steals of the Week'
+            or link.title == 'Weekly Flash Sale'
+            or link.title contains '| HIDE'
+          %}
+            <div class="item category">
+              <div class="top btn-category" data-url="{{ link.url }}">
+                {%
+                  assign filename = 'sac-'
+                  | append: link.object.handle
+                  | append: '.jpg'
+                %}
+                <img class="collection-img lazyload" data-src="{{ filename | file_img_url | replace: " %C3%A9", "e" }}" alt="{{ link.title }}">
+                <p class="collection-title h3">{{ link.title }}</p>
+                <i class="icomoon icomoon-arrow-4"></i>
+              </div>
+              {%- assign sublist = link.links -%}
+              <ul class="sublist">
+                {%- for child_link in sublist -%}
+                  <li>
+                    <a class="sub-title h3" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                    {%- assign sublist2 = child_link.links -%}
+                    <ul class="sublist2" {% if sublist2.size < 1 %}style="display: none" {% endif %}>
+                      {%- for child_link2 in sublist2 -%}
+                        <li>
+                          <a href="{{ child_link2.url }}">{{ child_link2.title }}</a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {% endunless %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>

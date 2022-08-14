@@ -1,0 +1,23 @@
+{% if header_title != '' %}
+  <h3 class="h2">{{ header_title }}</h3>
+{% endif %}
+<div class="collection-listing-banner-wrapper three-columns-hero-wrapper">
+  <div class="hero">
+    <a href="{{ featured_collection_1.url }}">
+          {% if block_title_1 != '' %}<h3>{{ block_title_1 }}</h3>{% endif %}
+          <img src="{{ featured_image_1 | img_url: '330x200', crop: 'center' }}" class="three-column-image" alt="{{ alt_text_1 }}">     
+    </a>
+  </div>
+  <div class="hero">
+    <a href="{{ featured_collection_2.url }}">
+          {% if block_title_2 != '' %}<h3>{{ block_title_2 }}</h3>{% endif %}
+          <img src="{{ featured_image_2 | img_url: '330x200', crop: 'center' }}" class="three-column-image" alt="{{ alt_text_2 }}">     
+    </a>
+  </div>                
+  <div class="hero">
+    <a href="{{ featured_collection_3.url }}">
+          {% if block_title_3 != '' %}<h3>{{ block_title_3 }}</h3>{% endif %}
+          <img src="{{ featured_image_3 | img_url: '330x200', crop: 'center' }}" class="three-column-image" alt="{{ alt_text_3 }}">     
+    </a>
+  </div>
+</div>

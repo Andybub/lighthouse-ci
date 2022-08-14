@@ -1,0 +1,102 @@
+<script src="{{ 'tw-tracking-3rd-party.js' | asset_url }}" ></script>
+<script src="https://assets.fastsimon.com/sdk/latest/fast_simon_sdk.js" ></script>
+<script>
+  window.TW = window.TW || {};
+  window.TW.ISP = window.TW.ISP || {};
+  window.TW.ISP.READY = false;
+  window.TW.ISP.STORE_ID = "{{ settings.isp_store_id | default: '15527691' }}";
+  window.TW.ISP.STORE_UUID = "{{ settings.isp_store_uuid | default: '816d24cc-9a43-4f9e-9464-e9646b674972' }}";
+  window.TW.ISP.PLP_SORT_BY = "{{ settings.isp_store_plp_sort_by | default: 'relevancy' }}";
+  window.TW.ISP.SERP_SORT_BY = "{{ settings.isp_store_serp_sort_by | default: 'relevancy' }}";
+  window.TW.ISP.READY_CALLBACKS = [];
+  window.FastSimonSDK.initialization({
+    storeID: window.TW.ISP.STORE_ID,
+    uuid: window.TW.ISP.STORE_UUID,
+    type: "MPA",
+    onReady: function() {
+      window.TW.ISP.READY = true;
+      for (var i = 0; i < window.TW.ISP.READY_CALLBACKS.length; i += 1) {
+        window.TW.ISP.READY_CALLBACKS[i]();
+      }
+    }
+  });
+  window.TW.STAMPED = {
+    API_KEY: "{{ settings.stamped_api_key | default: 'pubkey-68uw0h6gWc9FHoXrOfpbl133nP4CXf' }}",
+    STORE_HASH: "{{ settings.stamped_store_hash | default: '67527' }}",
+    STORE_URL: "{{ settings.stamped_store_url | default: 'efavormart-new.myshopify.com' }}",
+    SHOP_URL: "{{ settings.stamped_shop_url | default: 'www.efavormart.com' }}"
+  };
+
+  {%- capture randomFile -%}{{ 'non_existent_file.js' | asset_url }}{%- endcapture -%}
+  {%- assign assetsPath = randomFile | split: 'non_existent_file.js' | first -%}
+  window.TW.assetPath = {{ assetsPath | json | default: "" }};
+
+  {%- capture randomFile -%}{{ 'non_existent_file.js' | file_url }}{%- endcapture -%}
+  {%- assign filePath = randomFile | split: 'non_existent_file.js' | first -%}
+  window.TW.filePath = {{ filePath | json | default: "" }};
+</script>
+
+{%- if template.name == 'order' or template.name == 'cart' or page.handle == 'all-customer-reviews' or page.handle == 'why-buy-from-us' -%}
+  <script type="text/javascript" data-api-key="pubkey-68uw0h6gWc9FHoXrOfpbl133nP4CXf" id="stamped-script-widget" src="https://cdn-stamped-io.azureedge.net/files/widget.min.js" defer></script>
+{%- endif -%}
+<script type="text/javascript" src="{{ 'isMobile.min.js' | asset_url }}" defer></script>
+<script type="text/javascript" src="{{ 'current-device.min.js' | asset_url }}" defer></script>
+<script type="text/javascript" src="{{ 'avoid-search-dropdown.min.js' | asset_url }}" defer></script>
+
+<div id="klaviyo-bis-modal" class="modal fade d-none" tabindex="-1"></div>
+<div id="add-to-cart-modal" class="modal fade d-none" tabindex="-1"></div>
+<div id="cart-keeper-modal" class="modal fade d-none" tabindex="-1"></div>
+{% render 'tw-size-chart-modal' %}
+<script src="{{ 'breadcrumbs.min.js' | asset_url }}"></script>
+<script src="{{ 'tw-vendors.js' | asset_url }}" defer></script>
+<script
+  id="tw-main-script"
+  data-template="{{ template }}"
+  data-assets-path="{{ 'tw-main.js' | asset_url | split: 'tw-main.js' | first }}"
+  data-customer-id="{% if customer %}{{ customer.id }}{% endif %}"
+  data-customer-name="{% if customer %}{{ customer.first_name }}{% endif %}"
+  data-customer-email="{% if customer %}{{ customer.email }}{% endif %}"
+  src="{{ 'tw-main.js' | asset_url }}"
+  defer
+></script>
+
+{%-case template.name-%}
+  {%-when 'index'-%}
+    <script src="{{ 'tw-index.js' | asset_url }}" defer></script>
+  {%-when 'product'-%}
+    <script src="{{ 'tw-product.js' | asset_url }}" defer></script>
+  {%-when 'collection'-%}
+    <script src="{{ 'tw-collection.js' | asset_url }}" defer></script>
+  {%-when 'list-collections'-%}
+    <script src="{{ 'tw-list-collections.js' | asset_url }}" defer></script>
+  {%-when 'cart'-%}
+    <script src="{{ 'tw-cart.js' | asset_url }}" defer></script>
+  {%-when 'page'-%}
+    {%-case page.handle-%}
+      {%-when 'search-results'-%}
+        <script src="{{ 'tw-search-result.js' | asset_url }}" defer></script>
+      {%-when 'weekly-promotion-sales-page'-%}
+        <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+        <script src="{{ 'tw-weekly-promotion.js' | asset_url }}" defer></script>
+      {%-when 'shop-the-look'-%}
+        <script src="{{ 'tw-shop-the-look.js' | asset_url }}" defer></script>
+      {%-when 'track-your-order'-%}
+        <script src="{{ 'tw-track-your-order.js' | asset_url }}" defer></script>
+      {%-when 'why-buy-from-us'-%}
+        <script src="{{ 'tw-why-buy-from-us.js' | asset_url }}" defer></script>
+      {%-when 'reviews-promo'-%}
+        <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+        <script src="{{ 'tw-reviews-promo.js' | asset_url }}" defer></script>
+      {%-when 'swym-wishlist'-%}
+        <script src="{{ 'tw-swym-wishlist.js' | asset_url }}" defer></script>
+    {%-endcase-%}
+  {%-when 'login' or 'register' or 'reset_password' or 'activate_account'-%}
+    <script src="{{ 'tw-login.js' | asset_url }}" defer></script>
+  {%-when 'account' or 'order' or 'addresses'-%}
+    <script src="{{ 'tw-account.js' | asset_url }}" defer></script>
+  {%-when '404'-%}
+    <script src="{{ 'tw-404.js' | asset_url }}" defer></script>
+  {%-when 'article'-%}
+    <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'tw-article.js' | asset_url }}" defer></script>
+{%-endcase-%}

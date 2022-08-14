@@ -1,0 +1,85 @@
+.stl-order-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  margin-left: 30px;
+  @include respondMax(768) {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+  @include respondMax(374) {
+    width: calc(100% - 100px);
+  }
+
+  .stl-order-trigger {
+    width: 240px;
+    text-align: center;
+    border: 1px #EAEAEA solid;
+    border-radius: 50px;
+    position: relative;
+    padding: 8px 20px;
+    user-select: none;
+    cursor: pointer;
+    @include respondMax(768) {
+      padding: 4px 20px;
+    }
+    @include respondMax(374) {
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .icomoon-arrow-2 {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+      transition: transform 0.2s ease-out;
+    }
+
+    &.show-options {
+      .icomoon-arrow-2 {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  .stl-order-options {
+    max-height: 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    z-index: 1;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+
+    &.show-options {
+      max-height: 100px;
+      transition: max-height 0.2s ease-in;
+    }
+
+    .stl-order-option {
+      text-align: center;
+      display: block;
+      background: #fff;
+      border: 1px #EAEAEA solid;
+      border-top: 0;
+      margin: 0;
+      padding: 8px 15px;
+      cursor: pointer;
+      @include respondMax(374) {
+        font-size: 13px;
+      }
+
+      &.selected {
+        color: #EAEAEA;
+        cursor: default;
+      }
+    }
+  }
+}

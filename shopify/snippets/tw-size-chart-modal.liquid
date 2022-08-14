@@ -1,0 +1,385 @@
+<div id="size-chart-modal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header flex-column">
+        <h2 class="modal-title">Tablecloth Calculator</h2>
+        <p class="modal-sub-title">Find the perfect tablecloth for any occasion. Choose the shape & size of your table along with the size of tablecloth you're looking for to see how it fits!</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="left col-12 col-md-6">
+            <h3 class="mb-0">Table Shape</h3>
+            <select class="mb-4 w-100" id="table-shape-dropdown">
+              <option>Round</option>
+              <option>Square</option>
+              <option>Rectangle</option>
+            </select>
+            
+            <h3 class="mb-0">Table Size</h3>
+            <select class="mb-4 w-100" id="table-size-dropdown">
+              <option>48" Table</option>
+              <option>60" Table</option>
+              <option>72" Table</option>
+            </select>
+            
+            <h3 class="mb-0">Tablecloth Size</h3>
+            <select class="mb-4 w-100" id="cloth-size-dropdown">
+              <option>70"</option>
+              <option>90"</option>
+              <option>108"</option>
+            </select>
+          </div>
+
+          <div class="right col-12 col-md-6">
+            <img class="lazyload" data-src="{{ '70-tablecloth-on-48-table.jpg' | file_url }}"/>
+            <p id="product-description" class="text-center"></p>
+          </div>
+        </div>
+
+        <table class="measurement-grid round-grid w-100" data-shape="round">
+          <tr>
+            <td class="header" colspan="2" rowspan="2"></td>
+            <td class="header" colspan="5">Linen Size</td>
+          </tr>
+          <tr data-row="0">
+            <td class="sub-header" data-linen="70">70" Round</td>
+            <td class="sub-header" data-linen="90">90" Round</td>
+            <td class="sub-header" data-linen="108">108" Round</td>
+            <td class="sub-header" data-linen="120">120" Round</td>
+            <td class="sub-header" data-linen="132">132" Round</td>
+          </tr>
+          <tr data-row="1" data-size="48">
+            <td class="header table-size-col" rowspan="3">Table Size (standard 30' height)</td>
+            <td class="sub-header">48" Round</td>
+            <td data-linen="70">11" drop</td>
+            <td data-linen="90">21" drop</td>
+            <td data-linen="108">30" drop</td>
+            <td data-linen="120">36" drop</td>
+            <td data-linen="132">42" drop</td>
+          </tr>
+          <tr data-row="2" data-size="60">
+            <td class="sub-header">60" Round</td>
+            <td data-linen="70">5" drop</td>
+            <td data-linen="90">15" drop</td>
+            <td data-linen="108">24" drop</td>
+            <td data-linen="120">30" drop</td>
+            <td data-linen="132">36" drop</td>
+          </tr>
+          <tr data-row="3" data-size="72">
+            <td class="sub-header">72" Round</td>
+            <td data-linen="70">Too short</td>
+            <td data-linen="90">9" drop</td>
+            <td data-linen="108">18" drop</td>
+            <td data-linen="120">24" drop</td>
+            <td data-linen="132">30" drop</td>
+          </tr>
+        </table>
+
+        <table class="measurement-grid square-grid w-100 d-none" data-shape="square">
+          <tr>
+            <td class="header" colspan="2" rowspan="2"></td>
+            <td class="header" colspan="5">Linen Size</td>
+          </tr>
+          <tr data-row="0">
+            <td class="sub-header" data-linen="54x54">54" Square</td>
+            <td class="sub-header" data-linen="60x60">60" Square</td>
+            <td class="sub-header" data-linen="70x70">70" Square</td>
+            <td class="sub-header" data-linen="90x90">90" Square</td>
+          </tr>
+          <tr data-row="1" data-size="48x48">
+            <td rowspan="3" class="table-size-col header">Table Size (standard 30' height)</td>
+            <td class="sub-header">48 x 48" Square</td>
+            <td data-linen="54x54">6" drop</td>
+            <td data-linen="60x60">12" drop</td>
+            <td data-linen="70x70">22" drop</td>
+            <td data-linen="90x90">42" drop</td>
+          </tr>
+          <tr data-row="2" data-size="60x60">
+            <td class="sub-header">60 x 60" Square</td>
+            <td data-linen="54x54">Too short</td>
+            <td data-linen="60x60">Too short</td>
+            <td data-linen="70x70">10" drop</td>
+            <td data-linen="90x90">30" drop</td>
+          </tr>
+          <tr data-row="3" data-size="72x72">
+            <td class="sub-header">72 x 72" Square</td>
+            <td data-linen="54x54">Too short</td>
+            <td data-linen="60x60">Too short</td>
+            <td data-linen="70x70">Too short</td>
+            <td data-linen="90x90">18" drop</td>
+          </tr>
+        </table>
+
+        <table class="measurement-grid rectangle-grid w-100 d-none" data-shape="rectangle">
+          <tr>
+            <td class="header" colspan="2" rowspan="2"></td>
+            <td class="header" colspan="4">Linen Size</td>
+          </tr>
+          <tr data-row="0">
+            <td class="sub-header" data-linen="60x102">60 x 102" Rect.</td>
+            <td class="sub-header" data-linen="60x126">60 x 126" Rect.</td>
+            <td class="sub-header" data-linen="90x132">90 x 132" Rect.</td>
+            <td class="sub-header" data-linen="90x156">90 x 156" Rect.</td>
+          </tr>
+          <tr data-row="1" data-size="30x48">
+            <td class="header table-size-col" rowspan="3">Table Size (standard 30' height)</td>
+            <td class="sub-header">30 x 48" Rect.</td>
+            <td data-linen="60x102">30" Short / 52" Long</td>
+            <td data-linen="60x126">30" Short / 78" Long</td>
+            <td data-linen="90x132">60" Short / 84" Long</td>
+            <td data-linen="90x156">60" Short / 108" Long</td>
+          </tr>
+          <tr data-row="2" data-size="30x72">
+            <td class="sub-header">30 x 72" Rect.</td>
+            <td data-linen="60x102">30" Short / 30" Long</td>
+            <td data-linen="60x126">30" Short / 54" Long</td>
+            <td data-linen="90x132">60" Short / 60" Long</td>
+            <td data-linen="90x156">60" Short / 84" Long</td>
+          </tr>
+          <tr data-row="3" data-size="30x96">
+            <td class="sub-header">30 x 96" Rect.</td>
+            <td data-linen="60x102">30" Short / 6" Long</td>
+            <td data-linen="60x126">30" Short / 30" Long</td>
+            <td data-linen="90x132">60" Short / 36" Long</td>
+            <td data-linen="90x156">60" Short / 60" Long</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  select {
+    background-image: url('{{ "ico-select.svg" | asset_url }}');
+  }
+</style>
+<script type="application/json" id="size-chart-modal-tables">
+  {
+    "round": {
+      "table48Inches": [
+        {
+          "name": "70\"",
+          "description": "A round 48\" table with a 70\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '70-tablecloth-on-48-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-70%22"
+        },
+        {
+          "name": "90\"",
+          "description": "A round 48\" table with a 90\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '90-tablecloth-on-48-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-90%22"
+        },
+        {
+          "name": "108\"",
+          "description": "A round 48\" table with a 108\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '108-tablecloth-on-48-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-108%22"
+        },
+        {
+          "name": "120\"",
+          "description": "A round 48\" table with a 120\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '120-tablecloth-on-48-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-120%22"
+        },
+        {
+          "name": "132\"",
+          "description": "A round 48\" table with a 132\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '132-tablecloth-on-48-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-132%22"
+        }
+      ],
+      "table60Inches": [
+        {
+          "name": "70\"",
+          "description": "A round 60\" table with a 70\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '70-tablecloth-on-60-table.jpg' | file_url }}",
+          "productURL": ""
+        },
+        {
+          "name": "90\"",
+          "description": "A round 60\" table with a 90\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '90-tablecloth-on-60-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-90%22"
+        },
+        {
+          "name": "108\"",
+          "description": "A round 60\" table with a 108\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '108-tablecloth-on-60-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-108%22"
+        },
+        {
+          "name": "120\"",
+          "description": "A round 60\" table with a 120\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '120-tablecloth-on-60-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-120%22"
+        },
+        {
+          "name": "132\"",
+          "description": "A round 60\" table with a 132\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '132-tablecloth-on-60-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-132%22"
+        }
+      ],
+      "table72Inches": [
+        {
+          "name": "90\"",
+          "description": "A round 72\" table with a 90\" tablecloth that seats 10 people.",
+          "imageURL": "{{ '90-tablecloth-on-72-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-90%22"
+        },
+        {
+          "name": "108\"",
+          "description": "A round 72\" table with a 108\" tablecloth that seats 10 people.",
+          "imageURL": "{{ '108-tablecloth-on-72-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-108%22"
+        },
+        {
+          "name": "120\"",
+          "description": "A round 72\" table with a 120\" tablecloth that seats 10 people.",
+          "imageURL": "{{ '120-tablecloth-on-72-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-120%22"
+        },
+        {
+          "name": "132\"",
+          "description": "A round 72\" table with a 132\" tablecloth that seats 10 people.",
+          "imageURL": "{{ '132-tablecloth-on-72-table.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-round+size-132%22"
+        }
+      ]
+    },
+    "square": {
+      "table48x48Inches": [
+        {
+          "name": "54\" x 54\"",
+          "description": "A square 48\" x 48\" (4 ft) table with a 54\" x 54\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '48x48-Square-54.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-54x54%22"
+        },
+        {
+          "name": "60\" x 60\"",
+          "description": "A square 48\" x 48\" (4 ft) table with a 60\" x 60\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '48x48-square-60.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-60x60%22"
+        },
+        {
+          "name": "70\" x 70\"",
+          "description": "A square 48\" x 48\" (4 ft) table with a 70\" x 70\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '48x48-Square-70.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-70x70%22"
+        },
+        {
+          "name": "90\" x 90\"",
+          "description": "A square 48\" x 48\" (4 ft) table with a 90\" x 90\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '48x48-Square-90.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-90x90%22"
+        }
+      ],
+      "table60x60Inches": [
+        {
+          "name": "70\" x 70\"",
+          "description": "A square 60\" x 60\" (5 ft) table with a 70\" x 70\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '60x60-Square-70.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-70x70%22"
+        },
+        {
+          "name": "90\" x 90\"",
+          "description": "A square 60\" x 60\" (5 ft) table with a 90\" x 90\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '60x60-Square-90.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-90x90%22"
+        }
+      ],
+      "table72x72Inches": [
+        {
+          "name": "90\" x 90\"",
+          "description": "A square 72\" x 72\" (6 ft) table with a 90\" x 90\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '72x72-Square-90.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-square+size-90x90%22"
+        }
+      ]
+    },
+    "rectangle": {
+      "table30x48Inches": [
+        {
+          "name": "60\" x 102\"",
+          "description": "A rectangle 30\" x 48\" (4 ft) table with a 60\" x 102\" tablecloth that seats 4 people.",
+          "imageURL": "{{ '4F-60-102.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x102%22"
+        },
+        {
+          "name": "60\" x 126\"",
+          "description": "A rectangle 30\" x 48\" (4 ft) table with a 60\" x 126\" tablecloth that seats 4 people.",
+          "imageURL": "{{ '4F-60-126.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x126%22"
+        },
+        {
+          "name": "90\" x 132\"",
+          "description": "A rectangle 30\" x 48\" (4 ft) table with a 90\" x 132\" tablecloth that seats 4 people.",
+          "imageURL": "{{ '4F-90-132.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x132%22"
+        },
+        {
+          "name": "90\" x 156\"",
+          "description": "A rectangle 30\" x 48\" (4 ft) table with a 90\" x 156\" tablecloth that seats 4 people.",
+          "imageURL": "{{ '4F-90-156.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x156%22"
+        }
+      ],
+      "table30x72Inches": [
+        {
+          "name": "60\" x 102\"",
+          "description": "A rectangle 30\" x 72\" (6 ft) table with a 60\" x 102\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '6F-60-102.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x102%22"
+        },
+        {
+          "name": "60\" x 126\"",
+          "description": "A rectangle 30\" x 72\" (6 ft) table with a 60\" x 126\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '6F-60-126.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x126%22"
+        },
+        {
+          "name": "90\" x 132\"",
+          "description": "A rectangle 30\" x 72\" (6 ft) table with a 90\" x 132\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '6F-90-132.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x132%22"
+        },
+        {
+          "name": "90\" x 156\"",
+          "description": "A rectangle 30\" x 72\" (6 ft) table with a 90\" x 156\" tablecloth that seats 6 people.",
+          "imageURL": "{{ '6F-90-156.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x156%22"
+        }
+      ],
+      "table30x96Inches": [
+        {
+          "name": "60\" x 102\"",
+          "description": "A rectangle 30\" x 96\" (8 ft) table with a 60\" x 102\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '8F-60-102.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x102%22"
+        },
+        {
+          "name": "60\" x 126\"",
+          "description": "A rectangle 30\" x 96\" (8 ft) table with a 60\" x 126\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '8F-60-126.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-60x126%22"
+        },
+        {
+          "name": "90\" x 132\"",
+          "description": "A rectangle 30\" x 96\" (8 ft) table with a 90\" x 132\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '8F-90-132.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x132%22"
+        },
+        {
+          "name": "90\" x 156\"",
+          "description": "A rectangle 30\" x 96\" (8 ft) table with a 90\" x 156\" tablecloth that seats 8 people.",
+          "imageURL": "{{ '8F-90-156.jpg' | file_url }}",
+          "productURL": "https://www.efavormart.com/collections/tablecloths?page=1&filters=shape-rectangle+size-90x156%22"
+        }
+      ]
+    }
+  }
+</script>

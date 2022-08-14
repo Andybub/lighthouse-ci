@@ -1,0 +1,320 @@
+.review-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(#000, 0.5);
+  z-index: 2000;
+
+  &[data-active='true'] {
+    display: block;
+  }
+
+  .review-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 60px 10px 30px;
+    width: 100%;
+    max-height: 90vh;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+
+    .review-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 48px;
+      height: 48px;
+      background-color: transparent;
+      border: 0;
+
+      i {
+        color: #666;
+        font-size: 24px;
+      }
+    }
+
+    .review-modal-content {
+      padding-bottom: 30px;
+      width: 100%;
+      height: 100%;
+      max-height: calc(90vh - 60px);
+      overflow: auto;
+    }
+  }
+  @include respondMD {
+    .review-modal {
+      max-width: 576px;
+    }
+  }
+  @include respondLG {
+    .review-modal {
+      padding: 40px;
+      max-width: 900px;
+      height: 90vh;
+      max-height: 800px;
+
+      .review-modal-content {
+        padding-bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 100%;
+        max-height: none;
+      }
+    }
+  }
+  @include respondXL {
+    .review-modal {
+      max-width: 1100px;
+    }
+  }
+}
+
+.review-modal-detail {
+  .review-detail {
+    .review-media-wrapper {
+      margin-bottom: 20px;
+      width: 100%;
+
+      .review-img {
+        padding-bottom: 110%;
+        width: 100%;
+        background: center/cover no-repeat;
+        background-color: #666;
+      }
+    }
+
+    .review-info {
+      > div {
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+
+      .review-info-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .review-rating {
+          width: 110px;
+
+          .spr-icon {
+            font-size: 16px;
+          }
+        }
+
+        .review-title {
+          flex: 1;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 1.3;
+        }
+      }
+
+      .review-info-middle {
+        .review-message {
+          font-size: 14px;
+          line-height: 1.3;
+        }
+      }
+
+      .review-info-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .review-info-left {
+          .review-author {
+            color: #666;
+
+            .review-author-name {
+              font-size: 16px;
+              line-height: 1.3;
+            }
+
+            .review-author-type {
+              margin-top: 5px;
+              display: flex;
+              align-items: center;
+              color: #62ba67;
+              font-size: 13px;
+
+              i {
+                font-size: 20px;
+              }
+            }
+          }
+
+          .review-date {
+            margin-top: 5px;
+            color: #666;
+            font-size: 13px;
+            line-height: 1.3;
+          }
+        }
+      }
+
+      .review-info-purchased {
+        &-title {
+          margin-bottom: 10px;
+          color: #666;
+          font-size: 16px;
+          line-height: 1.3;
+        }
+
+        &-item {
+          margin: 0 5px;
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          background: #fff;
+          border-radius: 8px;
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+
+          &-img {
+            width: 100px;
+            height: 100px;
+            background: center/cover no-repeat;
+            background-color: #000;
+          }
+
+          &-name {
+            padding-left: 12px;
+            flex: 1;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.3;
+          }
+        }
+      }
+    }
+  }
+
+  .review-list {
+    margin-top: 30px;
+
+    .swiper-container {
+      .swiper-wrapper {
+        margin: 0;
+
+        .swiper-slide {
+          margin-right: 10px;
+          padding: 1px;
+          display: inline-block;
+          width: auto;
+          border: 1.5px solid transparent;
+          border-radius: 8px;
+
+          &[data-active='true'] {
+            border-color: #7e3c7e;
+          }
+        }
+      }
+
+      .swiper-buttons {
+        display: none;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+          width: 40px;
+          height: 40px;
+          background-color: #fff;
+          box-shadow: 0 0 10.7197px rgba(0, 0, 0, 0.25);
+        }
+      }
+    }
+
+    .all-reviews-item {
+      width: 95px;
+      height: 95px;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      cursor: pointer;
+
+      .all-reviews-item-img {
+        width: 100%;
+        height: 100%;
+        background: center/cover no-repeat;
+        background-color: #ccc;
+        border-radius: 8px;
+      }
+    }
+  }
+
+  @include respondLG {
+    .review-detail {
+      display: flex;
+      justify-content: space-between;
+      flex: 1;
+
+      .review-media-wrapper {
+        margin-bottom: 0;
+        width: calc(50% - 10px);
+
+        .review-video {
+          position: relative;
+          background-color: #000;
+
+          video {
+            position: absolute;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+
+        .review-img {
+          padding-bottom: 112.5%;
+        }
+      }
+
+      .review-info {
+        position: relative;
+        width: calc(50% - 10px);
+        min-height: 400px;
+
+        .review-info-bottom {
+          .review-info-left {
+            .review-author {
+              display: flex;
+              align-items: center;
+
+              .review-author-type {
+                margin: 0;
+                margin-left: 5px;
+              }
+            }
+          }
+        }
+
+        .review-info-purchased {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+        }
+      }
+    }
+
+    .review-list {
+      .swiper-container {
+        .swiper-buttons {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @include respondXL {
+    .review-list {
+      .all-reviews-item {
+        width: 102px;
+        height: 102px;
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<div class="collection-listing-banner-wrapper four-columns-product-wrapper">
+  {% capture imagepromobanner %}
+    {% if linked_url != blank %}
+      <a href="{{linked_url}}" class="relative-link">  
+    {% endif %}
+    <div class="text-container">
+      {% if block_title != '' %}<h3>{{ block_title }}</h3>{% endif %}
+      {% if button_text != blank %}<span class="btn-link">{{ button_text }}</span>{% endif %}    
+    </div>
+    <img 
+      src="{{ featured_image | img_url: '250x400', crop: 'center' }}"
+      class="{% if featured_image_mobile != blank %}desktop-only{% endif %} four-column-image" 
+      alt="{{ alt_text }}"
+    >     
+    {% if featured_image_mobile != blank %}
+      <img 
+        src="{{ featured_image_mobile | img_url: '330x200', crop: 'center' }}" 
+        class="mobile-only four-column-image" 
+        alt="{{ alt_text }}"
+      >
+    {% endif %}                                                                                                  
+    {% if linked_url != blank %}
+      </a>
+    {% endif %}
+  {% endcapture %} 
+  {% if banner_position == 'left' %}
+    <div class="grid__item large--one-quarter medium--one-half on-sale grid-product-item small--one-half medium--one-half collection-promobanner-grid">
+      {{ imagepromobanner }}
+    </div> 
+  {% else %}
+    <div class="mobile-only grid__item large--one-quarter medium--one-half on-sale grid-product-item small--one-half medium--one-half collection-promobanner-grid">
+      {{ imagepromobanner }}
+    </div>                   
+  {% endif %}
+  <div class="promo-product-slider large--three-quarters {% if banner_position == 'left' %} left-promo-banner {% else %} right-promo-banner{% endif %}">
+    {% assign productarray = '' %}
+    {%- if product_1 != blank and product_1.available %}
+      {% render 'product-grid-item', product: product_1 %}
+      {% assign productarray = productarray | append: "," | append: product_1.id %}
+    {%- endif %}
+    {%- if product_2 != blank and product_2.available %}
+      {% render 'product-grid-item', product: product_2 %}
+      {% assign productarray = productarray | append: "," | append: product_2.id %}
+    {%- endif %}
+    {%- if product_3 != blank and product_3.available %}
+      {% render 'product-grid-item', product: product_3 %}
+      {% assign productarray = productarray | append: "," | append: product_3.id %}
+    {%- endif %}
+
+    {% assign productarray = productarray | remove_first: "," %}
+  </div>
+  <div class="product-array-details" data-prodjson='{{ productarray }}' style="display: none"></div>
+  {% if  banner_position == 'right' %}
+    <div class="desktop-only grid__item large--one-quarter medium--one-half on-sale grid-product-item small--one-half medium--one-half collection-promobanner-grid">
+      {{ imagepromobanner }}
+    </div> 
+  {% endif %}
+</div> 

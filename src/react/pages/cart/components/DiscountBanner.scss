@@ -1,0 +1,109 @@
+@keyframes discount-banner-pointer {
+  to {
+    top: 8px;
+  }
+}
+
+.discount-banner-container {
+  margin: 10px 0 10px;
+
+  @include respondMD {
+    margin: 10px 0 10px;
+  }
+
+  .discount-banner-wrapper {
+    padding: 5px 0;
+    background-color: #fbe9e8;
+
+    @include respondMD {
+      padding: 15px 0;
+    }
+
+    .discount-banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .discount-banner-text,
+      .discount-banner-countdown {
+        color: #ff7474;
+        font-size: 14px;
+        // line-height: 18px;
+
+        @include respondMD {
+          font-size: 18px;
+        }
+      }
+
+      .discount-banner-text {
+        margin-right: 4px;
+        text-align: center;
+
+        @include respondMD {
+          margin-right: 20px;
+        }
+      }
+
+      .discount-banner-countdown {
+        .ends-in {
+          display: none;
+
+          @include respondMD {
+            display: inline-block;
+          }
+        }
+      }
+
+      .discount-banner-button {
+        position: relative;
+        color: white;
+        font-size: 12px;
+        line-height: 10px;
+        background: #ff7474;
+        border-radius: 4px;
+        margin-left: 4px;
+        margin-bottom: 5px;
+        padding: 7px 20px 7px 15px;
+
+        @include respondMD {
+          margin-left: 16px;
+          margin-bottom: 0;
+          padding: 10px 20px 10px 15px;
+          font-size: 18px;
+        }
+
+        .button-text {
+        }
+
+        .finger {
+          display: block;
+          width: 20px;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: rotate(-19deg);
+
+          img {
+            position: absolute;
+            width: 100%;
+            top: 20px;
+            animation: discount-banner-pointer 0.4s ease-in 0s alternate infinite;
+          }
+        }
+      }
+    }
+  }
+
+  .discount-banner-success {
+    padding: 6px 0;
+    color: #ff7474;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+
+    @include respondMD {
+      padding: 20px 0;
+    }
+  }
+}

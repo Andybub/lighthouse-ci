@@ -1,0 +1,4 @@
+# https://shopify.dev/themes/tools/theme-check/configuration
+root: shopify
+MatchingTranslations:
+  enabled: false

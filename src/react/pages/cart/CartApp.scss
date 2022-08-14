@@ -1,0 +1,29 @@
+.tw-react-cart {
+  .loading {
+    min-height: 50vh;
+  }
+
+  .main-container {
+    min-height: 560px;
+
+    .page-title {
+      color: #000;
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+
+      @include respondLG {
+        text-align: left;
+      }
+    }
+
+    .btn-clear-cart {
+      margin-bottom: 2rem;
+      padding: 8px 16px;
+      color: #999;
+      font-size: 14px;
+      line-height: 1.3;
+      background: #efefef;
+    }
+  }
+}

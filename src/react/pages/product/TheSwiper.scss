@@ -1,0 +1,54 @@
+.the-swiper {
+  --swiper-width: 180px;
+  --swiper-height: 315px;
+
+  .swiper-container {
+    height: var(--swiper-height);
+  }
+
+  .swiper-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 !important;
+  }
+
+  .swiper-slide {
+    width: var(--swiper-width) !important;
+    height: var(--swiper-height);
+  }
+
+  .swiper-prev,
+  .swiper-next {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 0;
+    border-radius: 18px;
+    box-shadow: 0 0 10px rgba(black, 0.25);
+    position: absolute;
+    top: 40%;
+    margin-top: -18px;
+    cursor: pointer;
+    z-index: 2;
+
+    &.is-disabled {
+      display: none;
+    }
+  }
+
+  .swiper-prev {
+    left: 15px;
+  }
+
+  .swiper-next {
+    right: 15px;
+
+    .icomoon-arrow-4 {
+      transform: rotate(180deg);
+    }
+  }
+}

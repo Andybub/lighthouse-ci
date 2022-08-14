@@ -1,0 +1,154 @@
+.free-promotions {
+  background: #fff;
+  border: 0;
+  margin-top: 10px;
+  padding: 0;
+
+  .promotion-tab {
+    color: #404040;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 1px 0;
+  }
+
+  .promotion-tab-text {
+    max-width: calc(100% - 40px);
+    font-size: 14px !important;
+    line-height: 18px;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .promotion-tab-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .promotion-popup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(#000, 0.13);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+
+    .icomoon-close {
+      color: #858585;
+      font-size: 14px;
+      display: block;
+      background: transparent;
+      border: 0;
+      position: absolute;
+      top: 25px;
+      right: 18px;
+    }
+
+    .promotion-popup-content {
+      width: 480px;
+      max-width: 90%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background: #fff;
+      position: relative;
+    }
+
+    .promotion-popup-title {
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 26px;
+
+      .icomoon-exclamation {
+        font-size: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 9px;
+      }
+    }
+
+    .promotion-popup-text {
+      width: 100%;
+      color: #404040;
+      font-size: 14px;
+      line-height: 18px;
+      text-align: left;
+      background: rgba(#000, 0.05);
+      margin: 12px 0 0;
+      padding: 8px;
+    }
+
+    .promotion-popup-link {
+      color: #404040;
+      font-size: 14px;
+      text-decoration: underline;
+      align-self: flex-start;
+      margin-top: 10px;
+    }
+  }
+
+  .estimate-delivery {
+    .delivery-date {
+      font-weight: 600;
+    }
+
+    .icomoon-calender {
+      font-size: 20px;
+      margin-right: 13px;
+    }
+  }
+
+  .free-shipping {
+    .promotion-tab-text {
+      // display: flex;
+      // align-items: center;
+      // flex-wrap: wrap;
+
+      > .promotion-tab-link:first-child {
+        padding-right: 4px;
+      }
+    }
+
+    .icomoon-shipping {
+      margin-right: 10px;
+    }
+
+    .icomoon-check {
+      width: 12px;
+      height: 12px;
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #7bbb54;
+      border-radius: 6px;
+    }
+
+    .in-stock-message {
+      color: #7bbb54;
+      margin-left: 6px;
+    }
+
+    .promotion-popup-content {
+      padding: 28px 16px 32px;
+    }
+  }
+
+  .free-returns {
+    .icomoon-nav-returns {
+      font-size: 20px;
+      margin-right: 13px;
+    }
+
+    .promotion-popup-content {
+      padding: 28px 16px 12px;
+    }
+  }
+}

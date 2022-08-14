@@ -1,0 +1,30 @@
+.reviews-container {
+  &[data-display='false'] {
+    display: none;
+  }
+
+  .form-container {
+    @include respondMD {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+  }
+
+  .btn-write-review {
+    width: 290px;
+    color: #222;
+    font-size: 13px;
+    background-color: #fff;
+    border: 1.5px solid #dadada;
+    margin: 0 auto;
+    padding: 15.5px 0;
+
+    &[data-display='false'] {
+      display: none;
+    }
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+}

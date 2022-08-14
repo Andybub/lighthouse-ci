@@ -1,0 +1,61 @@
+{%- layout none -%}
+{%- paginate search.results by 250 -%}
+{%- capture result -%}
+{%- for item in search.results -%}
+
+  {%- assign jsonVariants = '' -%}
+  {%- for variant in item.variants -%}
+
+    {%- if forloop.first -%}{%- assign jsonVariants = jsonVariants | append: '[' -%}{%- endif -%}
+
+    {%- assign jsonVariants = jsonVariants | append: '{' -%}
+
+    {%- assign jsonVariants = jsonVariants | append: '"id":' | append: variant.id | append: ',' -%}
+    {%- assign jsonVariants = jsonVariants | append: '"title":"' | append: variant.title | append: '",' -%}
+    {%- assign jsonVariants = jsonVariants | append: '"url":"' | append: variant.url | append: '",' -%}
+
+    {%- assign variantPrice = variant.price | money_without_currency | json -%}
+    {%- assign variantComparePrice = variant.compare_at_price | money_without_currency | json -%}
+    {%- assign jsonVariants = jsonVariants | append: '"price":' | append: variantPrice | append: ',' -%}
+    {%- assign jsonVariants = jsonVariants | append: '"compare_price":' | append: variantComparePrice | append: ',' -%}
+
+    {%- assign jsonVariants = jsonVariants | append: '"inventory_quantity":' | append: variant.inventory_quantity | append: ',' -%}
+    {%- assign jsonVariants = jsonVariants | append: '"inventory_policy":"' | append: variant.inventory_policy | append: '",' -%}
+
+    {%- assign threshold = variant.metafields.deposco['threshold'] -%}
+    {%- if threshold != blank -%}
+      {%- assign threshold = threshold | plus: 0 -%}
+    {%- else -%}
+      {%- assign threshold = "0" | plus: 0 -%}
+    {%- endif -%}
+    {%- assign jsonVariants = jsonVariants | append: '"threshold":' | append: threshold | append: ',' -%}
+
+    {%- assign variantMetafield = variant.metafields.deposco['Sold Out'] | downcase -%}
+    {%- assign metaDate = variantMetafield | date: '%B %d %Y' -%}
+    {%- if variantMetafield contains "sold out until" and metaDate != variantMetafield -%}
+      {%- assign sold_out = "Preorder: Available on " | append: metaDate -%}
+    {%- else -%}
+      {%- assign sold_out = "" -%}
+    {%- endif -%}
+    {%- assign jsonVariants = jsonVariants | append: '"sold_out":"' | append: sold_out | append: '"' -%}
+
+    {%- assign jsonVariants = jsonVariants | append: '}' -%}
+
+    {%- unless forloop.last -%}{%- assign jsonVariants = jsonVariants | append: ',' -%}{%- endunless -%}
+
+    {%- if forloop.last -%}{%- assign jsonVariants = jsonVariants | append: ']' -%}{%- endif -%}
+
+  {%- endfor -%}
+
+,{
+  "id": {{- item.id -}},
+  "title": {{- item.title | json -}},
+  "url": {{- item.url | json -}},
+  "image": {{- item.featured_image | json -}},
+  "personalized": {% if item.type == 'Personalized' %}true{% else %}false{% endif %},
+  "variants": {{- jsonVariants -}}
+}
+{%- endfor -%}
+{%- endcapture -%}
+[{{- result | remove_first: "," | strip_newlines -}}]
+{%- endpaginate -%}

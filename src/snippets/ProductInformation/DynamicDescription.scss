@@ -1,0 +1,34 @@
+#dynamic-description {
+  .desc-image {
+    width: 170px;
+    margin-bottom: 20px;
+
+    @include respondLG {
+      margin-bottom: 0;
+    }
+  }
+
+  .desc-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px 0;
+
+    @include respondLG {
+      flex-direction: row;
+
+      &:nth-child(odd) {
+        .desc-image {
+          margin-right: 15px;
+        }
+      }
+
+      &:nth-child(even) {
+        .desc-image {
+          order: 1;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

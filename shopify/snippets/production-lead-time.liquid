@@ -1,0 +1,37 @@
+<div class="product-customizer-options d-none d-md-block">
+  <div class="pco__item">
+    <div class="product-customizer-option option-type-select option-required production-time-option">
+      <div class="pco__item-label closed">
+        {{ section.settings.lead_time_title }}
+        <svg aria-hidden="true" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+        </svg>
+        <svg aria-hidden="true" data-prefix="fas" data-icon="minus" class="svg-inline--fa fa-minus fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+        </svg>
+      </div>
+      <div class="pco__item-body">
+        <div class="product-customizer-option-description">
+          {{ section.settings.lead_time_description }}
+          <span class="product-customizer-select-wrap">
+            {% if section.blocks != empty %}
+              <select id="ProductionTime" name="properties[Production Time]" required="required">
+                <option value="" selected disabled>{{ section.settings.lead_time_default }}</option>
+                {% for block in section.blocks %}
+                  <option value="{{ block.settings.lead_time_label }}" data-prod-time-cost={{ block.settings.lead_time_cost }}>
+                    {{ block.settings.lead_time_label }}
+                    {% if block.settings.lead_time_cost != blank %}
+                      <span>{{ block.settings.lead_time_cost | prepend: '(+$' | append: '.00)' }}</span>
+                    {% endif %}
+                  </option>
+                {% endfor %}
+              </select>
+              <input type="hidden" id="ShowRushCost" name="properties[Personalized Rush Production Time]" value="0" />
+              <input type="hidden" id="ProductionCost" name="properties[_production_cost_quantity]" value="0" />
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+#tw-react-reviews {
+  background-color: #fff;
+
+  @include respondMD {
+    background-color: transparent;
+  }
+}

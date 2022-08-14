@@ -1,0 +1,41 @@
+.tw-slideshow-section {
+  & > .container {
+    max-width: 100%;
+    padding: 0;
+
+    @include respondLG {
+      max-width: var(--max-container);
+      padding-left: var(--grid-gutter);
+      padding-right: var(--grid-gutter);
+    }
+  }
+
+  .swiper-container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .swiper-pagination {
+    pointer-events: all;
+  }
+
+  li {
+    .count-down-container {
+      color: white;
+      font-size: 12px;
+      background: rgb(0 0 0 / 50%);
+      right: 0;
+      bottom: 0;
+      padding: 0 10px;
+    }
+
+    a {
+      display: block;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

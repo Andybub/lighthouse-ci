@@ -1,0 +1,93 @@
+@use 'sass:math';
+
+@mixin textEllipsis($numLines) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-line-clamp: $numLines;
+  -webkit-box-orient: vertical;
+}
+
+@mixin seoTagStyleInherit {
+  margin: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+@mixin aspectRatio($width, $height) {
+  &::before {
+    content: '';
+    position: relative;
+    padding-top: math.percentage(math.div($height, $width));
+    display: block;
+    width: 100%;
+  }
+}
+
+@mixin respondMax($width) {
+  @media only screen and (max-width: #{$width + px}) {
+    @content;
+  }
+}
+
+@mixin respondMin($width) {
+  @media only screen and (min-width: #{$width + px}) {
+    @content;
+  }
+}
+
+@mixin respondBetween($min-width, $max-width) {
+  @media only screen and (min-width: #{$min-width + px}) and (max-width: #{$max-width + px}) {
+    @content;
+  }
+}
+
+@mixin respondSM() {
+  @include respondMin($respondSM) {
+    @content;
+  }
+}
+
+@mixin respondMD() {
+  @include respondMin($respondMD) {
+    @content;
+  }
+}
+
+@mixin respondLG() {
+  @include respondMin($respondLG) {
+    @content;
+  }
+}
+
+@mixin respondXL() {
+  @include respondMin($respondXL) {
+    @content;
+  }
+}
+
+@mixin respondXXL() {
+  @include respondMin($respondXXL) {
+    @content;
+  }
+}
+
+@mixin button {
+  padding: 11.5px 40px;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: capitalize;
+  background-color: #7e3d7e;
+  border: 0;
+  border-radius: 30px;
+
+  @include respondSM {
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: #7c297c;
+  }
+}

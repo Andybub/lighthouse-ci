@@ -1,0 +1,27 @@
+{% layout none %}
+{
+  "inventory":[{% for variant in product.variants %} {% unless forloop.first %},{% endunless %}{
+    "count": {{ variant.inventory_quantity }},
+    "id": {{ variant.id }},
+    {%- assign inventory_policy = variant.inventory_policy -%}
+    {%- assign inventory_quantity = variant.inventory_quantity -%}
+    "inventory_policy": "{{ inventory_policy }}",
+    "inventory_quantity": {{ inventory_quantity }},
+    {%- if inventory_policy == 'continue' and inventory_quantity < 1 -%}
+      "preorder": true,
+      {%- assign variantMetafield = variant.metafields.deposco['Sold Out'] -%}
+      {%- if variantMetafield == blank or variantMetafield == 'Sold Out' -%}
+        "available_date" : ""
+      {%- else -%}
+        {%- assign metafieldSplit = variantMetafield | split: ' ' | reverse -%}
+        {%- assign metaDate = metafieldSplit[0] | date: '%B %d %Y' -%}
+        {%- assign formattedInStockMessage = variantMetafield | replace: metafieldSplit[0], metaDate -%}
+        "available_date" : "{{ formattedInStockMessage | replace: "Sold Out until", "Preorder: Available on " }}"
+      {%- endif -%}
+    {%- else -%}
+      "preorder": false
+    {%- endif -%}
+  }
+  {% endfor %}
+  ]
+}

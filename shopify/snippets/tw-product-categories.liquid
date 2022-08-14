@@ -1,0 +1,24 @@
+{%- for link in linklists['1-top-navigation'].links -%}
+  {%- assign related_count = product.collections | where: 'handle', link.handle | size -%}
+  {%- unless related_count == 0 -%}
+    {%- if link.object == null or link.handle == "shop-by-color" -%}{% continue %}{%- endif -%}
+    {%- assign collection = link.object -%}
+    <a class="d-inline-block levels-{{ link.levels }}" href="{{ collection.url }}">{{ collection.title }}</a><i>, </i>
+  {%- endunless -%}
+  {%- for link2 in link.links -%}
+    {%- assign related2_count = product.collections | where: 'handle', link2.handle | size -%}
+    {%- unless related2_count == 0 -%}
+      {%- if link2.object == null or link2.handle == "shop-by-color" -%}{% continue %}{%- endif -%}
+      {%- assign collection2 = link2.object -%}
+      <a class="d-inline-block levels-{{ link2.levels }}" href="{{ collection2.url }}">{{ collection2.title }}</a><i>, </i>
+    {%- endunless -%}
+    {%- for link3 in link2.links -%}
+      {%- assign related3_count = product.collections | where: 'handle', link3.handle | size -%}
+      {%- unless related3_count == 0 -%}
+        {%- if link3.object == null or link3.handle == "shop-by-color" -%}{% continue %}{%- endif -%}
+        {%- assign collection3 = link3.object -%}
+        <a class="d-inline-block levels-{{ link3.levels }}" href="{{ collection3.url }}">{{ collection3.title }}</a><i>, </i>
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endfor -%}

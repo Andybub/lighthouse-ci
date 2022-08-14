@@ -1,0 +1,45 @@
+<link href="{{ 'icomoon.css' | asset_url }}" rel="stylesheet" />
+<link href="{{ 'tw-main.css' | asset_url }}" rel="stylesheet" />
+{%-case template.name-%}
+  {%-when 'index'-%}
+    <link href="{{ 'tw-index.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'collection'-%}
+    <link href="{{ 'tw-collection.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'product'-%}
+    <link href="{{ 'tw-product.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'list-collections'-%}
+    <link href="{{ 'tw-list-collections.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'cart'-%}
+    <link href="{{ 'tw-cart.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'page'-%}
+    {%-case page.handle-%}
+      {%-when 'search-results'-%}
+        <link href="{{ 'tw-search-result.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'weekly-promotion-sales-page'-%}
+        <link href="{{ 'tw-weekly-promotion.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'shop-the-look'-%}
+        <link href="{{ 'tw-shop-the-look.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'track-your-order'-%}
+        <link href="{{ 'tw-track-your-order.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'contact-us'-%}
+        <link href="{{ 'tw-contact-us.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'refer-a-friend'-%}
+        <link href="{{ 'tw-refer-a-friend.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'why-buy-from-us'-%}
+        <link href="{{ 'tw-why-buy-from-us.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'reviews-promo'-%}
+        <link href="{{ 'tw-reviews-promo.css' | asset_url }}" rel="stylesheet" />
+      {%-when 'swym-wishlist'-%}
+        <link href="{{ 'tw-swym-wishlist.css' | asset_url }}" rel="stylesheet" />
+    {%-endcase-%}
+  {%-when 'login' or 'register' or 'reset_password' or 'activate_account'-%}
+    <link href="{{ 'tw-login.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'blog'-%}
+    <link href="{{ 'tw-blogs.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'article'-%}
+    <link href="{{ 'tw-article.css' | asset_url }}" rel="stylesheet" />
+  {%-when 'account' or 'order' or 'addresses'-%}
+    <link href="{{ 'tw-account.css' | asset_url }}" rel="stylesheet" />
+  {%-when '404'-%}
+    <link href="{{ 'tw-404.css' | asset_url }}" rel="stylesheet" />
+{%-endcase-%}

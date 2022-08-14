@@ -1,0 +1,333 @@
+{%- assign currentDate = 'now' | date: '%c' %}
+{%- assign currentDate = currentDate | date: '%s' | times: 1 %}
+{%- assign contentStart = section.settings.content_start | date: '%s' | times: 1 %}
+{%- assign contentEnd = section.settings.content_end | date: '%s' | times: 1 %}
+{%- if currentDate >= contentStart and currentDate < contentEnd %}
+
+  {%- for block in section.blocks -%}
+    {% case block.type %}
+      {%- when 'title' -%}
+        <div class="section-header">
+          <h1 class="section-header__title font-weight-bold">
+            <span class="page-title">{{ block.settings.promo_title }}</span>
+          </h1>
+        </div>
+      {%- when 'banner' -%}
+        {% assign pageBannerDesktop = block.settings.promo_banner_desktop %}
+        {% assign pageBannerMobile = block.settings.promo_banner_mobile %}
+        <img src="{{ pageBannerDesktop | img_url: '1200x' }}" class="banner-img {% if pageBannerMobile != blank %}desktop-only{% endif %}" alt="{{ pageBannerDesktop.alt }}" />
+        {% if pageBannerMobile != blank %}
+          <img src={{ pageBannerMobile | img_url: '450x250', crop: 'center' }} class="banner-img mobile-only four-column-image" alt="{{ pageBannerMobile.alt }}" />
+        {% endif %}
+      {%- when 'main_content' -%}
+        <p class="steps-content-main h3">{{ block.settings.promo_main_content }}</p>
+      {%- when 'sub_content' -%}
+        <p class="steps-content-sub h6">{{ block.settings.promo_sub_content }}</p>
+      {%- when 'steps' -%}
+        <div class="steps">
+          <div class="steps-wrapper">
+            <div class="step step-1">
+              <div class="step-num">1</div>
+              <div class="step-content">{{ block.settings.step_one }}</div>
+              <div class="step-icons">
+                <img src="{{ "EFMT_RPP_icon-01.svg" | asset_url }}" alt="EFMT_RPP_icon-01">
+              </div>
+            </div>
+            <div class="step-arrow">
+              <div class="arrow-custom"></div>
+            </div>
+            <div class="step step-2">
+              <div class="step-num">2</div>
+              <div class="step-content">{{ block.settings.step_two }}</div>
+              <div class="step-icons">
+                <img src="{{ "EFMT_RPP_icon-02.svg" | asset_url }}" alt="EFMT_RPP_icon-02">
+              </div>
+            </div>
+            <div class="step-arrow">
+              <div class="arrow-custom"></div>
+            </div>
+            <div class="step step-3">
+              <div class="step-num">3</div>
+              <div class="step-content">{{ block.settings.step_three }}</div>
+              <div class="step-icons">
+                <img src="{{ "EFMT_RPP_icon-03.svg" | asset_url }}" alt="EFMT_RPP_icon-03">
+              </div>
+            </div>
+          </div>
+          <div class="steps-btn-wrapper">
+            <a class="btn" href="{{ block.settings.button_link }}">
+              <span>{{ block.settings.button_text }}</span>
+              <div class="arrow-custom"></div>
+            </a>
+          </div>
+        </div>
+      {%- when 'reviews_swiper' -%}
+        <div class="reviews">
+          <div class="reviews-swiper swiper">
+            <p class="reviews-title h3">{{ block.settings.reviews_title }}</p>
+            <div class="swiper-wrapper">
+              {%- for i in (1..10) -%}
+                {%- assign review_image_name = "review_image_" | append: i -%}
+                {%- assign review_image = block.settings[review_image_name] -%}
+                {%- if review_image -%}
+                  <div class="swiper-slide">
+                    {% if block.settings.reviews_layout == 'big' %}
+                      <img src="{{ review_image | img_url: '250x350', crop: 'center' }}" alt="{{ review_image.alt }}">
+                    {% else %}
+                      <!-- <img src="{{ review_image | image_url: width: 500, height: 500, crop: 'top' }}" alt="{{ review_image.alt }}"> -->
+                      <img src="{{ review_image | img_url: '220x315', crop: 'center' }}" alt="{{ review_image.alt }}">
+                    {% endif %}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="swiper-buttons">
+            <button type="button" class="swiper-button swiper-button-prev"><i class="icomoon-arrow-4"></i></button>
+            <button type="button" class="swiper-button swiper-button-next"><i class="icomoon-arrow-4"></i></button>
+          </div>
+        </div>
+      {%- when 'divider' -%}
+        <div class="divider"></div>
+    {%- endcase -%}
+  {%- endfor -%}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Reviews Promo",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "promo_name",
+      "label": "Promotion Name",
+      "info": "reference only, ex: 01/01 Flash10"
+    },
+    {
+      "type": "header",
+      "content": "CONTENT SCHEDULE"
+    },
+    {
+      "type": "text",
+      "id": "content_start",
+      "label": "Content start",
+      "info": "ex: January 1 2022 11:00:00 AM"
+    },
+    {
+      "type": "text",
+      "id": "content_end",
+      "label": "Content end",
+      "info": "ex: January 31 2022 6:00:00 PM"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "block_name",
+          "label": "Block Name",
+          "info": "reference only",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Promo title",
+          "info": "ex: May Reviews Promo"
+        }
+      ]
+    },
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "promo_banner_desktop",
+          "label": "Banner Image Desktop"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_banner_mobile",
+          "label": "Banner Image Mobile"
+        }
+      ]
+    },
+    {
+      "type": "main_content",
+      "name": "Main Content",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "promo_main_content",
+          "label": "Promo Main Content"
+        }
+      ]
+    },
+    {
+      "type": "sub_content",
+      "name": "Sub Content",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "promo_sub_content",
+          "label": "Promo Sub Content"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "name": "Steps",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "step_one",
+          "label": "Content Step 1"
+        },
+        {
+          "type": "richtext",
+          "id": "step_two",
+          "label": "Content Step 2"
+        },
+        {
+          "type": "richtext",
+          "id": "step_three",
+          "label": "Content Step 3"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Let's get Reviewing"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    },
+    {
+      "type": "reviews_swiper",
+      "name": "Reviews Swiper",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviews_title",
+          "label": "Reviews Title"
+        },
+        {
+          "type": "select",
+          "id": "reviews_layout",
+          "label": "Reviews Layout",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "big",
+              "label": "Big"
+            }
+          ],
+          "default": "big"
+        },
+        {
+          "type": "header",
+          "content": "REVIEW IMAGES"
+        },
+        {
+          "type": "paragraph",
+          "content": "Recommend Size: 250x350(big) / 220x315(small)"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_1",
+          "label": "Review image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_2",
+          "label": "Review image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_3",
+          "label": "Review image 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_4",
+          "label": "Review image 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_5",
+          "label": "Review image 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_6",
+          "label": "Review image 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_7",
+          "label": "Review image 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_8",
+          "label": "Review image 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_9",
+          "label": "Review image 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_10",
+          "label": "Review image 10"
+        }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider Bar"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Promo",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "main_content"
+        },
+        {
+          "type": "sub_content"
+        },
+        {
+          "type": "steps"
+        },
+        {
+          "type": "reviews_swiper"
+        },
+        {
+          "type": "reviews_swiper"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

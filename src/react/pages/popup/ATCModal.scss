@@ -1,0 +1,123 @@
+#add-to-cart-modal {
+  background: rgba(#000, 0.5);
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+
+  @include respondMD {
+    justify-content: center;
+  }
+
+  .modal-dialog {
+    max-width: 708px;
+    max-height: 100%;
+    pointer-events: unset;
+    overflow-y: scroll;
+
+    @include respondLG {
+      max-width: 992px;
+    }
+  }
+
+  .modal-header {
+    border-bottom: 0;
+    padding-bottom: 0;
+
+    .close {
+      top: 0;
+    }
+  }
+
+  .modal-title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+
+  .product-content {
+    .product-image {
+      width: 80px;
+      flex: 0 0 80px;
+      @include respondSM {
+        width: 120px;
+        flex: 0 0 120px;
+      }
+    }
+
+    .product-title {
+      color: #5e5e5e;
+      font-size: 14px;
+      line-height: 18px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      margin-bottom: 4px;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  .cart-content {
+    background: #f5f5f5;
+
+    .cart-info {
+      color: #333;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    .btn.btn-primary.btn-block {
+      max-width: 520px;
+      margin: 0 auto 10px;
+    }
+
+    .btn.btn-link {
+      border: none !important;
+    }
+  }
+
+  .cab-title {
+    font-size: 18px;
+    line-height: 23px;
+  }
+
+  .cab-item {
+    width: calc(50% - 0.5rem);
+    display: none;
+    & + .cab-item {
+      margin-left: 1rem;
+    }
+    &:nth-child(-n + 2) {
+      display: block;
+    }
+
+    @include respondSM {
+      width: calc(33% - 0.66rem);
+      & + .cab-item {
+        margin-left: 1.32rem;
+      }
+      &:nth-child(-n + 3) {
+        display: block;
+      }
+    }
+
+    @include respondMD {
+      width: calc(25% - 0.75rem);
+      & + .cab-item {
+        margin-left: 1.5rem;
+      }
+      &:nth-child(-n + 4) {
+        display: block;
+      }
+    }
+
+    @include respondLG {
+      width: calc(20% - 0.8rem);
+      & + .cab-item {
+        margin-left: 1.6rem;
+      }
+      &:nth-child(-n + 5) {
+        display: block;
+      }
+    }
+  }
+}

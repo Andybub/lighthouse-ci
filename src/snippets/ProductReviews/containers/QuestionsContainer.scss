@@ -1,0 +1,30 @@
+.questions-container {
+  &[data-display='false'] {
+    display: none;
+  }
+
+  .form-container {
+    @include respondMD {
+      margin: 0 auto;
+      max-width: 768px;
+    }
+  }
+
+  .btn-write-question {
+    margin: 0 auto;
+    padding: 15.5px 0;
+    width: 290px;
+    color: #222;
+    font-size: 13px;
+    background-color: #fff;
+    border: 1.5px solid #dadada;
+
+    &[data-display='false'] {
+      display: none;
+    }
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+}

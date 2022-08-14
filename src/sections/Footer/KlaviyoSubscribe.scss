@@ -1,0 +1,83 @@
+@use 'sass:color';
+
+.footer .tw-klaviyo-subscribe {
+  padding: 32px 0 44px;
+
+  .cta-title {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .form-control {
+    width: 100%;
+
+    &:invalid {
+      background-image: none;
+    }
+  }
+
+  .klaviyo-messages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #e8e8e8;
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    bottom: -16px;
+    z-index: 1;
+
+    .success-message {
+      color: #333;
+      font-size: 18px;
+      line-height: 24px;
+      text-align: center;
+
+      @include respondLG {
+        font-size: 21px;
+        line-height: 27px;
+      }
+
+      strong {
+        font-size: 21px;
+        line-height: 27px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 24px;
+
+        @include respondLG {
+          font-size: 32px;
+          line-height: 42px;
+          margin-bottom: 9px;
+        }
+      }
+    }
+  }
+
+  .error-message {
+    color: #e53838;
+    font-size: 16px;
+    line-height: 21px;
+
+    @include respondLG {
+      font-size: 18px;
+      line-height: 23px;
+    }
+  }
+
+  .icomoon-danger {
+    color: #e53838;
+    font-size: 18px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    @include respondLG {
+      top: auto;
+      bottom: 12px;
+    }
+  }
+}

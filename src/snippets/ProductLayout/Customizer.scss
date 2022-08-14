@@ -1,0 +1,193 @@
+@mixin respondBOLD() {
+  @include respondMax(767) {
+    @content;
+  }
+}
+
+.final-step-add-to-cart.is-loading {
+  pointer-events: none;
+}
+
+.btn.personalize-it-btn {
+  position: relative;
+  display: none;
+  color: #fff;
+  background: $colorPurple;
+  border-color: $colorPurple;
+  border-radius: 20px;
+  overflow: hidden;
+
+  &::before {
+    content: 'Customize';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: #7e3d7e;
+  }
+}
+
+.yaya-personalizer-wrapper + .cart.product-form {
+  @include respondBOLD {
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+.desktop-personalizer,
+.yaya-personalizer-form .product-single__form-actions,
+.product-customizer-customizations-total {
+  display: block !important;
+  @include respondBOLD {
+    display: none !important;
+  }
+}
+
+.content-summary.sold-out {
+  .personalizer-mobile-portal {
+    display: none !important;
+  }
+}
+
+.personalizer-text-option > input {
+  padding: 2px 10px;
+  display: block;
+  width: 100%;
+  color: #333;
+  border: 1px #eaeaea solid;
+}
+
+.product-customizer-select-wrap,
+.step-controls-container {
+  select {
+    padding: 8px 20px 8px 10px;
+    display: block;
+    width: 100%;
+    color: #333;
+    line-height: 1.42;
+    background: #fff
+      url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE3LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iOHB4IiBoZWlnaHQ9IjEzcHgiIHZpZXdCb3g9IjAgMCA4IDEzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA4IDEzIiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8Zz4KCQk8cG9seWdvbiBmaWxsPSIjMzMzIiBwb2ludHM9IjAsOCA0LDEzIDgsOCIgLz4KCTwvZz4KPC9nPgo8Zz4KCTxnPgoJCTxwb2x5Z29uIGZpbGw9IiMzMzMiIHBvaW50cz0iNCwwIDAsNSA4LDUiIC8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg==')
+      no-repeat right 10px center;
+    border: 1px #eaeaea solid;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  option {
+    padding: 0 2px 1px;
+    min-height: 1.2em;
+    color: #000;
+    background: #fff;
+  }
+}
+
+.product-customizer-options {
+  .pco_item {
+    margin-bottom: 4px;
+  }
+}
+
+.product-customizer-option {
+  padding: 0 5px 10px 0;
+  width: 100%;
+
+  .pco__item-body {
+    padding: 10px;
+    background: #f5f5f5;
+    border: 1px #ddd solid;
+  }
+
+  .product-customizer-option-description {
+    font-size: 16px;
+  }
+
+  .pco__item-label {
+    position: relative;
+    margin: 0;
+    padding: 5px 10px;
+    display: flex;
+    color: #000;
+    font-size: 16px;
+    line-height: 28px;
+    background: #ddd;
+    user-select: none;
+    cursor: pointer;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      display: block;
+      width: 12px;
+      transform: translateY(-50%);
+      z-index: 2;
+    }
+
+    .fa-plus {
+      display: none;
+    }
+
+    &.closed {
+      background: #f5f5f5;
+
+      .fa-plus {
+        display: block;
+      }
+
+      .fa-minus {
+        display: none;
+      }
+
+      ~ .pco__item-body {
+        display: none;
+      }
+    }
+  }
+}
+
+.personalizer-accordion-item {
+  margin-bottom: 0.25rem;
+
+  .accordion-label {
+    color: #000 !important;
+    background: #f5f5f5 !important;
+
+    label {
+      margin-bottom: 0 !important;
+      color: #000 !important;
+      font-weight: 400 !important;
+    }
+  }
+
+  .accordion-body {
+    background: #f5f5f5 !important;
+    border: 1px #ddd solid;
+
+    .personalizer-next-step {
+      color: #7e3c7e;
+      font-size: 16px;
+      font-weight: 700;
+      background: transparent;
+      border: 1.4px solid #7e3c7e;
+      border-radius: 8px;
+    }
+  }
+}
+
+#pdp-pc-image.active {
+  .personalizer-image-container > .personalizer-image-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block !important;
+  }
+}
+
+.personalize-notice {
+  display: none;
+}

@@ -1,0 +1,315 @@
+{%- assign timeNow = 'now' | date: '%H:%M:%S' -%}
+{%- assign dateNow = 'now' | date: '%Y-%m-%d' -%}
+{%- assign supportAvailable = false -%}
+{%- assign specialDay = false -%}
+{%- assign day = 'now' | date: '%A' -%}
+{% case day %}
+    {% when 'Sunday' or 'Saturday' %}
+        {% assign weekday = false %}
+    {% else %}
+        {% assign weekday = true %}
+{% endcase %}
+
+{% for block in section.blocks %}
+    {% if block.settings.special_date == dateNow %}
+        {% assign specialDay = true %}
+        {% assign endTime = block.settings.special_end | default: "" %}
+        {% assign startTime = block.settings.special_start | default: "" %}
+    {% endif %}
+{% endfor %}
+
+{% unless specialDay %}
+    {% if weekday %}
+        {% assign endTime = section.settings.weekday_end | default: "" %}
+        {% assign startTime = section.settings.weekday_start | default: "" %}
+    {% else %}
+        {% assign endTime = section.settings.weekend_end | default: "" %}
+        {% assign startTime = section.settings.weekend_start | default: "" %}
+    {% endif %}
+{% endunless %}
+
+{% if endTime != "" and startTime != "" %}
+    {% if timeNow > startTime and timeNow < endTime %}
+        {% assign supportAvailable = true %}
+    {% endif %}
+{% endif %}
+
+{% unless section.settings.phone_support_disabled %}
+    <div class="d-flex phone_support align-items-center mt-5 mb-4">
+        <div class="left-wrap">
+            <a {% if supportAvailable %}href="https://www.efavormart.com/pages/phone-contact-form"{% endif %}>
+                <div class="d-flex justify-content-end">
+                    <img src="{{ 'contact-callcenter.jpg' | asset_url }}" width="144px" />
+                    <!-- <img src="{% if supportAvailable %}{{ section.settings.response_time_image | img_url: 'master' }}{% else %}{{ 'icon-phone.svg' | asset_url }}{% endif %}" width="40px"/> -->
+                </div>
+            </a>
+        </div>
+        <div class="hr"></div>
+        <div class="right-wrap">
+            <div class="d-flex flex-column justify-content-start">
+                <div class="">
+                    <span class="weekday_hours body_13">
+                        <img src="{{ 'icon-clock.svg' | asset_url }}" alt=""> Mon-Fri | {{ section.settings.weekday_start | date: '%I:%M %P'}} - {{ section.settings.weekday_end | date: '%I:%M %P'}} PST </span>
+                    {% unless section.settings.weekend_start == "00:00:00" and section.settings.weekend_end == "00:00:00" %}
+                        <span class="weekend_hours">{{ section.settings.weekend_start | date: '%I:%M %P'}} - {{ section.settings.weekend_end | date: '%I:%M %P'}} PST | Sat-Sun </span>
+                    {% endunless %}
+                    {% for block in section.blocks %}
+                        {% unless block.settings.special_start == "00:00:00" and block.settings.special_end == "00:00:00" %}
+                            <span class="special_hours">{{ block.settings.special_start | date: '%I:%M %P'}} - {{ block.settings.special_end | date: '%I:%M %P'}} PST | {{ block.settings.special_date | date: "%a, %b %d %Y" }}</span>
+                        {% else %}
+                            <span class="special_hours">Closed | {{ block.settings.special_date | date: "%a, %b %d %Y" }}</span>
+                        {% endunless %}
+                    {% endfor %}
+                </div>
+                <div class="foot_note">{{ section.settings.phone_support_note }}</div>
+            </div>
+        </div>
+    </div>
+{% endunless %}
+
+<style>
+    .weekday_hours {
+        color: {{ section.settings.weekday_color }};
+        {% if section.settings.weekday_bold %}
+            font-weight: bold;
+        {% endif %}
+        {% if section.settings.weekday_italic %}
+            font-style: italic;
+        {% endif %}
+        {% if section.settings.weekday_underline %}
+            text-decoration: underline;
+        {% endif %}
+    }
+
+    .weekend_hours {
+        color: {{ section.settings.weekend_color }};
+        {% if section.settings.weekend_bold %}
+            font-weight: bold;
+        {% endif %}
+        {% if section.settings.weekend_italic %}
+            font-style: italic;
+        {% endif %}
+        {% if section.settings.weekend_underline %}
+            text-decoration: underline;
+        {% endif %}
+    }
+
+    .foot_note {
+        color: {{ section.settings.foot_note_color }};
+        {% if section.settings.foot_note_bold %}
+            font-weight: bold;
+        {% endif %}
+        {% if section.settings.foot_note_italic %}
+            font-style: italic;
+        {% endif %}
+        {% if section.settings.foot_note_underline %}
+            text-decoration: underline;
+        {% endif %}
+    }
+
+    .special_hours {
+        color: {{ section.settings.special_color }};
+        {% if section.settings.special_bold %}
+            font-weight: bold;
+        {% endif %}
+        {% if section.settings.special_italic %}
+            font-style: italic;
+        {% endif %}
+        {% if section.settings.special_underline %}
+            text-decoration: underline;
+        {% endif %}
+    }
+
+</style>
+
+{% schema %}
+    {
+        "name": "Phone Support Settings",
+        "class": "phone-scheduler",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "response_time_image",
+                "label": "Response Time Image"
+            },
+            {
+                "type": "checkbox",
+                "id": "phone_support_disabled",
+                "label": "Hide Phone Support Section"
+            },
+            {
+                "type": "text",
+                "id": "phone_support_note",
+                "label": "Foot Note:",
+                "default": "Please note - Wait time may vary"
+            },
+            {
+                "type": "color",
+                "id": "foot_note_color",
+                "label": "Font Color",
+                "default": "#000000"
+            },
+            {
+                "type": "checkbox",
+                "id": "foot_note_bold",
+                "label": "Bold"
+            },
+            {
+                "type": "checkbox",
+                "id": "foot_note_italic",
+                "label": "Italic"
+            },
+            {
+                "type": "checkbox",
+                "id": "foot_note_underline",
+                "label": "Underline"
+            },
+            {
+                "type": "header",
+                "content": "Weekday Hours"
+            },
+            {
+                "type": "text",
+                "id": "weekday_start",
+                "label": "Open:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "text",
+                "id": "weekday_end",
+                "label": "Close:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "color",
+                "id": "weekday_color",
+                "label": "Font Color",
+                "default": "#000000"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekday_bold",
+                "label": "Bold"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekday_italic",
+                "label": "Italic"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekday_underline",
+                "label": "Underline"
+            },
+            {
+                "type": "header",
+                "content": "Weekend Hours:"
+            },
+            {
+                "type": "text",
+                "id": "weekend_start",
+                "label": "Open:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "text",
+                "id": "weekend_end",
+                "label": "Close:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "color",
+                "id": "weekend_color",
+                "label": "Font Color",
+                "default": "#000000"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekend_bold",
+                "label": "Bold"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekend_italic",
+                "label": "Italic"
+            },
+            {
+                "type": "checkbox",
+                "id": "weekend_underline",
+                "label": "Underline"
+            },
+            {
+                "type": "header",
+                "content": "Special Day Styling"
+            },
+            {
+                "type": "color",
+                "id": "special_color",
+                "label": "Font Color",
+                "default": "#000000"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_bold",
+                "label": "Bold"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_italic",
+                "label": "Italic"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_underline",
+                "label": "Underline"
+            }
+        ],
+        "blocks" : [
+            {
+                "type": "special_day",
+                "name": "Add a Special Day",
+                "settings": [
+            {
+                "type": "text",
+                "id": "special_date",
+                "label": "Date",
+                "default": "2020-01-30"
+            },
+            {
+                "type": "text",
+                "id": "special_start",
+                "label": "Open:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "text",
+                "id": "special_end",
+                "label": "Close:",
+                "default": "00:00:00"
+            },
+            {
+                "type": "color",
+                "id": "special_color",
+                "label": "Font Color",
+                "default": "#000000"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_bold",
+                "label": "Bold"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_italic",
+                "label": "Italic"
+            },
+            {
+                "type": "checkbox",
+                "id": "special_underline",
+                "label": "Underline"
+            }
+        ]
+        }
+    ]
+}
+{% endschema %}

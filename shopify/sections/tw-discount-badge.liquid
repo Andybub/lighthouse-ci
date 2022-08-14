@@ -1,0 +1,67 @@
+{%- assign dateNow = 'now' | date: '%c' -%}
+{%- assign dateNow = dateNow | date: '%s' | times: 1 -%}
+{%- capture data -%}
+  [
+    {%- for block in section.blocks -%}
+      {%- assign start = block.settings.discount_start | date: '%s' | times: 1 %}
+      {%- assign end = block.settings.discount_end | date: '%s' | times: 1 %}
+      {%- if dateNow > start and dateNow < end %}
+        ,{
+          "tag": {{ block.settings.tag | json }},
+          "image": {{ block.settings.image | json }}
+        }
+      {%- endif %}
+    {%- endfor %}
+  ]
+{%- endcapture -%}
+{%- if section.settings.enable and data %}
+<script id="tw-discount-badge-settings-json" type="application/json">
+  {{- data | remove_first: "," | strip_newlines -}}
+</script>
+{%- endif %}
+
+{% schema %}
+ {
+   "name": "Discount Badge",
+   "class": "discount-badge-template d-none",
+   "settings": [
+     {
+       "type": "checkbox",
+       "id": "enable",
+       "label": "Enable Discount Badge",
+       "default": true
+     }
+   ],
+   "blocks": [
+     {
+       "type": "discount_tag",
+       "name": "Discount Tag",
+       "settings": [
+         {
+           "id": "tag",
+           "type": "text",
+           "label": "Discount Tag",
+           "default": "Flash-Sale"
+         },
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Discount Badge Image"
+         },
+         {
+           "type": "text",
+           "id": "discount_start",
+           "label": "start time",
+           "info": "Enter a starting date - Example: April 1 2022 12:00:00 AM"
+         },
+         {
+           "type": "text",
+           "id": "discount_end",
+           "label": "stop time",
+           "info": "Enter an stop date - Example: April 2 2022 11:59:59 PM"
+         }
+       ]
+     }
+   ]
+ }
+{% endschema %}

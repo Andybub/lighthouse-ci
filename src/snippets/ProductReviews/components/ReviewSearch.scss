@@ -1,0 +1,144 @@
+.review-search {
+  .review-search-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review-search-input {
+    input {
+      padding: 8px 12px;
+      padding-right: 40px;
+      background-color: #fff;
+      border: 1.5px solid #dadada;
+      border-radius: 99px;
+
+      &::placeholder {
+        color: 999;
+        font-size: 12px;
+      }
+    }
+
+    .review-search-btn {
+      position: absolute;
+      top: 50%;
+      right: 5px;
+      background-color: transparent;
+      border: 0;
+      transform: translateY(-50%);
+
+      .icomoon-nav-research {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .search-topic {
+    margin: 0 5px;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1.5px solid #dadada;
+    border-radius: 99px;
+    cursor: pointer;
+
+    span {
+      display: block;
+      color: #222;
+      font-size: 14px;
+    }
+
+    .icomoon-close {
+      margin-left: 10px;
+      display: none;
+      font-size: 16px;
+    }
+
+    &[data-active='true'] {
+      background-color: #dadada;
+
+      .icomoon-close {
+        display: block;
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: #dadada;
+      }
+    }
+  }
+
+  .review-search-filter {
+    select {
+      padding: 8px 12px;
+      color: #222;
+      font-size: 16px;
+      background-color: #fff;
+      border: 1.5px solid #dadada;
+      appearance: none;
+      background-image: none;
+    }
+
+    .icomoon-arrow-3 {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  }
+
+  @include respondSM {
+    .review-search-top {
+      justify-content: center;
+    }
+
+    .review-search-bottom {
+      display: flex;
+      justify-content: center;
+    }
+
+    .review-search-input {
+      max-width: 450px;
+    }
+
+    .review-search-filter {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  @include respondMD {
+    .review-search-top {
+      align-items: center;
+      flex-direction: row;
+      border-top: 1px solid #dadada;
+    }
+
+    .review-search-bottom {
+      justify-content: flex-end;
+      border-top: 1px solid #dadada;
+    }
+
+    .review-search-input {
+      margin-right: 10px;
+      width: 230px;
+    }
+
+    .review-search-topics {
+      flex: 1;
+    }
+
+    .review-search-filter {
+      max-width: 210px;
+    }
+  }
+
+  @include respondLG {
+    .review-search-top {
+      margin: 0 auto;
+      max-width: 740px;
+    }
+  }
+}

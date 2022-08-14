@@ -1,0 +1,41 @@
+#product-review-pagination {
+  display: flex;
+  justify-content: center;
+
+  .navigation {
+    background-color: transparent;
+    border: 0;
+
+    &[data-active='false'] {
+      color: #ccc;
+      pointer-events: none;
+    }
+
+    &-next {
+      .icomoon-icon {
+        transform: scaleX(-1);
+      }
+    }
+  }
+
+  .pagination-list {
+    display: flex;
+
+    .pagination-item {
+      button {
+        margin: 0 5px;
+        width: 30px;
+        height: 42px;
+        background-color: transparent;
+        border: 0;
+        border: 1px solid transparent;
+        border-radius: 4px;
+
+        &[data-active='true'] {
+          background-color: #fff;
+          border-color: #dadada;
+        }
+      }
+    }
+  }
+}

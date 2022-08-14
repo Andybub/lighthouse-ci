@@ -1,0 +1,175 @@
+a:focus,
+a:hover,
+a:active {
+  color: $colorPurpleHover;
+}
+
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:active {
+  background-color: $colorPurpleHover !important;
+  border-color: $colorPurpleHover !important;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:hover,
+.btn-outline-primary:active {
+  color: $colorPurpleHover !important;
+  background-color: white !important;
+  border-color: $colorPurpleHover !important;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.modal {
+  background: rgba(#000, 0.5);
+}
+.modal-backdrop {
+  display: none;
+}
+
+// extend kiti-var,css.liquid
+.container-fluid {
+  max-width: none !important;
+}
+
+.prevent-children * {
+  pointer-events: none;
+}
+
+.text-purple {
+  color: #7e3c7e;
+}
+
+.text-gray {
+  color: #999;
+}
+
+.text-green {
+  color: #219653;
+}
+
+.text-red {
+  color: #f00;
+}
+
+.title_21 {
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 27px;
+}
+
+.body_16 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+}
+
+.body_14 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.body_13 {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 17px;
+}
+
+// Google Review
+#___ratingbadge_0 {
+  display: none !important;
+
+  @include respondMD {
+    display: inline-block !important;
+  }
+}
+
+// comm100 float button
+#comm100-container {
+  [id^='comm100-float-button'] > div {
+    z-index: 2 !important;
+  }
+}
+
+.desktop-only {
+  display: none;
+  @include respondMD {
+    display: inline-block;
+  }
+}
+
+.mobile-only {
+  @include respondMD {
+    display: none;
+  }
+}
+
+.shogun-root {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--grid-gutter);
+  padding-right: var(--grid-gutter);
+  max-width: var(--max-container);
+
+  @include respondMD {
+    --grid-gutter: 10px;
+  }
+}
+
+// swym wishlist
+.swym-ui-component *,
+.swym-ui-component .swym-is-button,
+.swym-ui-component .swym-is-anchor,
+.swym-ui-component .swym-title,
+.swym-ui-component .swym-heading,
+.swym-ui-component .swym-label {
+  font-family: $font;
+}
+
+.swym-ui-components,
+.swym-ui-component {
+  font-family: $font;
+}
+
+[cloak] {
+  display: none;
+}
+
+// GTM prevent child click
+[class*='gtm-'] {
+  * {
+    pointer-events: none;
+  }
+}
+
+// Stamped review star
+.stamped-badge-starrating {
+  color: #ffd700;
+  line-height: 1;
+  margin: 0 2px 0 0;
+  vertical-align: middle;
+
+  .spr-icon {
+    font-size: 13px;
+    top: auto;
+    width: auto;
+    height: auto;
+    margin: 0 1px 0 0;
+  }
+}
+
+.stamped-badge-caption {
+  color: #999;
+  font-size: 13px;
+
+  &::after {
+    content: '' !important;
+  }
+}

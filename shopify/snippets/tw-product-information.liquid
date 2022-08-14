@@ -1,0 +1,16 @@
+{%- if productDescription contains "<h4>[" -%}
+  {%- assign descSplit = productDescription | replace: '<h4>[', '[' | replace: ']</h4>', ']' | split: "[" -%}
+  {%- assign idx_counter = 0 -%}
+  {%- for section in descSplit -%}
+    {%- assign sectionStripped = section | strip_html | strip -%}
+    {%- assign idx_counter = idx_counter| plus: 1 -%}
+    {%- unless sectionStripped == blank -%}
+      {%- assign secondSplit = section | split: ']' -%}
+      {%- assign sectionTitle = secondSplit[0] -%}
+      {%- assign sectionContent = secondSplit[1] -%}
+      {%- if sectionTitle contains "Information" -%}
+        {{ sectionContent }}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endif -%}

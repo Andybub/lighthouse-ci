@@ -1,0 +1,28 @@
+{%- liquid
+  assign subCategoriesSourceHandle = collection.metafields.global["sub_categories_source_handle"] | handleize
+  if subCategoriesSourceHandle != blank
+    assign sourceLinks = linklists[subCategoriesSourceHandle].links
+  else
+    assign sourceLinks = linklists['1-top-navigation'].links
+  endif
+  assign ranOnce = false
+  for link in sourceLinks
+    if link.current
+      if link.links and link.links.size > 0
+        render 'tw-related-sub-categories-json', links: link.links
+        break
+      endif
+      break
+    elsif link.child_current and ranOnce == false
+      assign ranOnce = true
+      for sub_link in link.links
+        if sub_link.current
+          if sub_link.links and sub_link.links.size > 0
+            render 'tw-related-sub-categories-json', links: sub_link.links
+            break
+          endif
+        endif
+      endfor
+    endif
+  endfor
+-%}

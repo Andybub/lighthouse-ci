@@ -1,0 +1,131 @@
+{%comment%}
+<div class="border-top" style="opacity: 0.3"></div>
+<div class="page-content"> {%-section 'contact-template'-%} </div>
+{%endcomment%}
+
+<div class="container page-content">
+  <div class="row">
+    <div class="col-12">
+      {%- comment -%}
+        {{ page.content }}
+      {%- endcomment -%}
+      <!-- START -->
+      <style>
+      select {
+        appearance: none;
+        background: #FAFAFA url('{{ "icon-arrow-down.svg" | asset_url }}') no-repeat calc(100% - 10px) center !important;
+      }
+      </style>
+      <div id="contact-us-wrap">
+        <div id="title-wrap" class="mt-5 mb-5">
+            <h2 class="title_21 text-purple">Contact Us</h2>
+        </div>
+        <div class="container">
+          <div class="row d-flex flex-column-reverse flex-md-row">
+            <div class="col-12 col-md-6 mb-5">
+              <div class="left-wrap">
+                <div class="d-flex justify-content-start justify-content-md-center mb-5">
+                  <img src="{{ 'icon-email.svg' | asset_url }}" alt="">
+                  <div class="ml-4">
+                    <div class="title_21 text-purple">Email Us</div>
+                    <div class="body_16 text-gray">(Reply within 24 business hours.)</div>
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <div class="body_14">
+                    Due to unusually high volume of emails, please allow up to <span class="text-red">24 hours</span> for replies.
+                  </div>
+                  <div class="body_14">
+                    We look forward to hearing from you, thank you for your interest in efavormart.com!
+                  </div>
+                </div>
+
+                <!-- FORM START -->
+                {% form 'contact', return_to: '/pages/contact-us?contact_posted=true', class:'clearfix' %}
+                  {% if form.posted_successfully? %}
+                    <p class="note form-success">
+                      {{ 'contact.form.post_success' | t }}
+                    </p>
+                  {% endif %}
+
+                  {{ form.errors | default_errors }}
+
+                  <div class="form-group d-flex mb-3">
+                    <input class="w-50 mr-3" required type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                    <input class="w-50" type="text" id="ContactFormPhone" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" autocapitalize="words" value="">
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <input required type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <select required id="ContactFormHelp" name="contact[help]">
+                      <option value="" disabled selected hidden>What do you need help with?</option>
+                      <option value="Product Inquiry">Product Inquiry</option>
+                      <option value="Order Status">Order Status</option>
+                      <option value="Wrong Item Received">Wrong Item Received</option>
+                      <option value="Return Inquiry">Return Inquiry</option>
+                      <option value="Did not receive order">Did not receive order</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <textarea required rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+                  </div>
+                  <div class="body_16 text-purple btn-submit" >
+                    <input type="submit" value="{{ 'contact.form.submit' | t }}" />
+                    <img class="ml-2" src="{{ 'icon-arrow-right.svg' | asset_url }}" alt="">
+                  </div>
+
+                <!-- FORM END -->
+                {% endform %}
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mb-5">
+              <div class="right-wrap">
+                <div class="d-flex justify-content-start justify-content-md-center mb-5">
+                  <!-- <img src="{{ 'icon-message.svg' | asset_url }}" alt="">
+                  <div class="ml-4">
+                    <div class="title_21 text-purple">Live Chat</div>
+                    <div class="body_16 text-green">(Online Now)</div>
+                  </div> -->
+                  <!--Begin Comm100 Live Chat Code-->
+                  <div id="comm100-button-98000000-0000-0000-0000-008e000f4468" style="width: 300px"></div>
+                  <script type="text/javascript">
+                    var Comm100API=Comm100API||{};(function(t){function e(e){var a=document.createElement("script"),c=document.getElementsByTagName("script")[0];a.type="text/javascript",a.async=!0,a.src=e+t.site_id,c.parentNode.insertBefore(a,c)}t.chat_buttons=t.chat_buttons||[],t.chat_buttons.push({code_plan:"98000000-0000-0000-0000-008e000f4468",div_id:"comm100-button-98000000-0000-0000-0000-008e000f4468"}),t.site_id=1000552,t.main_code_plan="98000000-0000-0000-0000-008e000f4468",e("https://vue.comm100.com/livechat.ashx?siteId="),setTimeout(function(){t.loaded||e("https://standby.comm100vue.com/livechat.ashx?siteId=")},5e3)})(Comm100API||{})
+                  </script>
+                  <!--End Comm100 Live Chat Code-->
+                </div>
+                <div class="body_14 mb-4">
+                  Please use our live chat to get in touch with us for immediate service and for <span class="text-red">urgent changes.</span>
+                </div>
+                <ul class="mb-4">
+                  <li class="body_13 mb-3">
+                    <img src="{{ 'icon-clock.svg' | asset_url }}" alt="">
+                    Mon-Fri | 5:00 am - 09:00 pm PST
+                    </li>
+                  <li class="body_13 mb-3">
+                    <img src="{{ 'icon-calendar.svg' | asset_url }}" alt="">
+                    Sat-Sun | 9:00 am - 6:00 pm PST
+                  </li>
+                </ul>
+                <div class="body_14 mb-5">
+                  You are also welcome to contact us via email using the form.
+                </div>
+                <!-- <div class="body_16 text-purple btn-submit">
+                  Chat Now
+                  <img class="ml-2" src="{{ 'icon-arrow-right.svg' | asset_url }}" alt="">
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% section 'phone-support' %}
+      </div>
+      <!-- END -->
+    </div>
+  </div>
+</div>

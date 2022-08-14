@@ -1,0 +1,51 @@
+{%- layout none -%}
+{%- capture output -%}
+  {%- paginate search.results by 25 -%}
+    {
+    "products": [
+    {%- assign products = search.results -%}
+    {%- capture productResult -%}
+      {%- for product in products -%}
+        {%- if product.object_type and product.object_type != 'product' -%}{%- continue -%}{%- endif -%}
+        {%- if product.type == 'SHOPSTORM_HIDDEN_PRODUCT' -%}{%- continue -%}{% endif -%}
+        {%- assign imgUrl = product.images[1] | product_img_url: '230x', crop: 'center', format: pjpg -%}
+        {%- if imgUrl contains 'no-image' -%}
+          {%- assign imgUrl = 'blank' -%}
+        {%- endif -%}
+        {%- if product.metafields.c_f.sizing != blank -%}
+          {%- assign metaTag = product.metafields.c_f.sizing -%}
+        {%- else -%}
+          {%- assign metaTag = null -%}
+        {%- endif -%}
+        ,{
+        "order": {{- paginate.current_offset | plus: forloop.index0 -}},
+        "url": {{- product.url | within: collection | json -}},
+        "metaTag": {{ metaTag | json }},
+        "sales_icon": {%- if product.metafields.inventory.ShappifySale -%}true{%- else -%}false{%- endif -%},
+        "id": {{- product.id -}},
+        "title": {{- product.title | json -}},
+        "type": "{{- product.type -}}",
+        "tags": {{- product.tags | json -}},
+        "handle": "{{- product.handle -}}",
+        "image": "{{- product.featured_image.src | img_url: '150x' -}}",
+        "hover_img": "{{- imgUrl -}}",
+        "price_max": {{- product.price_max -}},
+        "price_min": {{- product.price_min -}},
+        "compare_at_price_max": {{- product.compare_at_price_max -}},
+        "compare_at_price_min": {{- product.compare_at_price_min -}},
+        "created_at": "{{- product.created_at -}}",
+        "published_at": "{{- product.published_at -}}",
+        "image_aspect_ratio": "{{- product.featured_image.aspect_ratio | default: 1 -}}",
+        "image_width": {{- product.featured_image.width | default: 0 -}},
+        "image_height": {{- product.featured_image.height | default: 0 -}},
+        "first_variant_id": "{{- product.variants.first.id -}}",
+        "sku": {{- product.variants.first.sku | json -}}
+        }
+      {%- endfor -%}
+    {%- endcapture -%}
+    {{- productResult | remove_first: ',' -}}
+    ]
+    }
+  {%- endpaginate -%}
+{%- endcapture -%}
+{{- output | strip_newlines -}}

@@ -1,0 +1,65 @@
+{% unless template == 'index' or template == 'cart' or template == '404' or template == 'challenge' or template == 'page.search-result-new-isp-sdk' or template == blank %}
+<nav class="hide container breadcrumb mb-0 d-flex {% if template.suffix == 'landing-page' %}d-lg-flex{% endif %}" role="navigation" aria-label="breadcrumbs" id="breadcrumbs">
+  <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}" class="d-none d-lg-block">{{ 'general.breadcrumbs.home' | t }}</a>
+  {% if template contains 'product' %}
+    <script>
+      var isProduct = true, product_collections = [{%- for _collection in product.collections -%}{ "handle": "{{- _collection.handle -}}", "title": "{{- _collection.title | replace: '"', '\"' -}}" }, {% endfor %}];
+    </script>
+    <span aria-hidden="true" class="breadcrumb__sep" id="bread_product_collection">&rsaquo;</span>
+    {% if collection %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+    {% else %}
+      {% capture url %}/collections/{{ product.collections[0].handle }}{% endcapture %}
+      {{ product.collections[0].title | link_to: url }}
+    {% endif %}
+    {% for _collection in product.collections %}{% endfor %}
+  {% elsif template contains 'collection' and collection.handle %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+      {{ collection.title | link_to: url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " }}</span>
+    {% else %}
+      <span>{{ collection.title }}</span>
+    {% endif %}
+    <script>var collection_handle = '{{ collection.handle }}';</script>
+  {% elsif template == 'blog' %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {% if current_tags %}
+      {{ blog.title | link_to: blog.url }}
+      <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+      <span>{{ current_tags | join: " + " | remove: 'holiday:' | remove: 'usage:' | remove: 'Usage:' | remove: 'theme: '| remove: 'occasion:'| remove: 'style:'| remove: 'seasons:'| remove: 'category:'| remove: 'color:'| remove: 'season:' }}</span>
+    {% endif %}
+  {% elsif template == 'article' %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    {{ blog.title | link_to: blog.url }}
+  {% elsif template contains 'page' %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span>{{ page.title }}</span>
+  {% else %}
+    <span aria-hidden="true" class="breadcrumb__sep">&rsaquo;</span>
+    <span class="else">{{ page_title }}</span>
+  {% endif %}
+
+  <script>
+    window.onload = () => {
+      let intervalID = null;
+
+      intervalID = setInterval(() => {
+        const links = document.querySelectorAll('nav#breadcrumbs > a');
+
+        if ([...links].every((link) => [...link.classList].includes('gtm-breadcrumbs'))) {
+          clearInterval(intervalID);
+          intervalID = null;
+        } else {
+          [...links].forEach((link) => {
+            link.classList.add('gtm-breadcrumbs');
+          })
+        }
+      }, 1000);
+    }
+  </script>
+</nav>
+{% endunless %}

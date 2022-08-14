@@ -1,0 +1,24 @@
+.related-term-container {
+  margin-bottom: 0;
+
+  @include respondLG {
+    margin-bottom: 3rem;
+  }
+
+  a {
+    color: #222;
+    font-size: 14px;
+    background-color: white;
+    border: 1.5px solid #999;
+    padding: 5px 16px;
+    margin-bottom: 1rem;
+
+    @include respondLG {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      background-color: #dadada;
+    }
+  }
+}

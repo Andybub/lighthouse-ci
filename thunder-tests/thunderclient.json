@@ -1,0 +1,475 @@
+[
+  {
+    "_id": "3e8192c6-76c8-48a3-b9b3-810d140d9f45",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Sitewide Reviews",
+    "url": "https://stamped.io/api/widget/reviews/batch",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-07-21T05:36:11.153Z",
+    "modified": "2022-07-21T05:37:02.177Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"data\": [\n    {\n      \"type\": \"carousel\",\n      \"apiKey\": \"{{stampedApiKey}}\",\n      \"storeUrl\": \"{{stampedStoreUrl}}\"\n    }\n  ]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "715a067c-1fce-491c-b810-560da8436cf5",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Product Reviews (yaya-uat)",
+    "url": "https://review-api-uat.efmt.app/review?productId=8550696658&page=1&take=10&sortReviews=featured",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2022-07-21T05:38:50.290Z",
+    "modified": "2022-07-21T09:09:39.945Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "productId",
+        "value": "8550696658",
+        "isPath": false
+      },
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "take",
+        "value": "10",
+        "isPath": false
+      },
+      {
+        "name": "sortReviews",
+        "value": "featured",
+        "isPath": false
+      },
+      {
+        "name": "sortReviews",
+        "value": "with-photo",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "da479da8-83d2-4d63-8b7e-c74af39a56fe",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Product Reviews",
+    "url": "https://stamped.io/api/widget?productId=8550696658&page=1&take=5&apiKey={{stampedApiKey}}&storeUrl={{stampedStoreUrl}}&productSku=TAB_120_WHT_POLY",
+    "method": "GET",
+    "sortNum": 60000,
+    "created": "2022-07-21T05:39:02.517Z",
+    "modified": "2022-07-22T08:53:56.620Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "productId",
+        "value": "8550696658",
+        "isPath": false
+      },
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "take",
+        "value": "5",
+        "isPath": false
+      },
+      {
+        "name": "apiKey",
+        "value": "{{stampedApiKey}}",
+        "isPath": false
+      },
+      {
+        "name": "storeUrl",
+        "value": "{{stampedStoreUrl}}",
+        "isPath": false
+      },
+      {
+        "name": "productSku",
+        "value": "TAB_120_WHT_POLY",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "b637a8f2-6958-4870-8a8d-89e939a1f8b9",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Products Ratings Summary",
+    "url": "https://stamped.io/api/widget/badges?isIncludeBreakdown=true&isincludehtml=false",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2022-07-22T07:12:16.449Z",
+    "modified": "2022-07-28T07:55:24.059Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "isIncludeBreakdown",
+        "value": "true",
+        "isPath": false
+      },
+      {
+        "name": "isincludehtml",
+        "value": "false",
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"productIds\": [\n      {\n        \"productId\": \"8548362002\",\n        \"productSku\": \"TAB_120_WHT_POLY\"\n      }\n    ],\n    \"apiKey\": \"{{stampedApiKey}}\",\n    \"storeUrl\": \"{{stampedStoreUrl}}\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "productId"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "breakdown"
+      }
+    ]
+  },
+  {
+    "_id": "e2002798-b818-458e-9465-777684dd85a7",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Product Visual Gallery",
+    "url": "https://stamped.io/api/widget/reviews?productId=8550696658&page=1&isWithPhotos=true&apiKey={{stampedApiKey}}&storeUrl={{stampedStoreUrl}}&productSku=TAB_90132_WHT_POLY&minRating=4&take=8&sortReviews=photos",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2022-07-22T10:03:45.898Z",
+    "modified": "2022-08-01T01:58:35.548Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "productId",
+        "value": "8550696658",
+        "isPath": false
+      },
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "isWithPhotos",
+        "value": "true",
+        "isPath": false
+      },
+      {
+        "name": "apiKey",
+        "value": "{{stampedApiKey}}",
+        "isPath": false
+      },
+      {
+        "name": "storeUrl",
+        "value": "{{stampedStoreUrl}}",
+        "isPath": false
+      },
+      {
+        "name": "productSku",
+        "value": "TAB_90132_WHT_POLY",
+        "isPath": false
+      },
+      {
+        "name": "minRating",
+        "value": "4",
+        "isPath": false
+      },
+      {
+        "name": "take",
+        "value": "8",
+        "isPath": false
+      },
+      {
+        "name": "sortReviews",
+        "value": "photos",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "b3418e69-baad-4421-b7fd-79d1ae5df36a",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Post New Review (fail)",
+    "url": "https://stamped.io/api/reviews3?apiKey=pubkey-68uw0h6gWc9FHoXrOfpbl133nP4CXf&storeUrl=efavormart-new.myshopify.com",
+    "method": "POST",
+    "sortNum": 120000,
+    "created": "2022-07-22T10:07:00.576Z",
+    "modified": "2022-07-22T12:48:23.386Z",
+    "headers": [
+      {
+        "name": "Content-Type",
+        "value": "multipart/form-data"
+      },
+      {
+        "name": "mimeType",
+        "value": "",
+        "isDisabled": true
+      }
+    ],
+    "params": [
+      {
+        "name": "apiKey",
+        "value": "pubkey-68uw0h6gWc9FHoXrOfpbl133nP4CXf",
+        "isPath": false
+      },
+      {
+        "name": "storeUrl",
+        "value": "efavormart-new.myshopify.com",
+        "isPath": false
+      },
+      {
+        "name": "sId",
+        "value": "67527",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "productId",
+          "value": "8548362002"
+        },
+        {
+          "name": "author",
+          "value": "John Doh"
+        },
+        {
+          "name": "email",
+          "value": "john.doh@example.com"
+        },
+        {
+          "name": "location",
+          "value": ""
+        },
+        {
+          "name": "reviewRating",
+          "value": "5"
+        },
+        {
+          "name": "reviewTitle",
+          "value": "This is a good review!"
+        },
+        {
+          "name": "reviewMessage",
+          "value": "Awsome!"
+        },
+        {
+          "name": "productName",
+          "value": "120\\\" White Polyester Round Tablecloth"
+        },
+        {
+          "name": "productSKU",
+          "value": "TAB_120_WHT_POLY"
+        },
+        {
+          "name": "productDescription",
+          "value": ""
+        },
+        {
+          "name": "productImageUrl",
+          "value": "//cdn.shopify.com/s/files/1/1552/7691/products/TAB_120_WHT_D05.jpg"
+        },
+        {
+          "name": "productUrl",
+          "value": "https://www.efavormart.com/products/120-white-polyester-round-tablecloth"
+        },
+        {
+          "name": "reviewSource",
+          "value": "api"
+        },
+        {
+          "name": "reviewRecommendProduct",
+          "value": "true",
+          "isDisabled": true
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "5607859a-2a6a-4671-8ac0-deb17310ccba",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Post New Question",
+    "url": "https://stamped.io/api/questions",
+    "method": "POST",
+    "sortNum": 130000,
+    "created": "2022-07-22T10:07:13.394Z",
+    "modified": "2022-07-22T10:49:46.185Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"productId\": 8548362002,\n    \"shop\": \"{{stampedStoreUrl}}\",\n    \"apiKey\": \"{{stampedApiKey}}\",\n    \"storeUrl\": \"{{stampedShopUrl}}\",\n    \"sId\": \"{{stampedStoreHash}}\",\n    \"name\": \"John Doh\",\n    \"email\": \"john.doh@example.com\",\n    \"reviewBody\": \"This is a test question\",\n    \"productName\": \"120\\\" White Polyester Round Tablecloth\",\n    \"productDescription\": \"\",\n    \"productSKU\": \"TAB_120_WHT_POLY\",\n    \"productUrl\": \"https://www.efavormart.com/products/120-white-polyester-round-tablecloth\",\n    \"productImageUrl\": \"//cdn.shopify.com/s/files/1/1552/7691/products/TAB_120_WHT_D05.jpg\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "aa2f75fc-ab90-445f-ac70-fd363dc661f0",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Review Carousel Photos",
+    "url": "https://stamped.io/api/widget/reviews?type=widget-carousel-photos&reviewId=71010446&productId=8550696658&productSKU=TAB_90132_WHT_POLY&productTitle=90%22x132%22%20White%20Polyester%20Rectangular%20Tablecloth&random=false&isFillEmpty=false&page=1&skip=100&minRating=1&isWithPhotos=true&apiKey={{stampedApiKey}}&storeUrl={{stampedShopUrl}}",
+    "method": "GET",
+    "sortNum": 140000,
+    "created": "2022-07-26T03:26:28.137Z",
+    "modified": "2022-07-26T03:26:28.137Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "type",
+        "value": "widget-carousel-photos",
+        "isPath": false
+      },
+      {
+        "name": "reviewId",
+        "value": "71010446",
+        "isPath": false
+      },
+      {
+        "name": "productId",
+        "value": "8550696658",
+        "isPath": false
+      },
+      {
+        "name": "productSKU",
+        "value": "TAB_90132_WHT_POLY",
+        "isPath": false
+      },
+      {
+        "name": "productTitle",
+        "value": "90%22x132%22%20White%20Polyester%20Rectangular%20Tablecloth",
+        "isPath": false
+      },
+      {
+        "name": "random",
+        "value": "false",
+        "isPath": false
+      },
+      {
+        "name": "isFillEmpty",
+        "value": "false",
+        "isPath": false
+      },
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "skip",
+        "value": "100",
+        "isPath": false
+      },
+      {
+        "name": "minRating",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "isWithPhotos",
+        "value": "true",
+        "isPath": false
+      },
+      {
+        "name": "apiKey",
+        "value": "{{stampedApiKey}}",
+        "isPath": false
+      },
+      {
+        "name": "storeUrl",
+        "value": "{{stampedShopUrl}}",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "82f77da8-a5d5-4fbc-b67b-38da6f2b728a",
+    "colId": "33929179-2090-4e11-aa49-ef3df7fcc6bb",
+    "containerId": "",
+    "name": "Get Products Ratings Summary (yaya-uat)",
+    "url": "https://review-api-uat.efmt.app/review/rating-summary?productId=8548362002&productSKU=TAB_120_WHT_POLY",
+    "method": "GET",
+    "sortNum": 105000,
+    "created": "2022-07-26T03:45:43.857Z",
+    "modified": "2022-07-26T03:46:39.666Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "productId",
+        "value": "8548362002",
+        "isPath": false
+      },
+      {
+        "name": "productSKU",
+        "value": "TAB_120_WHT_POLY",
+        "isPath": false
+      }
+    ],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "isjson",
+        "value": "true"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "productId"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "breakdown"
+      }
+    ]
+  }
+]

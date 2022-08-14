@@ -1,0 +1,64 @@
+<div id="account-order-return" class="my-5">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+  {{ 'customer.orders.returns_how_to_html' | t }}
+
+  <div class="order-return">
+    <h4 class="order-return-title">Return Order History</h4>
+    {% comment %}
+    If we have past orders, loop through each one
+    {% endcomment %}
+    <div class="table-wrap returnordrc" style="display:none;">
+      <table id="ordertable" class="w-100">
+        <thead>
+          <tr>
+            <th>Order Name</th>
+            <th>Order Number</th>
+            <th>Submitted Date</th>
+            <th>Refund Type</th>
+            <th>Return Status</th>
+          </tr>
+        </thead>
+        <tbody id="ordertable-b">
+        </tbody>
+      </table>
+    </div>
+    <p></p>
+  </div>
+</div>
+
+<script>
+  var id ={{customer.id}};
+  if(id){
+    $.ajax({
+      url: "https://rma.efmt.app/efmtapp/public/customer_return_form/"+id,
+      type: "GET",
+      dataType: "json",
+      success: function(searchResult){
+        if(searchResult.orders){
+          var order=searchResult.orders;
+          var data='';
+          if(order.length > 0){
+            $('.returnordrc').show();
+            for(var i=0; i < order.length; i++){
+              data += '<tr><td id="order_'+i+'">'+order[i].shopifyOrderNumber+'</td><td id="title_'+i+'">'+order[i].rmaNumber+'</td><td>'+moment(order[i].created_at).format("MMM d YYYY")+'</td><td>'+order[i].type+'</td><td>'+order[i].status+'</td></tr>';
+            }
+            $('#ordertable-b').html(data);
+          }else{
+            $('.returnordrc').show();
+            $('.returnordrc').html('<p>You haven\'t placed any return orders yet.</p>');
+          }
+        }else{
+          $('.error').show();
+          $('.error').text(searchResult.error);
+          setTimeout(function(){ $('.error').hide(); }, 5000);
+        }
+      },
+      error: function(err){
+        console.log("Error in fetchProductInfo: " + err);
+      }
+    });
+  }
+</script>

@@ -1,0 +1,30 @@
+.product-quickview-content {
+  padding: 2rem 1rem;
+
+  .product-page.product-inner {
+    max-height: 90vh;
+    overflow-x: hidden;
+  }
+
+  .row.align-items-start {
+    position: relative;
+    & > .col-12.col-lg-6 {
+      position: sticky;
+      top: 0;
+    }
+  }
+
+  .content-summary {
+    max-height: none !important;
+    transform: none !important;
+  }
+
+  .entry-short-description {
+    margin-bottom: 0;
+  }
+
+  .btn-more-details {
+    color: #333;
+    text-decoration: underline;
+  }
+}

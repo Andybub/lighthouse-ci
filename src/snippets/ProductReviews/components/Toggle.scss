@@ -1,0 +1,23 @@
+.toggle-container {
+  border-bottom: #dadada 1px solid;
+  margin-bottom: 30px;
+
+  button {
+    width: 50%;
+    color: #333;
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    border-bottom: transparent 3px solid;
+
+    &[data-is-active='true'] {
+      font-weight: 500;
+      border-bottom-color: #333;
+    }
+
+    @include respondMD {
+      width: auto;
+      font-size: 24px;
+    }
+  }
+}

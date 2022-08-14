@@ -1,0 +1,14 @@
+.stamped-reviews-container {
+  .stamped-badge-starrating {
+    line-height: 1;
+  }
+
+  .stamped-badge-caption {
+    color: #999;
+    font-size: 13px;
+
+    &::after {
+      content: '' !important;
+    }
+  }
+}

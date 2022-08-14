@@ -1,0 +1,8 @@
+.description-container {
+  > div {
+    @include respondXXL {
+      flex: 0 0 80%;
+      max-width: 80%;
+    }
+  }
+}

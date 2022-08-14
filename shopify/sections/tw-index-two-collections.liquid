@@ -1,0 +1,133 @@
+<div class="container mt-3 mb-3{% if section.settings.off_mobile == true %}d-none d-lg-block{% elsif section.settings.off_desktop == true %}d-lg-none{% endif %}">
+  <div class="row flex-column justify-content-lg-between flex-lg-row">
+    {% for block in section.blocks %}
+      {% for c in (1..2) %}
+        {% assign target = "collection-id-" | append: c %}
+        {% if block.settings[target] != blank %}
+          {% assign collection = collections[block.settings[target]] %}
+          <div class="collection-container row d-lg-flex col-lg-6 ml-0 mb-3 mb-lg-0">
+            {% assign img_target = target | append: "-img" %}
+            {% if block.settings[img_target] != blank %}
+              {% assign img_src = block.settings[img_target] %}
+            {% else %}
+              {% assign img_src = collection.image %}
+            {% endif %}
+            <a class="left-container gtm-mid-banner prevent-children text-center d-block col-lg-8" href="{{ collection.url }}" style="background-image: url({{ img_src | image_url: width: 750 }})">
+              {% assign title_target = target | append: "-heading" %}
+              {% if block.settings[title_target] != blank %}
+                {% assign title = block.settings[title_target] %}
+              {% else %}
+                {% assign title = collection.title %}
+              {% endif %}
+              <h2 class="text-uppercase">{{ title }}</h2>
+              <button class="btn">{{ section.settings.see_more_btn_text }}<i class="fkt-long-arrow-right"></i></button>
+            </a>
+            <div class="products-container d-none d-lg-flex flex-wrap col-lg-4">
+              {% for i in (0..1) %}
+                {% assign product = collection.products[i] %}
+                <a class="gtm-mid-banner-product prevent-children position-relative d-block text-center" href="{{ product.url }}" style="background-image: url({{ product.featured_image.src | image_url: width: 300 }})" data-product-id="{{ product.id }}">
+                  <p class="d-flex justify-content-center align-items-center position-absolute">
+                    <span class="price font-weight-bold">{{ product.price_min | money }}</span>
+                    <span class="compare-price">{{ product.compare_at_price_min | money }}</span>
+                  </p>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Index Two Collections",
+  "class": "tw-two-collections",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rows_headline",
+      "label": "Header",
+      "info": "optional"
+    },
+    {
+      "type": "text",
+      "id": "see_more_btn_text",
+      "label": "Button Text",
+      "default": "See More"
+    },
+    {
+      "type": "checkbox",
+      "id": "off_desktop",
+      "label": "Turn off on Desktop?",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "off_mobile",
+      "label": "Turn off on Mobile?",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+    "type": "item",
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "block title"
+      },
+      {
+        "type": "header",
+        "content": "Collection 1"
+      },
+      {
+        "type": "collection",
+        "id": "collection-id-1",
+        "label": "Choose the first collection"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection-id-1-img",
+        "label": "Image Picker - Desktop 1"
+      },
+      {
+        "type": "text",
+        "id": "collection-id-1-heading",
+        "label": "Heading Text",
+        "info": "optional if different from the collection's name"
+      },
+      {
+        "type": "header",
+        "content": "Collection 2"
+      },
+      {
+        "type": "collection",
+        "id": "collection-id-2",
+        "label": "Choose the 2nd collection"
+      },
+      {
+        "type": "image_picker",
+        "id": "collection-id-2-img",
+        "label": "Image Picker - Desktop 2"
+      },
+      {
+        "type": "text",
+        "id": "collection-id-2-heading",
+        "label": "Heading Text",
+        "info": "optional if different from the collection's name"
+      }
+    ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Index Two Collections",
+      "category": "Collection Row"
+    }
+  ]
+}
+{% endschema %}

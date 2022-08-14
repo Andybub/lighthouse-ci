@@ -1,0 +1,23 @@
+<script defer>
+  function swymCallbackFn(swat){
+    if(typeof $ !== "undefined"){
+      $(document).on("swym:variant-changed", function(event, data){
+        var variant_id = data.variant.id;
+        var $swym_button = $("#swym-quick-view");
+        $swym_button.attr('data-variant-id',variant_id);
+        swat.initializeActionButtons("div.mfp-content");
+      });
+    }
+  }
+
+  if(!window.SwymCallbacks){
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(swymCallbackFn);
+</script>
+<style>
+  .swym-button-bar.swym-wishlist-button-bar.swym-quick-view {
+    margin-left : -2px;
+  }
+
+</style>

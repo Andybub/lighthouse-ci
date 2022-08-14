@@ -1,0 +1,220 @@
+// styles shared with QuickView
+.product-page {
+  .entry-summary {
+    will-change: auto;
+  }
+
+  .entry-title {
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0;
+    padding: 0;
+    -webkit-line-clamp: unset;
+  }
+
+  .psgl-vendor-sku {
+    line-height: 0;
+  }
+
+  .psgl-sku {
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+
+    label {
+      color: #999;
+      font-size: 12px;
+    }
+  }
+
+  .entry-price {
+    margin-bottom: 0;
+
+    [class^='ProductPrice-'] {
+      color: var(--primary);
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 40px;
+
+      &.discount {
+        color: #f03f33;
+      }
+    }
+
+    [class^='ComparePrice-'] {
+      color: #999;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+
+  .entry-short-description {
+    table {
+      width: 100%;
+      font-size: 14px;
+      line-height: 18px;
+
+      tr:nth-child(odd) {
+        background: #f8f8f8;
+      }
+
+      td {
+        border: 0;
+        padding: 5px;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+
+      strong {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .stamped-product-reviews-badge {
+    display: inline-block !important;
+
+    .stamped-badge {
+      color: #999 !important;
+
+      .stamped-badge-caption {
+        &::before {
+          content: '( ' !important;
+        }
+
+        &::after {
+          content: ' )' !important;
+        }
+
+        > span {
+          display: none !important;
+        }
+      }
+    }
+  }
+
+  .selector-wrapper[data-n-opt='Title'],
+  .selector-wrapper[data-n-opt='Size'] {
+    display: block;
+
+    label {
+      display: none;
+    }
+
+    .fake_select.combobox {
+      margin: 0;
+
+      > ul {
+        width: 100%;
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        background: none;
+        border: 0;
+        position: relative;
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+      }
+
+      li {
+        width: calc(50% - 5px);
+        display: flex;
+        align-items: center;
+        background: #f5f5f5;
+        border: 1.5px solid #f5f5f5;
+        border-radius: 5px;
+        padding: 12px;
+
+        &::before {
+          content: '';
+          width: 18px;
+          height: 18px;
+          display: block;
+          flex: 0 0 18px;
+          background: #fff;
+          border: 1px #dadada solid;
+          border-radius: 10px;
+          margin-right: 12px;
+        }
+
+        &.selected {
+          border-color: var(--primary);
+          position: relative;
+
+          &::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            display: block;
+            background: var(--primary);
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            margin: -5px 0 0 4px;
+          }
+        }
+      }
+
+      .option_title {
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 19px;
+        white-space: break-spaces;
+        display: block;
+
+        > span {
+          font-weight: 400;
+          line-height: 18px;
+          display: block;
+          padding-left: 0;
+        }
+
+        .kt_price_lable {
+          text-transform: none;
+          float: none;
+        }
+
+        .tw-saving-lable {
+          color: #e53838;
+        }
+      }
+    }
+  }
+
+  .selector-wrapper:not([data-n-opt='Title']):not([data-n-opt='Size']) {
+    .fake_select.combobox > ul {
+      max-height: 50vh;
+      overflow: auto;
+    }
+  }
+
+  .selector-wrapper[data-n-opt='Style'],
+  .selector-wrapper[data-n-opt='Letter'],
+  .selector-wrapper[data-n-opt='Number'] {
+    span.swatch {
+      color: var(--gray);
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    .selected > span.swatch {
+      color: var(--primary);
+    }
+  }
+}
+
+.additional-information {
+  li {
+    list-style: initial;
+    margin-left: 2rem;
+  }
+}

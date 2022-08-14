@@ -1,0 +1,45 @@
+.entry-buttons {
+  --qty: 9rem;
+  --gap: 1.5rem;
+
+  max-width: calc(100% + var(--gap));
+  align-items: center;
+
+  .quantity.js-item-quantity {
+    flex: 0 0 var(--qty) !important;
+  }
+
+  .single_add_to_cart_button {
+    --width: calc(50% - var(--qty) - var(--gap) * 2.5);
+
+    min-width: 100px;
+    border-radius: 21px;
+    padding: 10px 0;
+
+    &:disabled {
+      width: 0;
+      min-width: 0;
+      flex: 0 0 0;
+      border: 0;
+      padding: 0;
+      margin-left: 0;
+      overflow: hidden;
+    }
+  }
+
+  .add-to-cart-message {
+    --width: calc(100% - var(--gap));
+
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 0 var(--gap);
+
+    > p {
+      min-width: calc(100% - var(--qty) - var(--gap));
+      color: #f03f33;
+      font-size: 12px;
+      text-align: center;
+      margin: 5px 0 0;
+    }
+  }
+}

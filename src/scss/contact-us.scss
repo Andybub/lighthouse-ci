@@ -1,0 +1,128 @@
+// colors
+$colorPurple: #7e3c7e;
+
+#contact-us-wrap {
+  max-width: 1170px;
+  margin: 0 auto;
+
+  .form-success {
+    border-radius: 3px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    color: #56ad6a;
+    background-color: #ecfef0;
+    border-color: #eaeaea;
+  }
+
+  .left-wrap,
+  .right-wrap {
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .right-wrap {
+    @include respondMax($respondMD) {
+      border-bottom: 0.5px solid #DADADA;
+    }
+  }
+
+  input, select, textarea {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    padding: 12px 15px;
+    font-weight: 400;
+    font-size: 13px !important;
+    line-height: 17px;
+    color: #000000;
+    background-color: #FAFAFA;
+    border: 0.5px solid #EBEBEB;
+  }
+
+  ::placeholder {
+    color: #999;
+  }
+
+  .btn-submit {
+    margin: 0 auto;
+    padding: 4px 10px;
+    width: max-content;
+    background: transparent;
+    border: 1px solid $colorPurple;
+    cursor: pointer;
+    min-width: 140px;
+    text-align: center;
+    border-radius: 40px;
+
+    input {
+      display: inline;
+      width: auto;
+      border: none;
+      background: inherit;
+      color: inherit;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  #title-wrap {
+    padding: 20px 0;
+    min-height: 80px;
+    text-align: center;
+    background: url(https://cdn.shopify.com/s/files/1/1552/7691/files/header-contact2.png) no-repeat right center;
+    background-size: cover;
+
+    h2 {
+      margin: 0 auto;
+      padding: 4px 16px;
+      display: inline-block;
+      background: #fff;
+      border-radius: 50px;
+    }
+  }
+
+  .phone_support {
+    border-top: 1px solid lightgray;
+    padding-top: 10px;
+  }
+
+  .phone_support .left-wrap,
+  .phone_support .right-wrap {
+      border: none;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 1 50%;
+          -ms-flex: 0 1 50%;
+              flex: 0 1 50%;
+  }
+
+  .phone_support .text-block {
+      margin-left: 10px;
+  }
+
+  .phone_support .hr {
+      margin: 0 24px;
+      width: 0.5px;
+      height: 60px;
+      background-color: #DADADA;
+  }
+
+  @include respondMax($respondMD) {
+      .phone_support  .left-wrap {
+          -webkit-box-flex: 0;
+          -webkit-flex: 0 1 40%;
+              -ms-flex: 0 1 40%;
+                  flex: 0 1 40%;
+      }
+      .phone_support .hr {
+          margin: 0 8px;
+      }
+      .phone_support .right-wrap {
+          -webkit-box-flex: 0;
+          -webkit-flex: 0 1 60%;
+              -ms-flex: 0 1 60%;
+                  flex: 0 1 60%;
+      }
+
+  }
+}

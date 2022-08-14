@@ -1,0 +1,71 @@
+.filter-container {
+  width: 100%;
+  height: 100%;
+  //background: #fafafa;
+  position: fixed;
+  top: 100%;
+  left: 0;
+  transition: all 0.3s ease-out;
+  z-index: 10;
+
+  @include respondLG {
+    position: static;
+    z-index: 1;
+
+    position: sticky !important;
+    top: 203px !important;
+    height: auto;
+    max-height: calc(100vh - 203px);
+    overflow: auto;
+  }
+
+  @include respondXL {
+    top: 144px !important;
+    max-height: calc(100vh - 144px);
+  }
+
+  @include respondXXL {
+    max-width: 20%;
+  }
+
+  &[data-visible='true'] {
+    top: 0;
+  }
+
+  .block {
+    inset: 0;
+    background: transparent;
+  }
+
+  .filter {
+    // width: 100%;
+    width: 100vw;
+    height: 100%;
+    max-width: 576px;
+    margin-left: calc(var(--grid-gutter) * -1);
+    background: #fafafa;
+    overflow: auto;
+    box-shadow: 1px 1px 10px 4px #ddd;
+
+    @include respondMD {
+      padding-left: 0;
+      padding-right: 0;
+      width: 100%;
+      background: white;
+    }
+    @include respondLG {
+      box-shadow: none;
+      overflow: visible;
+
+      height: auto;
+    }
+  }
+}
+
+body.filter-open {
+  overflow: hidden;
+
+  @include respondMin(992) {
+    overflow: auto;
+  }
+}

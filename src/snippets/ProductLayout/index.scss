@@ -1,0 +1,53 @@
+.app-placeholder {
+  background-image: var(--imglazy);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.section-width.bg-gray {
+  background: #f9f9fa;
+}
+
+.product-page {
+  .product-images {
+    @include respondLG {
+      padding-bottom: 2rem;
+    }
+  }
+
+  .categories_wrapper {
+    color: #999;
+    font-size: 14px;
+
+    a {
+      color: #666;
+
+      @at-root .desktop &:hover {
+        color: $colorPurple;
+      }
+    }
+
+    i {
+      font-style: normal;
+
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
+  .social-label {
+    color: #999;
+    font-size: 14px;
+  }
+
+  .sizing-container {
+    color: #fff !important;
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 8px;
+    left: var(--grid-gutter);
+    bottom: 0;
+    z-index: 1;
+  }
+}

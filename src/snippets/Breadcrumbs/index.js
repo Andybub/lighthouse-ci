@@ -1,0 +1,1 @@
+export { initBreadcrumbs } from './Breadcrumbs';

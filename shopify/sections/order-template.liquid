@@ -1,0 +1,537 @@
+<!-- order-template.liquid -->
+{%- liquid
+  assign width_section = section.settings.width_section
+  assign width_content = section.settings.width_content
+  capture width_section_
+    if width_section == 'container-fluid wide' and width_content == false
+      echo 'w-100'
+    else
+      echo width_section
+    endif
+  endcapture
+  capture width_content_
+    if width_content and width_section == 'w-100'
+      echo 'container'
+    elsif width_section == 'container-fluid wide' and width_content == false
+      echo 'container-fluid wide'
+    else
+      echo 'w-100'
+    endif
+  endcapture
+  assign dir_body = settings.dir_body
+  assign cssAlign = 'left'
+  assign cssAlign_rev = 'right'
+  if dir_body == 'rtl'
+    assign cssAlign = 'right'
+    assign cssAlign_rev = 'left'
+  endif
+-%}
+{%-render 'sc_css' -%}
+
+<div class="border-top" style="opacity: 0.3"></div>
+<div class="page-content {{width_section_}}">
+  <div class="dashboard content_{{section.id}}{%if section.settings.image %} bg-image lazyload{%endif%}"{%if section.settings.image  %} data-bgset="{{section.settings.image | img_url: 'master'}}" data-sizes="auto" data-parent-fit="contain"{%endif%} data-respon="{'el':'.content_{{section.id}}','mt':'{{section.settings.section_margin_top}}','mb':'{{section.settings.section_margin_bottom}}','p':'{{section.settings.section_padding}}'}">      
+    <div class="section-width {{width_content_}}">
+      <div class="row">
+        <aside class="col-12 col-md-4 col-lg-3">
+          <ul class="nav nav-dashboard flex-column list-unstyled" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" id="tab-dashboard-link" data-toggle="tab" href="#tab-dashboard" role="tab" aria-controls="tab-dashboard" aria-selected="false">{{ 'customer.account.dashboard' | t }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-orders-link" data-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders" aria-selected="false">{{ 'customer.orders.title_orders' | t }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="tab-order-link" data-toggle="tab" href="#tab-order" role="tab" aria-controls="tab-order" aria-selected="false">{{order.name}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account/login#recover" target="_blank">Change Your Password</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{routes.account_addresses_url}}">{{ 'customer.addresses.title' | t }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{routes.account_logout_url}}">{{ 'customer.account.sign_out' | t }}</a>
+            </li>
+          </ul>
+        </aside>
+        <div class="col-12 col-md-8 col-lg-9">
+          <div class="tab-content">
+            <div class="tab-pane fade" id="tab-dashboard" role="tabpanel" aria-labelledby="tab-dashboard-link">
+              <p>{{ 'customer.account.hello' | t }} <span class="font-weight-normal text-dark">{%- if customer.name != blank -%}{{customer.name}}{%-else-%}{{customer.email}}{%-endif-%}</span> (not <span class="font-weight-normal text-dark">{%- if customer.name != blank -%}{{customer.name}}{%-else-%}{{customer.email}}{%-endif-%}</span>? <a href="{{routes.account_logout_url}}">{{ 'customer.account.sign_out' | t }}</a>) 
+                <br>
+                {{ 'customer.account.dashboard_info_html' | t }}.</p>
+            </div>
+            <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+              {%- if customer.orders.size == 0 -%}
+                <p>{{ 'customer.orders.none' | t }}</p>
+                <a href="{{ routes.all_products_collection_url }}" class="btn btn-outline-primary-2">
+                  <span>{{ 'customer.orders.button_back_to_shop' | t }}</span>
+                  <i class="fkt-long-arrow-right"></i>
+                </a>
+              {%- else -%}
+                {%- paginate customer.orders by 20 -%}
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>{{ 'customer.orders.order_number' | t }}</th>
+                          <th>{{ 'customer.orders.date' | t }}</th>
+                          <th>{{ 'customer.orders.products' | t }}</th>
+                          {% comment %}<th>{{ 'customer.orders.payment_status' | t }}</th>{% endcomment %}
+                          <th>{{ 'customer.orders.total' | t }}</th>
+                          <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {%- for order_i in customer.orders -%}
+                        <tr>
+                          <td data-label="{{ 'customer.orders.order_number' | t }}">
+                            {%if order_i.name == order.name %}
+                            <a href="#tab-order" class="tab-trigger-link">{{ order_i.name }}</a>
+                            {%else%}
+                            <a href="{{ order_i.customer_url }}">{{ order_i.name }}</a>
+                            {%endif%}
+                          </td>
+                          <td data-label="{{ 'customer.orders.date' | t }}">{{ order_i.created_at | date: format: 'month_day_year' }}</td>
+                          <td data-label="{{ 'customer.orders.products' | t }}">
+                            {{ order_i.line_items[0].product.title | truncatewords: 5}}
+                            {%- assign count = order_i.line_items.size | minus: 1 -%}
+                            {%if order_i.line_items.size > 1%}{{ 'customer.orders.items_with_count' | t : count: count }}{%endif%}
+                          </td>
+                          {% comment %}<td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>{% endcomment %}
+                          <td data-label="{{ 'customer.orders.total' | t }}">{{ order_i.total_price | money }}</td>
+                          <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order_i.fulfillment_status_label }}</td>
+                        </tr>
+                        {%- endfor -%}
+                      </tbody>
+                    </table>
+                  </div>
+                  {%-if paginate.pages > 1-%}
+                    <div class="pagination_ text-center clearfix">
+                      {%- render 'pagination', paginate: paginate, cssAlign: cssAlign, cssAlign_rev: cssAlign_rev -%}
+                    </div>
+                  {%-endif-%}
+                {%- endpaginate -%}
+              {%- endif -%}
+
+              <!-- Order Return -->
+              {%- render 'account-order-return' -%}
+            </div>
+            <div class="tab-pane fade active show" id="tab-order" role="tabpanel" aria-labelledby="tab-order-link">
+              {%- assign order_date = order.created_at | time_tag: format: "month_day_year_hours_minute_meridian" -%}
+              <p>{{ 'customer.order.title' | t }} <mark class="order-number">{{order.name}}</mark> {{ 'customer.order.date' | t }} <mark class="order-date">{{order_date}}</mark> {{ 'customer.order.and_currently' | t }} <mark class="order-status">{{ order.fulfillment_status_label }}</mark>.</p>
+              {%- if order.cancelled -%}
+              {%- assign cancelled_at = order.cancelled_at | time_tag: format: "month_day_year_hours_minute_meridian" -%}
+              <p>{{ 'customer.order.cancelled' | t }} <mark class="order-cancelled">{{cancelled_at}}</mark></p>
+              <p>{{ 'customer.order.cancelled_reason' | t }} <mark class="order-cancelled_reason">{{order.cancel_reason}}</mark></p>
+              {%- endif -%}
+              <div class="order-customer-info mt-3">
+                <h3 class="title" style="font-size: 1.8rem;">{{ 'customer.order.customer_details' | t }}</h3>
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>{{ 'customer.order.email' | t }}:</th>
+                        <td>{{order.email}}</td>
+                      </tr>
+                      {%- if order.note != blank -%}
+                      <tr>
+                        <th>{{ 'customer.order.note' | t }}:</th>
+                        <td>{{ order.note }}</td>
+                      </tr>
+                      {%- endif -%}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="row mt-3 mb-5">
+                  <div class="col-12 col-lg-6">
+                    <h3 class="h6">{{ 'customer.order.shipping_address' | t }}</h3>
+                    <div class="border-top mb-1" style="opacity: 0.3"></div>
+                    <p><strong>{{ 'customer.order.fulfillment_status' | t }}:</strong> {{ order.fulfillment_status_label }}</p>
+                    <p><strong>{{order.shipping_address.name }}</strong></p>
+                    <p class="">
+                      <span>{{'customer.addresses.title'|t}}: </span>
+                      {{order.shipping_address.address1 }}
+                      {% if order.shipping_address.address1 == blank %}
+                      {{order.shipping_address.address2 }}
+                      {% endif %}
+                      {% if order.shipping_address.city != blank %}, 
+                      {{order.shipping_address.city}}
+                      {% endif %}
+                      {% if order.shipping_address.province != blank %}, 
+                      {{order.shipping_address.province}}
+                      {% endif %}
+                      {% if order.shipping_address.country != blank %}, 
+                      {{order.shipping_address.country}}
+                      {% endif %}
+                    </p>
+                    {%- if order.shipping_address.phone != blank -%}
+                    <p class="">
+                      <span>{{'customer.addresses.phone'|t}}: </span>
+                      {{order.shipping_address.phone}}
+                    </p>
+                    {%- endif -%}
+                  </div>
+                  <div class="col-12 col-lg-6">
+                    <h3 class="h6">{{ 'customer.order.billing_address' | t }}</h3>
+                    <div class="border-top mb-1" style="opacity: 0.3"></div>
+                    <p><strong>{{ 'customer.order.payment_status' | t }}:</strong> {{ order.financial_status_label }}</p>
+                    <p><strong>{{order.shipping_address.name }}</strong></p>
+                    <p class="">
+                      <span>{{'customer.addresses.title'|t}}: </span>
+                      {{order.billing_address.address1 }}
+                      {% if order.billing_address.address1 == blank %}
+                      {{order.billing_address.address2 }}
+                      {% endif %}
+                      {% if order.billing_address.city != blank %}, 
+                      {{order.billing_address.city}}
+                      {% endif %}
+                      {% if order.billing_address.province != blank %}, 
+                      {{order.billing_address.province}}
+                      {% endif %}
+                      {% if order.billing_address.country != blank %}, 
+                      {{order.billing_address.country}}
+                      {% endif %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="order-product-info table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>{{ 'cart.label.product' | t }}</th>
+                      <th class="text-right">{{ 'cart.label.price' | t }}</th>
+                      <th class="text-right">Quantity</th>
+                      <th class="text-center">Review</th>
+                      <th class="text-right">{{ 'cart.label.total' | t }}</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    data-author="{{ customer.first_name }} {{ customer.last_name }}"
+                    data-email="{{- customer.email -}}"
+                  >
+                    {% for line_item in order.line_items %}
+
+                      <!-- Hide "Personalized Rush Production Time" in table row -->
+                      {%- unless line_item.variant_id == 39308598083630 -%}
+                        <tr
+                          data-product-id="{{- line_item.product.id -}}"
+                          data-variant-id="{{- line_item.variant.id -}}"
+                          data-quantity="{{- line_item.quantity -}}"
+                          data-product-name='{{- line_item.product.title -}}'
+                          data-product-image-url="{{ line_item.product.featured_image | img_url }}"
+                          data-product-url="https://www.efavormart.com{{ line_item.product.url }}"
+                          data-product-type="{{ line_item.product.type }}"
+                          data-product-available="{{ line_item.product.available }}"
+                        >
+                          <td>
+                            {% if line_item.fulfillment.tracking_number %}
+                              <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank">
+                                {{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number }}
+                              </a>
+                            {%- endif -%}
+                          </td>
+                          <td class="product-col">
+                            <div class="product w-100 d-flex align-items-start align-items-md-center">
+                              <figure class="product-media">
+                                <a href="{{ line_item.url }}">
+                                  <img
+                                    src="{{ line_item.variant.featured_image | default: line_item.product.featured_image | img_url: '104x120', crop: 'top' }}"
+                                    alt="{{ line_item.title | escape | strip_html }}"
+                                    loading="lazy"
+                                    width=""
+                                    height=""
+                                  />
+                                </a>
+                              </figure>
+                              <div class="cart__meta">
+                                <h3 class="product-title">
+                                  <a href="{{ line_item.url }}">{{ line_item.product.title }} <span style="color: #999;">(x{{line_item.quantity}})</span></a>
+                                </h3>
+                                {% unless line_item.variant.title contains 'Default' %}
+                                <div class="cart__meta-text">
+                                  {% for option in line_item.product.options %}
+                                    {{ option }}: {{ line_item.variant.options[forloop.index0] }}<br>
+                                  {% endfor %}
+                                </div>
+                                {% endunless %}
+                                {%- assign property_size = line_item.properties | size -%}
+                                {% if property_size > 0 %}
+                                  <div class="cart__meta-text">
+                                    {% for p in line_item.properties %}
+                                      {% unless p.last == blank %}
+                                        {% if p.last contains 'h5' %}
+                                          <div class="bundle_properties">{{ p.first }}: {{ p.last }}</div>
+                                        {% else %}
+                                          {{ p.first }}:
+                                          {% if p.last contains '/uploads/' %}
+                                            <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                          {% else %}
+                                            {{ p.last }}<br>
+                                          {% endif %}
+                                        {% endif %}
+                                      {% endunless %}
+                                      {% if p.first == 'Personalized Rush Production Time' %}
+                                        {%- assign production_time_price = p.last | remove: '$' | times: 100 -%}
+                                      {% endif %}
+                                    {% endfor %}
+                                  </div>
+                                {% endif %}
+                              </div>
+                            </div>
+                          </td>
+                          <td class="price-col text-right">
+                            {{ line_item.original_price | plus: production_time_price | money }}
+                          </td>
+                          <td class="quantity-col text-right">
+                            {{ line_item.quantity }}
+                          </td>
+                          <td class="review-col review text-center"></td>
+                          <td class="total-col text-right">
+                            {%- assign production_time_price_total = production_time_price | times: line_item.quantity -%}
+                            <span>{{ line_item.original_line_price | plus: production_time_price_total | money }}</span>
+                            {% if line_item.line_level_discount_allocations.size > 0 %}
+                              <div class="text-nowrap">
+                                {% for discount_allocation in line_item.line_level_discount_allocations %}
+                                  <span>{{ discount_allocation.amount | times: -1 | money }}</span>
+                                  <span class="question_mark position-relative"> (?)
+                                    <div class="info-discount position-absolute text-uppercase">
+                                      {{ discount_allocation.discount_application.title }}
+                                    </div>
+                                  </span>
+                                {%- endfor -%}
+                              </div>
+                            {% endif %}
+                          </td>
+                        </tr>
+                      {%- endunless -%}
+                    {% endfor %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th colspan="5" scope="row">{{ 'customer.order.subtotal' | t }}:</th>
+                      <td data-label="{{ 'customer.order.subtotal' | t }}"><span class="shopify-Price-amount amount">{{ order.subtotal_price | money }}</span></td>
+                    </tr>
+                    {%- for discount in order.discounts -%}
+                    {%- unless discount.code == blank -%}
+                    <tr class="order_summary discount_">
+                      <th colspan="5" scope="row">{{ 'customer.order.discount' | t }}: "{{ discount.code }}"</th>
+                      <td data-label="{{ 'customer.order.discount' | t }}">{{ discount.savings | money }}</td>
+                    </tr>
+                    {%- endunless -%}
+                    {%- endfor -%}
+                    {%- for shipping_method in order.shipping_methods -%}
+                    <tr>
+                      <th colspan="5" scope="row">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }}):</th>
+                      <td data-label="{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})"><span class="shopify-Price-amount amount">{{ shipping_method.price | money }}</span></td>
+                    </tr>
+                    {%- endfor -%}
+                    {%- for tax_line in order.tax_lines -%}
+                    <tr>
+                      <th colspan="5" scope="row">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</th>
+                      <td data-label="{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)">{{ tax_line.price | money }}</td>
+                    </tr>
+                    {%- endfor -%}
+                    <tr>
+                      <th colspan="5" scope="row">{{ 'customer.order.total' | t }}:</th>
+                      <td data-label="{{ 'customer.order.total' | t }}"><span class="shopify-Price-amount amount">{{ order.total_price | money }} {{ order.currency }}</span></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <!-- Review Form -->
+              <div
+                id="write-stamped-review"
+                class="stamped-container"
+                data-widget-show-upload="true"
+              >
+                <h3>Write Review</h3>
+                <form method="post" id="new-review-form" class="new-review-form stamped-visible">
+                  <fieldset class="stamped-form-review">
+                    <div class="stamped-form-review-rating">
+                      <label class="stamped-form-label" for="reviewRating">Rating</label>
+                      <input type="hidden" id="reviewRating" name="reviewRating" required="">
+                      <div class="stamped-form-input stamped-starrating set-rate">
+                        <a
+                          class="stamped-fa stamped-fa-star-o"
+                          data-value="1"
+                          onclick="StampedFn.setRating(this);return false;"
+                        ></a>
+                        <a
+                          class="stamped-fa stamped-fa-star-o"
+                          data-value="2"
+                          onclick="StampedFn.setRating(this);return false;"
+                        ></a>
+                        <a
+                          class="stamped-fa stamped-fa-star-o"
+                          data-value="3"
+                          onclick="StampedFn.setRating(this);return false;"
+                        ></a>
+                        <a
+                          class="stamped-fa stamped-fa-star-o"
+                          data-value="4"
+                          onclick="StampedFn.setRating(this);return false;"
+                        ></a>
+                        <a
+                          class="stamped-fa stamped-fa-star-o"
+                          data-value="5"
+                          onclick="StampedFn.setRating(this);return false;"
+                        ></a>
+                      </div>
+                    </div>
+                    <div class="stamped-form-review-title">
+                      <label class="stamped-form-label" for="review_title">Title of Review</label>
+                      <input
+                        class="stamped-form-input stamped-form-input-text"
+                        id="reviewTitle"
+                        type="text"
+                        name="reviewTitle"
+                        required=""
+                        placeholder="Give your review a title"
+                      >
+                      <input
+                        id="reviewSource"
+                        type="hidden"
+                        name="reviewSource"
+                        value="api"
+                      >
+                    </div>
+                    <div class="stamped-form-review-body">
+                      <label class="stamped-form-label" for="review_body">How was your overall experience?</label>
+                      <div class="stamped-form-input">
+                        <textarea
+                          id="reviewMessage"
+                          class="stamped-form-input stamped-form-input-textarea"
+                          name="reviewMessage"
+                          required=""
+                          rows="10"
+                          maxlength="5000"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <fieldset class="stamped-form-actions">
+                    <span class="stamped-file-holder"></span>
+                    <span class="stamped-file-uploader">
+                      <label for="stamped-file-uploader-input">
+                        <input
+                          id="stamped-file-uploader-input"
+                          class="stamped-file-uploader-input"
+                          type="file"
+                          name="stamped-file-uploader-input"
+                          multiple=""
+                          style="display:none;"
+                        >
+                        <span class="stamped-file-uploader-btn">
+                          <i class="stamped-fa stamped-fa-camera"></i>
+                          <span class="stamped-file-uploader-btn-label2"></span>
+                        </span>
+                      </label>
+                    </span>
+                    <input
+                      id="button-submit"
+                      class="stamped-button stamped-button-primary button button-primary btn"
+                      type="submit"
+                      value="Submit"
+                    >
+                  </fieldset>
+                </form>
+              </div>
+
+              <!-- Success Modal -->
+              <div class="success-overlay hide">
+                <div class="popup-review-success">
+                  <span class="icomoon-check success-check"></span>
+                  <div class="contents">
+                    <h3>Review submitted!</h3>
+                    <p>Thank you for your feedback.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="order-detail">
+  {{- order.id | json -}}
+</script>
+
+{% schema %}
+  {
+    "name": "Order page",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Space settings"
+      },
+      {
+        "type": "select",
+        "id": "width_section",
+        "label": "Max width section",
+        "options": [
+          { "value": "container", "label": "1200px" },
+          { "value": "container-fluid wide", "label": "Wide" },
+          { "value": "w-100", "label": "Full width" }
+        ],
+        "default": "w-100"
+      },
+      {
+        "type":"checkbox",
+        "id": "width_content",
+        "label": "Max width content?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "section_margin_top",
+        "label": "Margin top",
+        "info": "2.5rem|3rem|3.5rem|4rem|4.5rem|5rem"
+      },
+      {
+        "type": "text",
+        "id": "section_margin_bottom",
+        "label": "Margin bottom",
+        "info": "2.5rem|3rem|3.5rem|4rem|4.5rem|5rem"
+      },
+      {
+        "type": "text",
+        "id": "section_padding",
+        "label": "Paddings (top right bottom left)",
+        "info": "6rem 6rem 0 6rem",
+        "default": "3rem 0 6rem"
+      },
+      {
+        "type": "header",
+        "content": "Background settings"
+      },
+      {
+        "type": "color",
+        "id": "section_bg",
+        "label": "Background color"
+      },
+      {
+        "type": "range",
+        "id": "section_bg_op",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "label": "Opacity background color",
+        "default": 1
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background image",
+        "info": "Size suggestion: 1920 x 497 pixels"
+      }
+    ]
+  }
+{% endschema %}

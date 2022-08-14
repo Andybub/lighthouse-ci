@@ -1,0 +1,83 @@
+.price-container {
+  margin-bottom: 1rem;
+  padding-left: var(--grid-gutter);
+  padding-right: var(--grid-gutter);
+
+  .price-control {
+    // flex-basis: 90px;
+
+    label {
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    input {
+      // max-width: 130px;
+      max-width: 90px;
+      // max-width: 60px;
+      // flex: 1 1 60px;
+      background: #f9f9f9;
+      border: 1px #dadada solid;
+      border-radius: 4px;
+      padding: 2px 4px 2px 10px;
+
+      @include respondMin(375) {
+        max-width: 110px;
+      }
+
+      @include respondMin(414) {
+        max-width: 130px;
+      }
+
+      @include respondLG {
+        max-width: 60px;
+      }
+    }
+  }
+
+  .minus {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 18px;
+
+    @include respondMin(375) {
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    @include respondMin(414) {
+    }
+
+    @include respondMD {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  .btn-submit {
+    min-width: unset;
+    color: white;
+    background: $colorPurple;
+    border: 0;
+    border-radius: 4px;
+    padding: 2px 8px;
+
+    i {
+      margin-left: 0;
+    }
+  }
+
+  .error-message {
+    color: #f42121;
+  }
+
+  &[data-error='true'] {
+    input {
+      border-color: #f42121;
+    }
+
+    .error-message {
+      display: block !important;
+    }
+  }
+}

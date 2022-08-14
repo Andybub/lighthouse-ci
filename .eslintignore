@@ -1,0 +1,4 @@
+.storybook
+node_modules
+shopify
+webpack.*.js

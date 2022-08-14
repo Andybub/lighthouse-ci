@@ -1,0 +1,52 @@
+<div class="container page-content">
+	<div class="row mt-5 mb-7">
+		<div class="col-12">
+      <div class="shipment-tracker-container pt-4 pb-4 mx-auto">
+        <div class="">
+          <h1>{{ settings.track_order_title }}</h1>
+          <p>{{ settings.track_order_content }}</p>
+        </div>
+        <div class="mb-4">
+          <label class="mb-0 d-block" for="order_number">Order Number:</label>
+          <input
+            type="text"
+            name="order_number"
+            id="shipment-tracker-order-number"
+            class="pl-3 mb-3 rounded w-100 d-block"
+            placeholder="123456EFMT"
+            required="required"
+          />
+          <label class="mb-0 d-block" for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="shipment-tracker-email"
+            class="pl-3 rounded w-100 d-block"
+            placeholder="youremail@efavormart.com (please use all lower case characters)"
+            required="required"
+          />
+        </div>
+        <div class="">
+          <button type="button" class="btn-submit border-0 rounded-pill text-capitalize">Lookup Order</button>
+          <div class="shipment-status d-inline-block ml-4">
+            <img src="{{ 'efavormart-loading.gif' | file_url }}" class="order-loading-gif" width="16" height="16" />
+            <span class="font-italic"></span>
+          </div>
+        </div>
+        <div class="">
+          Forgot Your Order Number? Please click <a href="/account{% unless customer %}/login{% endunless %}">HERE</a> to log in to your account!
+        </div>
+      </div>
+		</div>
+	</div>
+</div>
+
+<script type="application/json" id="order-track-settings">
+{
+  "settings": {
+    "track_order_validation": "{{ settings.track_order_validation }}",
+    "track_order_processing": "{{ settings.track_order_processing }}",
+    "track_order_error": "{{ settings.track_order_error }}"
+  }
+}
+</script>
